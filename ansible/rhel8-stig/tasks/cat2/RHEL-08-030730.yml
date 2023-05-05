@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-030730 | RHEL 8 must take action when allocated audit record storage volume reaches 75 percent of the repository maximum audit record storage
+    capacity.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*space_left =
+    line: space_left = 25%
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030730
+  tags:
+    - RHEL-08-030730

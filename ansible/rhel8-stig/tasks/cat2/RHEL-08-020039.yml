@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-020039 | RHEL 8 must have the tmux package installed.
+  ansible.builtin.dnf:
+    name: tmux
+    state: latest
+
+  when:
+    - rhel_08_020039
+  tags:
+    - RHEL-08-020039

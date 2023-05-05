@@ -1,0 +1,36 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-020290 | RHEL 8 must prohibit the use of cached authentications after one day. | Part 1 of 4
+      ansible.builtin.dnf:
+        name: sssd
+        state: latest
+
+    - name: MEDIUM | RHEL-08-020290 | RHEL 8 must prohibit the use of cached authentications after one day. | Part 2 of 4
+      stat:
+        path: /etc/sssd/sssd.conf
+      register: sssd_conf
+
+    - name: MEDIUM | RHEL-08-020290 | RHEL 8 must prohibit the use of cached authentications after one day. | Part 3 of 4
+      ansible.builtin.lineinfile:
+        path: /etc/sssd/sssd.conf
+        regexp: ^#?\s*cache_credentials.*
+        line: cache_credentials = true
+        state: present
+      when: sssd_conf.stat.exists | bool
+
+    - name: MEDIUM | RHEL-08-020290 | RHEL 8 must prohibit the use of cached authentications after one day. | Part 4 of 4
+      ansible.builtin.lineinfile:
+        path: /etc/sssd/sssd.conf
+        regexp: ^#?\s*offline_credentials_expiration.*
+        line: offline_credentials_expiration = 1
+        insertafter: \[pam\]
+        state: present
+      when: sssd_conf.stat.exists | bool
+
+  when:
+    - rhel_08_020290
+    - rhel8stig_mfa
+    - rhel8stig_sssd
+  tags:
+    - RHEL-08-020290
+    - mfa

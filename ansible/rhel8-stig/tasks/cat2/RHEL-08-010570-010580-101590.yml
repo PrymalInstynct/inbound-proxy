@@ -1,0 +1,27 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010570 RHEL-08-010580 RHEL-08-010590 | RHEL 8 must prevent devices, code, & files with the setuid and setgid bit set from being executed
+        on file systems that contain user home directories. | Part 1 of 2
+      ansible.posix.mount:
+        path: /home
+        src: UUID={{ home_mount.uuid }}
+        fstype: "{{ home_mount.fstype }}"
+        opts: "{{ home_mount.options }},nosuid,noexec,nodev"
+        state: mounted
+
+    - name: MEDIUM | RHEL-08-010570 RHEL-08-010580 RHEL-08-010590 | RHEL 8 must prevent devices, code, & files with the setuid and setgid bit set from being executed
+        on file systems that contain user home directories. | Part 2 of 2
+      ansible.builtin.command: mount /home -o remount,nosuid,noexec,nodev
+
+  when:
+    - rhel_08_010570 or rhel_08_010580 or rhel_08_010590
+    - ansible_mounts | selectattr('mount', 'match', '^/home$') | list | length != 0
+    - "'nosuid' not in home_mount.options"
+    - "'noexec' not in home_mount.options"
+    - "'nodev' not in home_mount.options"
+  vars:
+    home_mount: "{{ ansible_mounts | json_query('[?mount == `/home`] | [0]') }}"
+  tags:
+    - RHEL-08-010570
+    - RHEL-08-010580
+    - RHEL-08-010590

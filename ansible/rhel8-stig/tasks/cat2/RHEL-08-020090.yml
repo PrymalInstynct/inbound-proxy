@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-020090 | MANUAL FIX | RHEL 8 must map the authenticated identity to the user or group account for PKI-based authentication.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | The fix for this check could be accomplished in a few ways depending on connection to Windows Active Directory or Red Hat Identity
+      Management
+
+  when:
+    - rhel_08_020090
+  tags:
+    - RHEL-08-020090
+    - manual_fix

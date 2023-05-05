@@ -1,0 +1,23 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010300 | RHEL 8 system commands must have mode 0755 or less permissive. | Part 1 of 2
+      ansible.builtin.shell: find -L /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -perm /0022 -o ! -user root -o ! -group root
+      register: system_commands
+      changed_when: false
+      failed_when: false
+      args:
+        warn: false
+
+    - name: MEDIUM | RHEL-08-010300 | RHEL 8 system commands must have mode 0755 or less permissive. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        owner: root
+        group: root
+        mode: "0755"
+        force: true
+      with_items: "{{ system_commands.stdout_lines }}"
+
+  when:
+    - rhel_08_010300
+  tags:
+    - RHEL-08-010300

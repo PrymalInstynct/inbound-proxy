@@ -1,0 +1,18 @@
+---
+- name: MEDIUM | RHEL-08-040350 | If the Trivial File Transfer Protocol (TFTP) server is required, the RHEL 8 TFTP daemon must be configured to operate in secure
+    mode.
+  ansible.builtin.lineinfile:
+    path: /etc/xinetd.d/tftp
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    regexp: ^#?\s*server_args.*''
+    line: server_args = -s /var/lib/tftpboot
+
+  when:
+    - rhel_08_040350
+    - rhel8stig_requires_tftp
+    - ansible_facts.services["tftp.service"] is defined
+  tags:
+    - RHEL-08-040350

@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-040100 | A firewall must be installed on RHEL 8.
+  ansible.builtin.dnf:
+    name: firewalld
+    state: latest
+
+  when:
+    - rhel_08_040100
+  tags:
+    - RHEL-08-040100

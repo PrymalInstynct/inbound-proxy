@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-040101 | A firewall must be active on RHEL 8.
+  ansible.builtin.systemd:
+    name: firewalld
+    state: started
+    enabled: true
+
+  when:
+    - rhel_08_040101
+  tags:
+    - RHEL-08-040101

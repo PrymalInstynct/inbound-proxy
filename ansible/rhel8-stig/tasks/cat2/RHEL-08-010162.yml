@@ -1,0 +1,15 @@
+---
+- name: MEDIUM | RHEL-08-010162 | The krb5-workstation package must not be installed on RHEL 8.
+  ansible.builtin.dnf:
+    name: krb5-workstation
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_010162
+    - not rhel8stig_kerberos
+    - "'krb5-server' not in ansible_facts.packages"
+    - "'krb5-workstation' in ansible_facts.packages"
+    - ansible_facts.packages['krb5-workstation'][0].version <= '1.17-18'
+  tags:
+    - RHEL-08-010162

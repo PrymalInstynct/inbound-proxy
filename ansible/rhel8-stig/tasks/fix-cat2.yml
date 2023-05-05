@@ -1,0 +1,1698 @@
+---
+- name: MEDIUM | RHEL-08-010001
+  include_tasks: cat2/RHEL-08-010001.yml
+  when:
+    - rhel_08_010001
+  tags:
+    - RHEL-08-010001
+
+- name: MEDIUM | RHEL-08-010010
+  include_tasks: cat2/RHEL-08-010010.yml
+  when:
+    - rhel_08_010010
+  tags:
+    - RHEL-08-010010
+
+- name: MEDIUM | RHEL-08-010030
+  include_tasks: cat2/RHEL-08-010030.yml
+  when:
+    - rhel_08_010030
+  tags:
+    - RHEL-08-010030
+
+- name: MEDIUM | RHEL-08-010040
+  include_tasks: cat2/RHEL-08-010040.yml
+  when:
+    - rhel_08_010040
+  tags:
+    - RHEL-08-010040
+
+- name: MEDIUM | RHEL-08-010049
+  include_tasks: cat2/RHEL-08-010049.yml
+  when:
+    - rhel_08_010049
+  tags:
+    - RHEL-08-010049
+
+- name: MEDIUM | RHEL-08-010050
+  include_tasks: cat2/RHEL-08-010050.yml
+  when:
+    - rhel_08_010050
+  tags:
+    - RHEL-08-010050
+
+- name: MEDIUM | RHEL-08-010060
+  include_tasks: cat2/RHEL-08-010060.yml
+  when:
+    - rhel_08_010060
+  tags:
+    - RHEL-08-010060
+
+- name: MEDIUM | RHEL-08-010070
+  include_tasks: cat2/RHEL-08-010070.yml
+  when:
+    - rhel_08_010070
+  tags:
+    - RHEL-08-010070
+
+- name: MEDIUM | RHEL-08-010090
+  include_tasks: cat2/RHEL-08-010090.yml
+  when:
+    - rhel_08_010090
+  tags:
+    - RHEL-08-010090
+    - mfa
+
+- name: MEDIUM | RHEL-08-010100
+  include_tasks: cat2/RHEL-08-010100.yml
+  when:
+    - rhel_08_010100
+  tags:
+    - RHEL-08-010100
+
+- name: MEDIUM | RHEL-08-010110
+  include_tasks: cat2/RHEL-08-010110.yml
+  when:
+    - rhel_08_010110
+  tags:
+    - RHEL-08-010110
+
+- name: MEDIUM | RHEL-08-010120
+  include_tasks: cat2/RHEL-08-010120.yml
+  when:
+    - rhel_08_010120
+  tags:
+    - RHEL-08-010120
+
+- name: MEDIUM | RHEL-08-010130
+  include_tasks: cat2/RHEL-08-010130.yml
+  when:
+    - rhel_08_010130
+  tags:
+    - RHEL-08-010130
+
+- name: MEDIUM | RHEL-08-010141
+  include_tasks: cat2/RHEL-08-010141.yml
+  when:
+    - rhel_08_010141
+  tags:
+    - RHEL-08-010141
+
+- name: MEDIUM | RHEL-08-010149
+  include_tasks: cat2/RHEL-08-010149.yml
+  when:
+    - rhel_08_010149
+  tags:
+    - RHEL-08-010149
+
+- name: MEDIUM | RHEL-08-010151
+  include_tasks: cat2/RHEL-08-010151.yml
+  when:
+    - rhel_08_010151
+  tags:
+    - RHEL-08-010151
+
+- name: MEDIUM | RHEL-08-010152
+  include_tasks: cat2/RHEL-08-010152.yml
+  when:
+    - rhel_08_010152
+  tags:
+    - RHEL-08-010152
+
+- name: MEDIUM | RHEL-08-010161
+  include_tasks: cat2/RHEL-08-010161.yml
+  when:
+    - rhel_08_010161
+    - not rhel8stig_kerberos
+  tags:
+    - RHEL-08-010161
+
+- name: MEDIUM | RHEL-08-010162
+  include_tasks: cat2/RHEL-08-010162.yml
+  when:
+    - rhel_08_010162
+    - not rhel8stig_kerberos
+  tags:
+    - RHEL-08-010162
+
+- name: MEDIUM | RHEL-08-010163
+  include_tasks: cat2/RHEL-08-010163.yml
+  when:
+    - rhel_08_010163
+    - not rhel8stig_kerberos
+  tags:
+    - RHEL-08-010163
+
+- name: MEDIUM | RHEL-08-010170
+  include_tasks: cat2/RHEL-08-010170.yml
+  when:
+    - rhel_08_010170
+  tags:
+    - RHEL-08-010170
+
+- name: MEDIUM | RHEL-08-010181
+  include_tasks: cat2/RHEL-08-010181.yml
+  when:
+    - rhel_08_010181
+  tags:
+    - RHEL-08-010181
+
+- name: MEDIUM | RHEL-08-010190
+  include_tasks: cat2/RHEL-08-010190.yml
+  when:
+    - rhel_08_010190
+  tags:
+    - RHEL-08-010190
+
+- name: MEDIUM | RHEL-08-010200
+  include_tasks: cat2/RHEL-08-010200.yml
+  when:
+    - rhel_08_010200
+  tags:
+    - RHEL-08-010200
+
+- name: MEDIUM | RHEL-08-010201
+  include_tasks: cat2/RHEL-08-010201.yml
+  when:
+    - rhel_08_010201
+  tags:
+    - RHEL-08-010201
+
+- name: MEDIUM | RHEL-08-010210
+  include_tasks: cat2/RHEL-08-010210.yml
+  when:
+    - rhel_08_010210
+  tags:
+    - RHEL-08-010210
+
+- name: MEDIUM | RHEL-08-010220
+  include_tasks: cat2/RHEL-08-010220.yml
+  when:
+    - rhel_08_010220
+  tags:
+    - RHEL-08-010220
+
+- name: MEDIUM | RHEL-08-010230
+  include_tasks: cat2/RHEL-08-010230.yml
+  when:
+    - rhel_08_010230
+  tags:
+    - RHEL-08-010230
+
+- name: MEDIUM | RHEL-08-010240
+  include_tasks: cat2/RHEL-08-010240.yml
+  when:
+    - rhel_08_010240
+  tags:
+    - RHEL-08-010240
+
+- name: MEDIUM | RHEL-08-010250
+  include_tasks: cat2/RHEL-08-010250.yml
+  when:
+    - rhel_08_010250
+  tags:
+    - RHEL-08-010250
+
+- name: MEDIUM | RHEL-08-010260
+  include_tasks: cat2/RHEL-08-010260.yml
+  when:
+    - rhel_08_010260
+  tags:
+    - RHEL-08-010260
+
+- name: MEDIUM | RHEL-08-010287
+  include_tasks: cat2/RHEL-08-010287.yml
+  when:
+    - rhel_08_010287
+  tags:
+    - RHEL-08-010287
+
+- name: MEDIUM | RHEL-08-010290 | RHEL-08-010290 | RHEL-08-040342
+  include_tasks: cat2/RHEL-08-010290-010291-040342.yml
+  when:
+    - rhel_08_010290 or rhel_08_010291 or rhel_08_040342
+  tags:
+    - RHEL-08-010290
+    - RHEL-08-010291
+    - RHEL-08-040342
+
+- name: MEDIUM | RHEL-08-010293
+  include_tasks: cat2/RHEL-08-010293.yml
+  when:
+    - rhel_08_010293
+  tags:
+    - RHEL-08-010293
+
+- name: MEDIUM | RHEL-08-010294
+  include_tasks: cat2/RHEL-08-010294.yml
+  when:
+    - rhel_08_010294
+  tags:
+    - RHEL-08-010294
+
+- name: MEDIUM | RHEL-08-010295
+  include_tasks: cat2/RHEL-08-010295.yml
+  when:
+    - rhel_08_010295
+  tags:
+    - RHEL-08-010295
+
+- name: MEDIUM | RHEL-08-010300
+  include_tasks: cat2/RHEL-08-010300.yml
+  when:
+    - rhel_08_010300
+  tags:
+    - RHEL-08-010300
+
+- name: MEDIUM | RHEL-08-010310
+  include_tasks: cat2/RHEL-08-010310.yml
+  when:
+    - rhel_08_010310
+  tags:
+    - RHEL-08-010310
+
+- name: MEDIUM | RHEL-08-010320
+  include_tasks: cat2/RHEL-08-010320.yml
+  when:
+    - rhel_08_010320
+  tags:
+    - RHEL-08-010320
+
+- name: MEDIUM | RHEL-08-010330
+  include_tasks: cat2/RHEL-08-010330.yml
+  when:
+    - rhel_08_010330
+  tags:
+    - RHEL-08-010330
+
+- name: MEDIUM | RHEL-08-010331
+  include_tasks: cat2/RHEL-08-010331.yml
+  when:
+    - rhel_08_010331
+  tags:
+    - RHEL-08-010331
+
+- name: MEDIUM | RHEL-08-010340
+  include_tasks: cat2/RHEL-08-010340.yml
+  when:
+    - rhel_08_010340
+  tags:
+    - RHEL-08-010340
+
+- name: MEDIUM | RHEL-08-010341
+  include_tasks: cat2/RHEL-08-010341.yml
+  when:
+    - rhel_08_010341
+  tags:
+    - RHEL-08-010341
+
+- name: MEDIUM | RHEL-08-010350
+  include_tasks: cat2/RHEL-08-010350.yml
+  when:
+    - rhel_08_010350
+  tags:
+    - RHEL-08-010350
+
+- name: MEDIUM | RHEL-08-010351
+  include_tasks: cat2/RHEL-08-010351.yml
+  when:
+    - rhel_08_010351
+  tags:
+    - RHEL-08-010351
+
+- name: MEDIUM | RHEL-08-010359
+  include_tasks: cat2/RHEL-08-010359.yml
+  when:
+    - rhel_08_010359
+  tags:
+    - RHEL-08-010359
+
+- name: MEDIUM | RHEL-08-010360
+  include_tasks: cat2/RHEL-08-010360.yml
+  when:
+    - rhel_08_010360
+  tags:
+    - RHEL-08-010360
+
+- name: MEDIUM | RHEL-08-010372
+  include_tasks: cat2/RHEL-08-010372.yml
+  when:
+    - rhel_08_010372
+  tags:
+    - RHEL-08-010372
+
+- name: MEDIUM | RHEL-08-010373
+  include_tasks: cat2/RHEL-08-010373.yml
+  when:
+    - rhel_08_010373
+  tags:
+    - RHEL-08-010373
+
+- name: MEDIUM | RHEL-08-010374
+  include_tasks: cat2/RHEL-08-010374.yml
+  when:
+    - rhel_08_010374
+  tags:
+    - RHEL-08-010374
+
+- name: MEDIUM | RHEL-08-010379
+  include_tasks: cat2/RHEL-08-010379.yml
+  when:
+    - rhel_08_010379
+  tags:
+    - RHEL-08-010379
+
+- name: MEDIUM | RHEL-08-010380
+  include_tasks: cat2/RHEL-08-010380.yml
+  when:
+    - rhel_08_010380
+  tags:
+    - RHEL-08-010380
+
+- name: MEDIUM | RHEL-08-010381
+  include_tasks: cat2/RHEL-08-010381.yml
+  when:
+    - rhel_08_010381
+  tags:
+    - RHEL-08-010381
+
+- name: MEDIUM | RHEL-08-010382
+  include_tasks: cat2/RHEL-08-010382.yml
+  when:
+    - rhel_08_010382
+  tags:
+    - RHEL-08-010382
+
+- name: MEDIUM | RHEL-08-010383
+  include_tasks: cat2/RHEL-08-010383.yml
+  when:
+    - rhel_08_010383
+  tags:
+    - RHEL-08-010383
+
+- name: MEDIUM | RHEL-08-010384
+  include_tasks: cat2/RHEL-08-010384.yml
+  when:
+    - rhel_08_010384
+  tags:
+    - RHEL-08-010384
+
+- name: MEDIUM | RHEL-08-010390
+  include_tasks: cat2/RHEL-08-010390.yml
+  when:
+    - rhel_08_010390
+  tags:
+    - RHEL-08-010390
+    - mfa
+
+- name: MEDIUM | RHEL-08-010400
+  include_tasks: cat2/RHEL-08-010400.yml
+  when:
+    - rhel_08_010400
+  tags:
+    - RHEL-08-010400
+    - mfa
+
+- name: MEDIUM | RHEL-08-010410
+  include_tasks: cat2/RHEL-08-010410.yml
+  when:
+    - rhel_08_010410
+  tags:
+    - RHEL-08-010410
+    - mfa
+
+- name: MEDIUM | RHEL-08-010420
+  include_tasks: cat2/RHEL-08-010420.yml
+  when:
+    - rhel_08_010420
+  tags:
+    - RHEL-08-010420
+
+- name: MEDIUM | RHEL-08-010421
+  include_tasks: cat2/RHEL-08-010421.yml
+  when:
+    - rhel_08_010421
+  tags:
+    - RHEL-08-010421
+
+- name: MEDIUM | RHEL-08-010422
+  include_tasks: cat2/RHEL-08-010422.yml
+  when:
+    - rhel_08_010422
+  tags:
+    - RHEL-08-010422
+
+- name: MEDIUM | RHEL-08-010423
+  include_tasks: cat2/RHEL-08-010423.yml
+  when:
+    - rhel_08_010423
+  tags:
+    - RHEL-08-010423
+
+- name: MEDIUM | RHEL-08-010430
+  include_tasks: cat2/RHEL-08-010430.yml
+  when:
+    - rhel_08_010430
+  tags:
+    - RHEL-08-010430
+
+- name: MEDIUM | RHEL-08-010450
+  include_tasks: cat2/RHEL-08-010450.yml
+  when:
+    - rhel_08_010450
+  tags:
+    - RHEL-08-010450
+
+- name: MEDIUM | RHEL-08-010480
+  include_tasks: cat2/RHEL-08-010480.yml
+  when:
+    - rhel_08_010480
+  tags:
+    - RHEL-08-010480
+
+- name: MEDIUM | RHEL-08-010490
+  include_tasks: cat2/RHEL-08-010490.yml
+  when:
+    - rhel_08_010490
+  tags:
+    - RHEL-08-010490
+
+- name: MEDIUM | RHEL-08-010500
+  include_tasks: cat2/RHEL-08-010500.yml
+  when:
+    - rhel_08_010500
+  tags:
+    - RHEL-08-010500
+
+- name: MEDIUM | RHEL-08-010520
+  include_tasks: cat2/RHEL-08-010520.yml
+  when:
+    - rhel_08_010520
+  tags:
+    - RHEL-08-010520
+
+- name: MEDIUM | RHEL-08-010522
+  include_tasks: cat2/RHEL-08-010522.yml
+  when:
+    - rhel_08_010522
+  tags:
+    - RHEL-08-010522
+
+- name: MEDIUM | RHEL-08-010521
+  include_tasks: cat2/RHEL-08-010521.yml
+  when:
+    - rhel_08_010521
+  tags:
+    - RHEL-08-010521
+
+- name: MEDIUM | RHEL-08-010543
+  include_tasks: cat2/RHEL-08-010543.yml
+  when:
+    - rhel_08_010543
+  tags:
+    - RHEL-08-010543
+
+- name: MEDIUM | RHEL-08-010544
+  include_tasks: cat2/RHEL-08-010544.yml
+  when:
+    - rhel_08_010544
+  tags:
+    - RHEL-08-010544
+
+- name: MEDIUM | RHEL-08-010550
+  include_tasks: cat2/RHEL-08-010550.yml
+  when:
+    - rhel_08_010550
+  tags:
+    - RHEL-08-010550
+
+- name: MEDIUM | RHEL-08-010561
+  include_tasks: cat2/RHEL-08-010561.yml
+  when:
+    - rhel_08_010561
+  tags:
+    - RHEL-08-010561
+
+- name: MEDIUM | RHEL-08-010570 RHEL-08-010580 RHEL-08-010590
+  include_tasks: cat2/RHEL-08-010570-010580-101590.yml
+  when:
+    - rhel_08_010570 or rhel_08_010580 or rhel_08_010590
+  tags:
+    - RHEL-08-010570
+    - RHEL-08-010580
+    - RHEL-08-010590
+
+- name: MEDIUM | RHEL-08-010571
+  include_tasks: cat2/RHEL-08-010571.yml
+  when:
+    - rhel_08_010571
+  tags:
+    - RHEL-08-010571
+
+- name: MEDIUM | RHEL-08-010572
+  include_tasks: cat2/RHEL-08-010572.yml
+  when:
+    - rhel_08_010572
+  tags:
+    - RHEL-08-010572
+
+- name: MEDIUM | RHEL-08-010580
+  include_tasks: cat2/RHEL-08-010580.yml
+  when:
+    - rhel_08_010580
+  tags:
+    - RHEL-08-010580
+
+- name: MEDIUM | RHEL-08-010600
+  include_tasks: cat2/RHEL-08-010600.yml
+  when:
+    - rhel_08_010600
+  tags:
+    - RHEL-08-010600
+
+- name: MEDIUM | RHEL-08-010610
+  include_tasks: cat2/RHEL-08-010610.yml
+  when:
+    - rhel_08_010610
+  tags:
+    - RHEL-08-010610
+
+- name: MEDIUM | RHEL-08-010620
+  include_tasks: cat2/RHEL-08-010620.yml
+  when:
+    - rhel_08_010620
+  tags:
+    - RHEL-08-010620
+
+- name: MEDIUM | RHEL-08-010630
+  include_tasks: cat2/RHEL-08-010630.yml
+  when:
+    - rhel_08_010630
+  tags:
+    - RHEL-08-010630
+
+- name: MEDIUM | RHEL-08-010640
+  include_tasks: cat2/RHEL-08-010640.yml
+  when:
+    - rhel_08_010640
+  tags:
+    - RHEL-08-010640
+
+- name: MEDIUM | RHEL-08-010650
+  include_tasks: cat2/RHEL-08-010650.yml
+  when:
+    - rhel_08_010650
+  tags:
+    - RHEL-08-010650
+
+- name: MEDIUM | RHEL-08-010660
+  include_tasks: cat2/RHEL-08-010660.yml
+  when:
+    - rhel_08_010660
+  tags:
+    - RHEL-08-010660
+
+- name: MEDIUM | RHEL-08-010670
+  include_tasks: cat2/RHEL-08-010670.yml
+  when:
+    - rhel_08_010670
+  tags:
+    - RHEL-08-010670
+
+- name: MEDIUM | RHEL-08-010671
+  include_tasks: cat2/RHEL-08-010671.yml
+  when:
+    - rhel_08_010671
+  tags:
+    - RHEL-08-010671
+
+- name: MEDIUM | RHEL-08-010672
+  include_tasks: cat2/RHEL-08-010672.yml
+  when:
+    - rhel_08_010672
+  tags:
+    - RHEL-08-010672
+
+- name: MEDIUM | RHEL-08-010673
+  include_tasks: cat2/RHEL-08-010673.yml
+  when:
+    - rhel_08_010673
+  tags:
+    - RHEL-08-010673
+
+- name: MEDIUM | RHEL-08-010674
+  include_tasks: cat2/RHEL-08-010674.yml
+  when:
+    - rhel_08_010674
+  tags:
+    - RHEL-08-010674
+
+- name: MEDIUM | RHEL-08-010675
+  include_tasks: cat2/RHEL-08-010675.yml
+  when:
+    - rhel_08_010675
+  tags:
+    - RHEL-08-010675
+
+- name: MEDIUM | RHEL-08-010680
+  include_tasks: cat2/RHEL-08-010680.yml
+  when:
+    - rhel_08_010680
+  tags:
+    - RHEL-08-010680
+
+- name: MEDIUM | RHEL-08-010690
+  include_tasks: cat2/RHEL-08-010690.yml
+  when:
+    - rhel_08_010690
+  tags:
+    - RHEL-08-010690
+
+- name: MEDIUM | RHEL-08-010700
+  include_tasks: cat2/RHEL-08-010700.yml
+  when:
+    - rhel_08_010700
+  tags:
+    - RHEL-08-010700
+
+- name: MEDIUM | RHEL-08-010710
+  include_tasks: cat2/RHEL-08-010710.yml
+  when:
+    - rhel_08_010710
+  tags:
+    - RHEL-08-010710
+
+- name: MEDIUM | RHEL-08-010720
+  include_tasks: cat2/RHEL-08-010720.yml
+  when:
+    - rhel_08_010720
+  tags:
+    - RHEL-08-010720
+
+- name: MEDIUM | RHEL-08-010730
+  include_tasks: cat2/RHEL-08-010730.yml
+  when:
+    - rhel_08_010730
+  tags:
+    - RHEL-08-010730
+
+- name: MEDIUM | RHEL-08-010731
+  include_tasks: cat2/RHEL-08-010731.yml
+  when:
+    - rhel_08_010731
+  tags:
+    - RHEL-08-010731
+
+- name: MEDIUM | RHEL-08-010740
+  include_tasks: cat2/RHEL-08-010740.yml
+  when:
+    - rhel_08_010740
+  tags:
+    - RHEL-08-010740
+
+- name: MEDIUM | RHEL-08-010750
+  include_tasks: cat2/RHEL-08-010750.yml
+  when:
+    - rhel_08_010750
+  tags:
+    - RHEL-08-010750
+
+- name: MEDIUM | RHEL-08-010760
+  include_tasks: cat2/RHEL-08-010760.yml
+  when:
+    - rhel_08_010760
+  tags:
+    - RHEL-08-010760
+
+- name: MEDIUM | RHEL-08-010770
+  include_tasks: cat2/RHEL-08-010770.yml
+  when:
+    - rhel_08_010770
+  tags:
+    - RHEL-08-010770
+
+- name: MEDIUM | RHEL-08-010780
+  include_tasks: cat2/RHEL-08-010780.yml
+  when:
+    - rhel_08_010780
+  tags:
+    - RHEL-08-010780
+
+- name: MEDIUM | RHEL-08-010790
+  include_tasks: cat2/RHEL-08-010790.yml
+  when:
+    - rhel_08_010790
+  tags:
+    - RHEL-08-010790
+
+- name: MEDIUM | RHEL-08-010800
+  include_tasks: cat2/RHEL-08-010800.yml
+  when:
+    - rhel_08_010800
+  tags:
+    - RHEL-08-010800
+
+- name: MEDIUM | RHEL-08-010830
+  include_tasks: cat2/RHEL-08-010830.yml
+  when:
+    - rhel_08_010830
+  tags:
+    - RHEL-08-010830
+
+- name: MEDIUM | RHEL-08-020000
+  include_tasks: cat2/RHEL-08-020000.yml
+  when:
+    - rhel_08_020000
+  tags:
+    - RHEL-08-020000
+
+- name: MEDIUM | RHEL-08-020027
+  include_tasks: cat2/RHEL-08-020027.yml
+  when:
+    - rhel_08_020027
+  tags:
+    - RHEL-08-020027
+
+- name: MEDIUM | RHEL-08-020028
+  include_tasks: cat2/RHEL-08-020028.yml
+  when:
+    - rhel_08_020028
+  tags:
+    - RHEL-08-020028
+
+- name: MEDIUM | RHEL-08-020030-020031
+  include_tasks: cat2/RHEL-08-020030-020031.yml
+  when:
+    - rhel_08_020030
+    - rhel_08_020031
+  tags:
+    - RHEL-08-020030
+    - RHEL-08-020031
+    - gui
+
+- name: MEDIUM | RHEL-08-020032
+  include_tasks: cat2/RHEL-08-020032.yml
+  when:
+    - rhel_08_020032
+  tags:
+    - RHEL-08-020032
+    - gui
+
+- name: MEDIUM | RHEL-08-020039
+  include_tasks: cat2/RHEL-08-020039.yml
+  when:
+    - rhel_08_020039
+  tags:
+    - RHEL-08-020039
+
+- name: MEDIUM | RHEL-08-020040
+  include_tasks: cat2/RHEL-08-020040.yml
+  when:
+    - rhel_08_020040
+  tags:
+    - RHEL-08-020040
+
+- name: MEDIUM | RHEL-08-020041
+  include_tasks: cat2/RHEL-08-020041.yml
+  when:
+    - rhel_08_020041
+  tags:
+    - RHEL-08-020041
+
+- name: MEDIUM | RHEL-08-020050
+  include_tasks: cat2/RHEL-08-020050.yml
+  when:
+    - rhel_08_020050
+  tags:
+    - RHEL-08-020050
+
+- name: MEDIUM | RHEL-08-020060
+  include_tasks: cat2/RHEL-08-020060.yml
+  when:
+    - rhel_08_020060
+  tags:
+    - RHEL-08-020060
+
+- name: MEDIUM | RHEL-08-020070
+  include_tasks: cat2/RHEL-08-020070.yml
+  when:
+    - rhel_08_020070
+  tags:
+    - RHEL-08-020070
+
+- name: MEDIUM | RHEL-08-020080
+  include_tasks: cat2/RHEL-08-020080.yml
+  when:
+    - rhel_08_020080
+  tags:
+    - RHEL-08-020080
+
+- name: MEDIUM | RHEL-08-020081
+  include_tasks: cat2/RHEL-08-020081.yml
+  when:
+    - rhel_08_020081
+  tags:
+    - RHEL-08-020081
+
+- name: MEDIUM | RHEL-08-020082
+  include_tasks: cat2/RHEL-08-020082.yml
+  when:
+    - rhel_08_020082
+  tags:
+    - RHEL-08-020082
+
+- name: MEDIUM | RHEL-08-020090
+  include_tasks: cat2/RHEL-08-020090.yml
+  when:
+    - rhel_08_020090
+  tags:
+    - RHEL-08-020090
+
+- name: MEDIUM | RHEL-08-020104
+  include_tasks: cat2/RHEL-08-020104.yml
+  when:
+    - rhel_08_020104
+  tags:
+    - RHEL-08-020104
+
+- name: MEDIUM | RHEL-08-020110
+  include_tasks: cat2/RHEL-08-020110.yml
+  when:
+    - rhel_08_020110
+  tags:
+    - RHEL-08-020110
+
+- name: MEDIUM | RHEL-08-020120
+  include_tasks: cat2/RHEL-08-020120.yml
+  when:
+    - rhel_08_020120
+  tags:
+    - RHEL-08-020120
+
+- name: MEDIUM | RHEL-08-020130
+  include_tasks: cat2/RHEL-08-020130.yml
+  when:
+    - rhel_08_020130
+  tags:
+    - RHEL-08-020130
+
+- name: MEDIUM | RHEL-08-020140
+  include_tasks: cat2/RHEL-08-020140.yml
+  when:
+    - rhel_08_020140
+  tags:
+    - RHEL-08-020140
+
+- name: MEDIUM | RHEL-08-020150
+  include_tasks: cat2/RHEL-08-020150.yml
+  when:
+    - rhel_08_020150
+  tags:
+    - RHEL-08-020150
+
+- name: MEDIUM | RHEL-08-020160
+  include_tasks: cat2/RHEL-08-020160.yml
+  when:
+    - rhel_08_020160
+  tags:
+    - RHEL-08-020160
+
+- name: MEDIUM | RHEL-08-020170
+  include_tasks: cat2/RHEL-08-020170.yml
+  when:
+    - rhel_08_020170
+  tags:
+    - RHEL-08-020170
+
+- name: MEDIUM | RHEL-08-020180
+  include_tasks: cat2/RHEL-08-020180.yml
+  when:
+    - rhel_08_020180
+  tags:
+    - RHEL-08-020180
+
+- name: MEDIUM | RHEL-08-020190
+  include_tasks: cat2/RHEL-08-020190.yml
+  when:
+    - rhel_08_020190
+  tags:
+    - RHEL-08-020190
+
+- name: MEDIUM | RHEL-08-020200
+  include_tasks: cat2/RHEL-08-020200.yml
+  when:
+    - rhel_08_020200
+  tags:
+    - RHEL-08-020200
+
+- name: MEDIUM | RHEL-08-020210
+  include_tasks: cat2/RHEL-08-020210.yml
+  when:
+    - rhel_08_020210
+  tags:
+    - RHEL-08-020210
+
+- name: MEDIUM | RHEL-08-020230
+  include_tasks: cat2/RHEL-08-020230.yml
+  when:
+    - rhel_08_020230
+  tags:
+    - RHEL-08-020230
+
+- name: MEDIUM | RHEL-08-020231
+  include_tasks: cat2/RHEL-08-020231.yml
+  when:
+    - rhel_08_020231
+  tags:
+    - RHEL-08-020231
+
+- name: MEDIUM | RHEL-08-020240
+  include_tasks: cat2/RHEL-08-020240.yml
+  when:
+    - rhel_08_020240
+  tags:
+    - RHEL-08-020240
+
+- name: MEDIUM | RHEL-08-020250
+  include_tasks: cat2/RHEL-08-020250.yml
+  when:
+    - rhel_08_020250
+  tags:
+    - RHEL-08-020250
+
+- name: MEDIUM | RHEL-08-020260
+  include_tasks: cat2/RHEL-08-020260.yml
+  when:
+    - rhel_08_020260
+  tags:
+    - RHEL-08-020260
+
+- name: MEDIUM | RHEL-08-020270
+  include_tasks: cat2/RHEL-08-020270.yml
+  when:
+    - rhel_08_020270
+  tags:
+    - RHEL-08-020270
+
+- name: MEDIUM | RHEL-08-020280
+  include_tasks: cat2/RHEL-08-020280.yml
+  when:
+    - rhel_08_020280
+  tags:
+    - RHEL-08-020280
+
+- name: MEDIUM | RHEL-08-020290
+  include_tasks: cat2/RHEL-08-020290.yml
+  when:
+    - rhel_08_020290
+  tags:
+    - RHEL-08-020290
+
+- name: MEDIUM | RHEL-08-020300
+  include_tasks: cat2/RHEL-08-020300.yml
+  when:
+    - rhel_08_020300
+  tags:
+    - RHEL-08-020300
+
+- name: MEDIUM | RHEL-08-020310
+  include_tasks: cat2/RHEL-08-020310.yml
+  when:
+    - rhel_08_020310
+  tags:
+    - RHEL-08-020310
+
+- name: MEDIUM | RHEL-08-020320
+  include_tasks: cat2/RHEL-08-020320.yml
+  when:
+    - rhel_08_020320
+  tags:
+    - RHEL-08-020320
+
+- name: MEDIUM | RHEL-08-020350
+  include_tasks: cat2/RHEL-08-020350.yml
+  when:
+    - rhel_08_020350
+  tags:
+    - RHEL-08-020350
+
+- name: MEDIUM | RHEL-08-020351
+  include_tasks: cat2/RHEL-08-020351.yml
+  when:
+    - rhel_08_020351
+  tags:
+    - RHEL-08-020351
+
+- name: MEDIUM | RHEL-08-020352
+  include_tasks: cat2/RHEL-08-020352.yml
+  when:
+    - rhel_08_020352
+  tags:
+    - RHEL-08-020352
+
+- name: MEDIUM | RHEL-08-020353
+  include_tasks: cat2/RHEL-08-020353.yml
+  when:
+    - rhel_08_020353
+  tags:
+    - RHEL-08-020353
+
+- name: MEDIUM | RHEL-08-AUDIT-RULES
+  include_tasks: cat2/RHEL-08-audit-rules.yml
+  when:
+    - rhel_08_audit_rules
+  tags:
+    - RHEL-08-AUDIT-RULES
+
+- name: MEDIUM | RHEL-08-030010
+  include_tasks: cat2/RHEL-08-030010.yml
+  when:
+    - rhel_08_030010
+  tags:
+    - RHEL-08-030010
+
+- name: MEDIUM | RHEL-08-030020
+  include_tasks: cat2/RHEL-08-030020.yml
+  when:
+    - rhel_08_030020
+  tags:
+    - RHEL-08-030020
+
+- name: MEDIUM | RHEL-08-030030
+  include_tasks: cat2/RHEL-08-030030.yml
+  when:
+    - rhel_08_030030
+  tags:
+    - RHEL-08-030030
+
+- name: MEDIUM | RHEL-08-030040
+  include_tasks: cat2/RHEL-08-030040.yml
+  when:
+    - rhel_08_030040
+  tags:
+    - RHEL-08-030040
+
+- name: MEDIUM | RHEL-08-030060
+  include_tasks: cat2/RHEL-08-030060.yml
+  when:
+    - rhel_08_030060
+  tags:
+    - RHEL-08-030060
+
+- name: MEDIUM | RHEL-08-030061
+  include_tasks: cat2/RHEL-08-030061.yml
+  when:
+    - rhel_08_030061
+  tags:
+    - RHEL-08-030061
+
+- name: MEDIUM | RHEL-08-030062
+  include_tasks: cat2/RHEL-08-030062.yml
+  when:
+    - rhel_08_030062
+  tags:
+    - RHEL-08-030062
+
+- name: MEDIUM | RHEL-08-030070
+  include_tasks: cat2/RHEL-08-030070.yml
+  when:
+    - rhel_08_030070
+  tags:
+    - RHEL-08-030070
+
+- name: MEDIUM | RHEL-08-030080
+  include_tasks: cat2/RHEL-08-030080.yml
+  when:
+    - rhel_08_030080
+  tags:
+    - RHEL-08-030080
+
+- name: MEDIUM | RHEL-08-030090
+  include_tasks: cat2/RHEL-08-030090.yml
+  when:
+    - rhel_08_030090
+  tags:
+    - RHEL-08-030090
+
+- name: MEDIUM | RHEL-08-030100
+  include_tasks: cat2/RHEL-08-030100.yml
+  when:
+    - rhel_08_030100
+  tags:
+    - RHEL-08-030100
+
+- name: MEDIUM | RHEL-08-030110
+  include_tasks: cat2/RHEL-08-030110.yml
+  when:
+    - rhel_08_030110
+  tags:
+    - RHEL-08-030110
+
+- name: MEDIUM | RHEL-08-030120
+  include_tasks: cat2/RHEL-08-030120.yml
+  when:
+    - rhel_08_030120
+  tags:
+    - RHEL-08-030120
+
+- name: MEDIUM | RHEL-08-030180
+  include_tasks: cat2/RHEL-08-030180.yml
+  when:
+    - rhel_08_030180
+  tags:
+    - RHEL-08-030180
+
+- name: MEDIUM | RHEL-08-030181
+  include_tasks: cat2/RHEL-08-030181.yml
+  when:
+    - rhel_08_030181
+  tags:
+    - RHEL-08-030181
+
+- name: MEDIUM | RHEL-08-030610
+  include_tasks: cat2/RHEL-08-030610.yml
+  when:
+    - rhel_08_030610
+  tags:
+    - RHEL-08-030610
+
+- name: MEDIUM | RHEL-08-030620
+  include_tasks: cat2/RHEL-08-030620.yml
+  when:
+    - rhel_08_030620
+  tags:
+    - RHEL-08-030620
+
+- name: MEDIUM | RHEL-08-030630
+  include_tasks: cat2/RHEL-08-030630.yml
+  when:
+    - rhel_08_030630
+  tags:
+    - RHEL-08-030630
+
+- name: MEDIUM | RHEL-08-030640
+  include_tasks: cat2/RHEL-08-030640.yml
+  when:
+    - rhel_08_030640
+  tags:
+    - RHEL-08-030640
+
+- name: MEDIUM | RHEL-08-030650
+  include_tasks: cat2/RHEL-08-030650.yml
+  when:
+    - rhel_08_030650
+  tags:
+    - RHEL-08-030650
+
+- name: MEDIUM | RHEL-08-030660
+  include_tasks: cat2/RHEL-08-030660.yml
+  when:
+    - rhel_08_030660
+  tags:
+    - RHEL-08-030660
+
+- name: MEDIUM | RHEL-08-030670
+  include_tasks: cat2/RHEL-08-030670.yml
+  when:
+    - rhel_08_030670
+  tags:
+    - RHEL-08-030670
+
+- name: MEDIUM | RHEL-08-030680
+  include_tasks: cat2/RHEL-08-030680.yml
+  when:
+    - rhel_08_030680
+  tags:
+    - RHEL-08-030680
+
+- name: MEDIUM | RHEL-08-030690
+  include_tasks: cat2/RHEL-08-030690.yml
+  when:
+    - rhel_08_030690
+  tags:
+    - RHEL-08-030690
+
+- name: MEDIUM | RHEL-08-030700
+  include_tasks: cat2/RHEL-08-030700.yml
+  when:
+    - rhel_08_030700
+  tags:
+    - RHEL-08-030700
+
+- name: MEDIUM | RHEL-08-030710
+  include_tasks: cat2/RHEL-08-030710.yml
+  when:
+    - rhel_08_030710
+  tags:
+    - RHEL-08-030710
+
+- name: MEDIUM | RHEL-08-030720
+  include_tasks: cat2/RHEL-08-030720.yml
+  when:
+    - rhel_08_030720
+  tags:
+    - RHEL-08-030720
+
+- name: MEDIUM | RHEL-08-030730
+  include_tasks: cat2/RHEL-08-030730.yml
+  when:
+    - rhel_08_030730
+  tags:
+    - RHEL-08-030730
+
+- name: MEDIUM | RHEL-08-030731
+  include_tasks: cat2/RHEL-08-030731.yml
+  when:
+    - rhel_08_030731
+  tags:
+    - RHEL-08-030731
+
+- name: MEDIUM | RHEL-08-030740
+  include_tasks: cat2/RHEL-08-030740.yml
+  when:
+    - rhel_08_030740
+  tags:
+    - RHEL-08-030740
+
+- name: MEDIUM | RHEL-08-040001
+  include_tasks: cat2/RHEL-08-040001.yml
+  when:
+    - rhel_08_040001
+  tags:
+    - RHEL-08-040001
+
+- name: MEDIUM | RHEL-08-040002
+  include_tasks: cat2/RHEL-08-040002.yml
+  when:
+    - rhel_08_040002
+  tags:
+    - RHEL-08-040002
+
+- name: MEDIUM | RHEL-08-040020
+  include_tasks: cat2/RHEL-08-040020.yml
+  when:
+    - rhel_08_040020
+  tags:
+    - RHEL-08-040020
+
+- name: MEDIUM | RHEL-08-040030
+  include_tasks: cat2/RHEL-08-040030.yml
+  when:
+    - rhel_08_040030
+  tags:
+    - RHEL-08-040030
+
+- name: MEDIUM | RHEL-08-040070
+  include_tasks: cat2/RHEL-08-040070.yml
+  when:
+    - rhel_08_040070
+  tags:
+    - RHEL-08-040070
+
+- name: MEDIUM | RHEL-08-040080
+  include_tasks: cat2/RHEL-08-040080.yml
+  when:
+    - rhel_08_040080
+  tags:
+    - RHEL-08-040080
+
+- name: MEDIUM | RHEL-08-040090
+  include_tasks: cat2/RHEL-08-040090.yml
+  when:
+    - rhel_08_040090
+  tags:
+    - RHEL-08-040090
+
+- name: MEDIUM | RHEL-08-040100
+  include_tasks: cat2/RHEL-08-040100.yml
+  when:
+    - rhel_08_040100
+  tags:
+    - RHEL-08-040100
+
+- name: MEDIUM | RHEL-08-040101
+  include_tasks: cat2/RHEL-08-040101.yml
+  when:
+    - rhel_08_040101
+  tags:
+    - RHEL-08-040101
+
+- name: MEDIUM | RHEL-08-040110
+  include_tasks: cat2/RHEL-08-040110.yml
+  when:
+    - rhel_08_040110
+  tags:
+    - RHEL-08-040110
+
+- name: MEDIUM | RHEL-08-040111
+  include_tasks: cat2/RHEL-08-040111.yml
+  when:
+    - rhel_08_040111
+  tags:
+    - RHEL-08-040111
+
+- name: MEDIUM | RHEL-08-040120 RHEL-08-040121 RHEL-08-040122
+  include_tasks: cat2/RHEL-08-040120-040121-040122.yml
+  when:
+    - rhel_08_040120 or rhel_08_040121 or rhel_08_040122
+
+  tags:
+    - RHEL-08-040120
+    - RHEL-08-040121
+    - RHEL-08-040122
+
+- name: MEDIUM | RHEL-08-040123 RHEL-08-040124 RHEL-08-040125
+  include_tasks: cat2/RHEL-08-040123-040124-040125.yml
+  when:
+    - rhel_08_040123 or rhel_08_040124 or rhel_08_040125
+
+  tags:
+    - RHEL-08-040123
+    - RHEL-08-040124
+    - RHEL-08-040125
+
+- name: MEDIUM | RHEL-08-040126 RHEL-08-040127 RHEL-08-040128
+  include_tasks: cat2/RHEL-08-040126-040127-040128.yml
+  when:
+    - rhel_08_040126 or rhel_08_040127 or rhel_08_040128
+
+  tags:
+    - RHEL-08-040126
+    - RHEL-08-040127
+    - RHEL-08-040128
+
+- name: MEDIUM | RHEL-08-040129 RHEL-08-040130 RHEL-08-040131
+  include_tasks: cat2/RHEL-08-040129-040130-040131.yml
+  when:
+    - rhel_08_040129 or rhel_08_040130 or rhel_08_040131
+
+  tags:
+    - RHEL-08-040129
+    - RHEL-08-040130
+    - RHEL-08-040131
+
+- name: MEDIUM | RHEL-08-040132 RHEL-08-040133 RHEL-08-040134
+  include_tasks: cat2/RHEL-08-040132-040133-040134.yml
+  when:
+    - rhel_08_040132 or rhel_08_040133 or rhel_08_040134
+
+  tags:
+    - RHEL-08-040132
+    - RHEL-08-040133
+    - RHEL-08-040134
+
+- name: MEDIUM | RHEL-08-040135
+  include_tasks: cat2/RHEL-08-040135.yml
+  when:
+    - rhel_08_040135
+  tags:
+    - RHEL-08-040135
+
+- name: MEDIUM | RHEL-08-040136
+  include_tasks: cat2/RHEL-08-040136.yml
+  when:
+    - rhel_08_040136
+  tags:
+    - RHEL-08-040136
+
+- name: MEDIUM | RHEL-08-040137
+  include_tasks: cat2/RHEL-08-040137.yml
+  when:
+    - rhel_08_040137
+  tags:
+    - RHEL-08-040137
+
+- name: MEDIUM | RHEL-08-040139 RHEL-08-040140 RHEL-08-040141
+  include_tasks: cat2/RHEL-08-040139-040140-040141.yml
+  when:
+    - rhel_08_040139 or rhel_08_040140 or rhel_08_040141
+  tags:
+    - RHEL-08-040139
+    - RHEL-08-040140
+    - RHEL-08-040141
+
+- name: MEDIUM | RHEL-08-040150
+  include_tasks: cat2/RHEL-08-040150.yml
+  when:
+    - rhel_08_040150
+  tags:
+    - RHEL-08-040150
+
+- name: MEDIUM | RHEL-08-040159
+  include_tasks: cat2/RHEL-08-040159.yml
+  when:
+    - rhel_08_040159
+  tags:
+    - RHEL-08-040159
+
+- name: MEDIUM | RHEL-08-040160
+  include_tasks: cat2/RHEL-08-040160.yml
+  when:
+    - rhel_08_040160
+  tags:
+    - RHEL-08-040160
+
+- name: MEDIUM | RHEL-08-040161
+  include_tasks: cat2/RHEL-08-040161.yml
+  when:
+    - rhel_08_040161
+  tags:
+    - RHEL-08-040161
+
+- name: MEDIUM | RHEL-08-040180
+  include_tasks: cat2/RHEL-08-040180.yml
+  when:
+    - rhel_08_040180
+  tags:
+    - RHEL-08-040180
+
+- name: MEDIUM | RHEL-08-040209
+  include_tasks: cat2/RHEL-08-040209.yml
+  when:
+    - rhel_08_040209
+  tags:
+    - RHEL-08-040209
+
+- name: MEDIUM | RHEL-08-040210
+  include_tasks: cat2/RHEL-08-040210.yml
+  when:
+    - rhel_08_040210
+  tags:
+    - RHEL-08-040210
+
+- name: MEDIUM | RHEL-08-040220
+  include_tasks: cat2/RHEL-08-040220.yml
+  when:
+    - rhel_08_040220
+  tags:
+    - RHEL-08-040220
+
+- name: MEDIUM | RHEL-08-040230
+  include_tasks: cat2/RHEL-08-040230.yml
+  when:
+    - rhel_08_040230
+  tags:
+    - RHEL-08-040230
+
+- name: MEDIUM | RHEL-08-040239
+  include_tasks: cat2/RHEL-08-040239.yml
+  when:
+    - rhel_08_040239
+  tags:
+    - RHEL-08-040239
+
+- name: MEDIUM | RHEL-08-040240
+  include_tasks: cat2/RHEL-08-040240.yml
+  when:
+    - rhel_08_040240
+  tags:
+    - RHEL-08-040240
+
+- name: MEDIUM | RHEL-08-040249
+  include_tasks: cat2/RHEL-08-040249.yml
+  when:
+    - rhel_08_040249
+  tags:
+    - RHEL-08-040249
+
+- name: MEDIUM | RHEL-08-040250
+  include_tasks: cat2/RHEL-08-040250.yml
+  when:
+    - rhel_08_040250
+  tags:
+    - RHEL-08-040250
+
+- name: MEDIUM | RHEL-08-040259
+  include_tasks: cat2/RHEL-08-040259.yml
+  when:
+    - rhel_08_040259
+  tags:
+    - RHEL-08-040259
+
+- name: MEDIUM | RHEL-08-040260
+  include_tasks: cat2/RHEL-08-040260.yml
+  when:
+    - rhel_08_040260
+  tags:
+    - RHEL-08-040260
+
+- name: MEDIUM | RHEL-08-040261
+  include_tasks: cat2/RHEL-08-040261.yml
+  when:
+    - rhel_08_040261
+  tags:
+    - RHEL-08-040261
+
+- name: MEDIUM | RHEL-08-040262
+  include_tasks: cat2/RHEL-08-040262.yml
+  when:
+    - rhel_08_040262
+  tags:
+    - RHEL-08-040262
+
+- name: MEDIUM | RHEL-08-040270
+  include_tasks: cat2/RHEL-08-040270.yml
+  when:
+    - rhel_08_040270
+  tags:
+    - RHEL-08-040270
+
+- name: MEDIUM | RHEL-08-040279
+  include_tasks: cat2/RHEL-08-040279.yml
+  when:
+    - rhel_08_040279
+  tags:
+    - RHEL-08-040279
+
+- name: MEDIUM | RHEL-08-040280
+  include_tasks: cat2/RHEL-08-040280.yml
+  when:
+    - rhel_08_040280
+  tags:
+    - RHEL-08-040280
+
+- name: MEDIUM | RHEL-08-040281
+  include_tasks: cat2/RHEL-08-040281.yml
+  when:
+    - rhel_08_040281
+  tags:
+    - RHEL-08-040281
+
+- name: MEDIUM | RHEL-08-040282
+  include_tasks: cat2/RHEL-08-040282.yml
+  when:
+    - rhel_08_040282
+  tags:
+    - RHEL-08-040282
+
+- name: MEDIUM | RHEL-08-040283
+  include_tasks: cat2/RHEL-08-040283.yml
+  when:
+    - rhel_08_040283
+  tags:
+    - RHEL-08-040283
+
+- name: MEDIUM | RHEL-08-040284
+  include_tasks: cat2/RHEL-08-040284.yml
+  when:
+    - rhel_08_040284
+  tags:
+    - RHEL-08-040284
+
+- name: MEDIUM | RHEL-08-040285
+  include_tasks: cat2/RHEL-08-040285.yml
+  when:
+    - rhel_08_040285
+  tags:
+    - RHEL-08-040285
+
+- name: MEDIUM | RHEL-08-040286
+  include_tasks: cat2/RHEL-08-040286.yml
+  when:
+    - rhel_08_040286
+  tags:
+    - RHEL-08-040286
+
+- name: MEDIUM | RHEL-08-040290
+  include_tasks: cat2/RHEL-08-040290.yml
+  when:
+    - rhel_08_040290
+  tags:
+    - RHEL-08-040290
+
+- name: MEDIUM | RHEL-08-040320
+  include_tasks: cat2/RHEL-08-040320.yml
+  when:
+    - rhel_08_040320
+  tags:
+    - RHEL-08-040320
+
+- name: MEDIUM | RHEL-08-040321
+  include_tasks: cat2/RHEL-08-040321.yml
+  when:
+    - rhel_08_040321
+  tags:
+    - RHEL-08-040321
+
+- name: MEDIUM | RHEL-08-040330
+  include_tasks: cat2/RHEL-08-040330.yml
+  when:
+    - rhel_08_040330
+  tags:
+    - RHEL-08-040330
+
+- name: MEDIUM | RHEL-08-040340
+  include_tasks: cat2/RHEL-08-040340.yml
+  when:
+    - rhel_08_040340
+  tags:
+    - RHEL-08-040340
+
+- name: MEDIUM | RHEL-08-040341
+  include_tasks: cat2/RHEL-08-040341.yml
+  when:
+    - rhel_08_040341
+  tags:
+    - RHEL-08-040341
+
+- name: MEDIUM | RHEL-08-040350
+  include_tasks: cat2/RHEL-08-040350.yml
+  when:
+    - rhel_08_040350
+  tags:
+    - RHEL-08-040350
+
+- name: MEDIUM | RHEL-08-040370
+  include_tasks: cat2/RHEL-08-040370.yml
+  when:
+    - rhel_08_040370
+  tags:
+    - RHEL-08-040370
+
+- name: MEDIUM | RHEL-08-040380
+  include_tasks: cat2/RHEL-08-040380.yml
+  when:
+    - rhel_08_040380
+  tags:
+    - RHEL-08-040380
+
+- name: MEDIUM | RHEL-08-040390
+  include_tasks: cat2/RHEL-08-040390.yml
+  when:
+    - rhel_08_040390
+  tags:
+    - RHEL-08-040390
+
+- name: MEDIUM | RHEL-08-040400
+  include_tasks: cat2/RHEL-08-040400.yml
+  when:
+    - rhel_08_040400
+  tags:
+    - RHEL-08-040400
+
+- name: MEDIUM | RHEL-08-PAM-RULES
+  include_tasks: cat2/RHEL-08-pam-rules.yml
+  when:
+    - rhel_08_pam_rules
+  tags:
+    - RHEL-08-PAM-RULES

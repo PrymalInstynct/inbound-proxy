@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010561 | The rsyslog service must be running in RHEL 8.
+  ansible.builtin.systemd:
+    name: rsyslog
+    state: started
+    enabled: true
+
+  when:
+    - rhel_08_010561
+  tags:
+    - RHEL-08-010561

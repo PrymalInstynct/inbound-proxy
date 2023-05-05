@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010544 | MANUAL FIX | A separate RHEL 8 filesystem must be used for the /var/tmp directory.
+  ansible.builtin.debug:
+    msg: "Manual Lockdown Required | WARNING: /var/tmp is not mounted on a separate partition"
+  changed_when: false
+
+  when:
+    - rhel_08_010544
+    - ansible_mounts | selectattr('mount', 'match', '^var/tmp$') | list | length == 0
+  tags:
+    - RHEL-08-010544
+    - manual_fix

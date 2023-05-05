@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-020352 | MANUAL FIX | RHEL 8 must set the umask value to 077 for all local interactive user accounts.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | All local interactive user accounts must have a umask of 077 'grep -i umask /home/*/.* 2>/dev/null'
+
+  when:
+    - rhel_08_020352
+  tags:
+    - RHEL-08-020352
+    - manual_fix

@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-030660 | MANUAL FIX | RHEL 8 must allocate audit record storage capacity to store at least one week of audit records, when audit records
+    are not immediately sent to a central audit record storage facility.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | Ensure enough drive space is allocated to /var/log/audit to save 1 week of logs
+  changed_when: false
+
+  when:
+    - rhel_08_030660
+  tags:
+    - RHEL-08-030660
+    - manual_fix

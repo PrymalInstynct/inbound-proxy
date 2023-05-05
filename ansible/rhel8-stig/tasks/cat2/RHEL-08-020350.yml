@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-020350 | RHEL 8 must display the date and time of the last successful account logon upon an SSH logon.
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: ^#PrintLastLog.*|^PrintLastLog.*
+    line: PrintLastLog yes
+    state: present
+    validate: /usr/sbin/sshd -tf %s
+  notify: Restart OpenSSH
+
+  when:
+    - rhel_08_020350
+  tags:
+    - RHEL-08-020350

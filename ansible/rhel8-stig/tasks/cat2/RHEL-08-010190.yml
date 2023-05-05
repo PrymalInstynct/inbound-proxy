@@ -1,0 +1,19 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010190 | A sticky bit must be set on all RHEL 8 public directories to prevent unauthorized and unintended information transferred via
+        shared system resources. | Part 1 of 2
+      ansible.builtin.shell: find {{ rhel8stig_local_mounts | join(' ') }} -xdev -type d \( -perm -0002 -a ! -perm -1000 \) -print 2>/dev/null | sed 's/.* //'
+      register: sticky_bit_directories
+      changed_when: sticky_bit_directories.stdout != ""
+
+    - name: MEDIUM | RHEL-08-010190 | A sticky bit must be set on all RHEL 8 public directories to prevent unauthorized and unintended information transferred via
+        shared system resources. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: "1777"
+      with_items: "{{ sticky_bit_directories.stdout_lines }}"
+
+  when:
+    - rhel_08_010190
+  tags:
+    - RHEL-08-010190

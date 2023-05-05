@@ -1,0 +1,12 @@
+---
+- name: LOW | RHEL-08-010541 | MANUAL FIX | RHEL 8 must use a separate file system for /var/log.
+  ansible.builtin.debug:
+    msg: "Manual Lockdown Required | WARNING: /var/log is not mounted on a separate partition"
+  changed_when: false
+
+  when:
+    - rhel_08_010541
+    - ansible_mounts | selectattr('mount', 'match', '^/var/log$') | list | length == 0
+  tags:
+    - RHEL-08-010541
+    - manual_fix

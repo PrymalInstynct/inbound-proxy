@@ -1,0 +1,11 @@
+---
+- name: LOW | RHEL-08-020042 | RHEL 8 must prevent users from disabling session control mechanisms.
+  ansible.builtin.lineinfile:
+    path: /etc/shells
+    regexp: ^.*tmux
+    state: absent
+
+  when:
+    - rhel_08_020042
+  tags:
+    - RHEL-08-020042

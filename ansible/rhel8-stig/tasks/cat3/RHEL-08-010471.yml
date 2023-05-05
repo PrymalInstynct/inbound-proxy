@@ -1,0 +1,11 @@
+---
+- name: LOW | RHEL-08-010471 | RHEL 8 must enable the hardware random number generator entropy gatherer service.
+  ansible.builtin.systemd:
+    name: rngd
+    state: started
+    enabled: true
+
+  when:
+    - rhel_08_010471
+  tags:
+    - RHEL-08-010471

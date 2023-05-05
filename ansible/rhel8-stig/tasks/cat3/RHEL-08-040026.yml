@@ -1,0 +1,18 @@
+---
+- name: LOW | RHEL-08-040026 | RHEL 8 must disable IEEE 1394 (FireWire) Support.
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^#install (?i)firewire-core.*|^install (?i)firewire-core.*", line: install firewire-core /bin/true }
+    - { regexp: "^#blacklist (?i)firewire-core", line: blacklist firewire-core }
+
+  when:
+    - rhel_08_040026
+  tags:
+    - RHEL-08-040026

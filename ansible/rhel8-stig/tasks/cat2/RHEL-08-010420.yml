@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010420 | MANUAL FIX | RHEL 8 must implement non-executable data to protect its memory from unauthorized code execution.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | The NX flag is usually set via the BIOS.
+
+  when:
+    - rhel_08_010420
+  tags:
+    - RHEL-08-010420
+    - manual_fix

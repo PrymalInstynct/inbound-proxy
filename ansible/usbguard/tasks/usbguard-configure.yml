@@ -1,0 +1,9 @@
+---
+- name: "RHEL | Generate USBGuard Policy"
+  shell: usbguard generate-policy > /etc/usbguard/rules.conf
+
+- name: "RHEL | Update USBGuard-daemon config"
+  replace:
+    path: /etc/usbguard/usbguard-daemon.conf
+    regexp: '^ImplicitPolicyTarget=block'
+    replace: 'ImplicitPolicyTarget=reject'

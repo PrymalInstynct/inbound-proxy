@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010660 | MANUAL FIX | Local RHEL 8 initialization files must not execute world-writable programs.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | Local initialization files in user home directories must not execute world-writable programs.
+
+  when:
+    - rhel_08_010660
+  tags:
+    - RHEL-08-010660
+    - manual_fix

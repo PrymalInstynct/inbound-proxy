@@ -1,0 +1,9 @@
+---
+- name: LOW | RHEL-08-040004 | RHEL 8 must enable mitigations against processor-based vulnerabilities.
+  ansible.builtin.command: grubby --update-kernel=ALL --args="pti=on"
+  changed_when: false
+
+  when:
+    - rhel_08_040004
+  tags:
+    - RHEL-08-040004

@@ -1,0 +1,13 @@
+---
+- name: HIGH | RHEL-08-010371 | RHEL 8 must prevent the installation of software, patches, service packs, device drivers, or operating system components of local
+    packages without verification.
+  ansible.builtin.lineinfile:
+    path: /etc/dnf/dnf.conf
+    regexp: ^#?\s*localpkg_gpgcheck.*
+    line: localpkg_gpgcheck=True
+    state: present
+
+  when:
+    - rhel_08_010371
+  tags:
+    - RHEL-08-010371

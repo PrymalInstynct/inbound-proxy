@@ -1,0 +1,18 @@
+---
+- name: MEDIUM | RHEL-08-010290 | RHEL-08-010291 | RHEL-08-040342 | The RHEL 8 SSH server must be configured to use only Message Authentication Codes (MACs) employing FIPS 140-2 validated
+    cryptographic hash algorithms.
+  ansible.builtin.lineinfile:
+    path: /etc/crypto-policies/back-ends/opensshserver.config
+    regexp: ^#?\s*CRYPTO_POLICY=.*
+    line: CRYPTO_POLICY='-oCiphers=aes256-ctr,aes192-ctr,aes128-ctr -oMACS=hmac-sha2-512,hmac-sha2-256 -oKexAlgorithms=ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512'
+    backrefs: true
+    state: present
+
+  when:
+    - rhel_08_010290
+    - rhel_08_010291
+    - rhel_08_040342
+  tags:
+    - RHEL-08-010290
+    - RHEL-08-010291
+    - RHEL-08-040342

@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-030090 | RHEL 8 audit logs must be group-owned by root to prevent unauthorized read access.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*log_group
+    line: log_group = root
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030090
+  tags:
+    - RHEL-08-030090

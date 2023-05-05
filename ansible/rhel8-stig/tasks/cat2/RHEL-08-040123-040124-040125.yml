@@ -1,0 +1,25 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040123 RHEL-08-040124 RHEL-08-040125 | RHEL 8 must mount /tmp with the nosuid, noexec, nodev options. | Part 1 of 2
+      ansible.posix.mount:
+        path: /tmp
+        src: UUID={{ tmp_mount.uuid }}
+        fstype: "{{ tmp_mount.fstype }}"
+        opts: "{{ tmp_mount.options }},nosuid,noexec,nodev"
+        state: mounted
+
+    - name: MEDIUM | RHEL-08-040123 RHEL-08-040124 RHEL-08-040125 | RHEL 8 must mount /tmp with the nosuid, noexec, nodev options. | Part 2 of 2
+      ansible.builtin.command: mount /tmp -o remount,nosuid,noexec,nodev
+
+  when:
+    - rhel_08_040123 or rhel_08_040124 or rhel_08_040125
+    - ansible_mounts | selectattr('mount', 'match', '^/tmp$') | list | length != 0
+    - "'nosuid' not in tmp_mount.options"
+    - "'noexec' not in tmp_mount.options"
+    - "'nodev' not in tmp_mount.options"
+  vars:
+    tmp_mount: "{{ ansible_mounts | json_query('[?mount == `/tmp`] | [0]') }}"
+  tags:
+    - RHEL-08-040123
+    - RHEL-08-040124
+    - RHEL-08-040125

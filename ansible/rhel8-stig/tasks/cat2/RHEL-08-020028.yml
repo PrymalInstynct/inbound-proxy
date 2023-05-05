@@ -1,0 +1,26 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-020028 | RHEL 8 systems below version 8.2 must configure SELinux context type to allow the use of a non-default faillock tally directory.
+        | Part 1 of 2
+      ansible.builtin.file:
+        path: /var/log/faillock
+        owner: root
+        group: root
+        mode: "0700"
+        setype: faillog_t
+        recurse: true
+        state: directory
+
+    - name: MEDIUM | RHEL-08-020028 | RHEL 8 systems below version 8.2 must configure SELinux context type to allow the use of a non-default faillock tally directory.
+        | Part 2 of 2
+      community.general.sefcontext:
+        target: /var/log/faillock
+        ftype: d
+        setype: faillog_t
+        state: present
+
+  when:
+    - rhel_08_020028
+    - ansible_distribution_version is version_compare('8.1', '<=')
+  tags:
+    - RHEL-08-020028

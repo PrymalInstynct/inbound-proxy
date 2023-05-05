@@ -1,0 +1,15 @@
+---
+- name: MEDIUM | RHEL-08-020353 | RHEL 8 must define default permissions for logon and non-logon shells.
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: umask\s\d\d\d
+    replace: umask 077
+  with_items:
+    - /etc/bashrc
+    - /etc/csh.cshrc
+    - /etc/profile
+
+  when:
+    - rhel_08_020353
+  tags:
+    - RHEL-08-020353

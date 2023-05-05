@@ -1,0 +1,12 @@
+---
+- name: HIGH | RHEL-08-040010 | RHEL 8 must not have the rsh-server package installed.
+  ansible.builtin.dnf:
+    name: rsh-server
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040010
+    - not rhel8stig_requires_rsh
+  tags:
+    - RHEL-08-040010

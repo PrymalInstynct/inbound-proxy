@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040180 | The debug-shell systemd service must be disabled on RHEL 8.
+  ansible.builtin.systemd:
+    name: debug-shell
+    state: stopped
+    enabled: false
+    masked: true
+
+  when:
+    - rhel_08_040180
+    - ansible_facts.services["debug-shell.service"] is defined
+  tags:
+    - RHEL-08-040180

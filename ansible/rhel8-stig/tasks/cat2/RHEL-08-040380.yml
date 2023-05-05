@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-040380 | The iprutils package must not be installed unless mission essential on RHEL 8.
+  ansible.builtin.dnf:
+    name: iprutils
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040380
+  tags:
+    - RHEL-08-040380

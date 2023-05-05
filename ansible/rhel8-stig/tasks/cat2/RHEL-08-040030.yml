@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-040030 | MANUAL FIX | RHEL 8 must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined
+    in the Ports, Protocols, and Services Management (PPSM) Category Assignments List (CAL) and vulnerability assessments.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | The Host Based Firewall must be configured per the PPSM
+
+  when:
+    - rhel_08_040030
+  tags:
+    - RHEL-08-040030
+    - manual_fix

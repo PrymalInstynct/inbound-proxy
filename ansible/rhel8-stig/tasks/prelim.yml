@@ -1,0 +1,305 @@
+---
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Prelim Tasks that are always run
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+- name: PRELIM | Gather Installed Package Facts
+  ansible.builtin.package_facts:
+    manager: rpm
+  tags:
+    - always
+
+- name: PRELIM | Gather Service Facts
+  ansible.builtin.service_facts:
+  tags:
+    - always
+
+- name: PRELIM | Gather mount information
+  ansible.builtin.setup:
+    gather_subset: hardware,!all,!min
+    filter: ansible_mounts
+  when:
+    - ansible_mounts is not defined
+  tags:
+    - always
+
+- name: PRELIM | Check whether machine is UEFI-based
+  ansible.builtin.stat:
+    path: /sys/firmware/efi
+  register: rhel_08_sys_firmware_efi
+  tags:
+    - always
+
+- name: PRELIM | Find all Repo Files
+  ansible.builtin.find:
+    paths: /etc/yum.repos.d
+    pattern: "*.repo"
+  register: rhel_08_repo_files
+  tags:
+    - always
+
+- name: PRELIM | Find all sudoers files
+  ansible.builtin.command: find /etc/sudoers /etc/sudoers.d/ -type f ! -name '*~' ! -name '*.*'
+  changed_when: false
+  failed_when: false
+  register: rhel8stig_sudoers_files
+  tags:
+    - always
+
+- name: PRELIM | Check whether machine has Gnome installed
+  ansible.builtin.stat:
+    path: /usr/share/gnome/gnome-version.xml
+  register: has_gnome
+  tags:
+    - gui
+    - always
+
+- name: PRELIM | Parse /etc/passwd
+  include_tasks: parse_etc_passwd.yml
+  tags:
+    - always
+
+- name: PRELIM | Determine Auditd Log File
+  ansible.builtin.shell: grep ^log_file /etc/audit/auditd.conf | awk {'print $3'}
+  register: audit_log_file
+  changed_when: false
+  tags:
+    - always
+
+- name: PRELIM | Determine Auditd Log Directory
+  ansible.builtin.shell: grep ^log_file /etc/audit/auditd.conf | awk {'print $3'} | awk -F '/' '{$NF=""; print $0}' | sed 's/ /\//g'
+  register: audit_log_directory
+  changed_when: false
+  tags:
+    - always
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Software Installations required by specific STIGs
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+- name: PRELIM | Install rsyslog
+  ansible.builtin.dnf:
+    name: rsyslog
+    state: latest
+  when:
+    - rhel_08_010070 or rhel_08_030670
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-010070
+    - RHEL-08-030670
+
+- name: PRELIM | Install grub2-tools
+  ansible.builtin.dnf:
+    name:
+      - grub2-tools
+      - grub2-tools-extra
+      - grub2-tools-minimal
+
+  when:
+    - rhel_08_010140 or rhel_08_010150
+  tags:
+    - cat1
+    - high
+    - RHEL-08-010140
+    - RHEL-08-010150
+
+- name: PRELIM | Install python3-pexpect
+  ansible.builtin.dnf:
+    name: python3-pexpect
+    state: latest
+  when:
+    - rhel_08_010140 or rhel_08_010150
+  tags:
+    - cat1
+    - high
+    - RHEL-08-010140
+    - RHEL-08-010150
+
+- name: PRELIM | Install aide
+  ansible.builtin.dnf:
+    name: aide
+    state: latest
+  when:
+    - rhel8stig_aide
+    - rhel_08_010359
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-010359
+
+- name: PRELIM | Install opensc
+  ansible.builtin.dnf:
+    name: opensc
+    state: latest
+  when:
+    - rhel_08_010410
+    - rhel8stig_mfa
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-010410
+    - mfa
+
+- name: PRELIM | Install rng-tools
+  ansible.builtin.dnf:
+    name: rng-tools
+    state: latest
+  when:
+    - rhel_08_010471
+    - rhel_08_010472
+  tags:
+    - cat3
+    - low
+    - RHEL-08-010471
+    - RHEL-08-010472
+
+- name: PRELIM | Install usbguard
+  ansible.builtin.dnf:
+    name: usbguard
+    state: latest
+  when:
+    - rhel8stig_usbguard
+    - rhel_08_040139 or rhel_08_040140 or rhel_08_040141 or rhel_08_030603
+  tags:
+    - cat2
+    - medium
+    - cat3
+    - low
+    - RHEL-08-040139
+    - RHEL-08-040140
+    - RHEL-08-040141
+    - RHEL-08-030603
+
+- name: PRELIM | Install python3-libselinux
+  ansible.builtin.dnf:
+    name: python3-libselinux
+    state: latest
+  when:
+    - rhel_08_010170
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-010170
+
+- name: PRELIM | Install tmux
+  ansible.builtin.dnf:
+    name: tmux
+    state: latest
+  when:
+    - rhel_08_020040 or rhel_08_020041
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-020040
+    - RHEL-08-020041
+
+- name: PRELIM | Install auditd
+  ansible.builtin.dnf:
+    name: audit
+    state: latest
+  when:
+    - rhel_08_030180
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-030180
+
+- name: PRELIM | Install rsyslog-gnutls
+  ansible.builtin.dnf:
+    name: rsyslog-gnutls
+    state: latest
+  when:
+    - rhel_08_030680
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-030680
+
+- name: PRELIM | Install firewalld
+  ansible.builtin.dnf:
+    name: firewalld
+    state: latest
+  when:
+    - rhel_08_040030 or rhel_08_040090 or rhel_08_040100
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-040030
+    - RHEL-08-040090
+    - RHEL-08-040100
+
+- name: PRELIM | Install nftables
+  ansible.builtin.dnf:
+    name: nftables
+    state: latest
+  when:
+    - rhel_08_040150
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-040150
+
+- name: PRELIM | Install archive tools
+  ansible.builtin.dnf:
+    name:
+      - tar
+      - zip
+      - unzip
+    state: latest
+  when:
+    - rhel_08_pam_rules
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-PAM-RULES
+
+- name: PRELIM | Copy Custom STIG Compliant Authselect Profiles
+  ansible.builtin.unarchive:
+    src: authselect-custom.tar
+    dest: /etc/authselect
+    owner: root
+    group: root
+  when:
+    - rhel_08_pam_rules
+  tags:
+    - cat2
+    - medium
+    - RHEL-08-PAM-RULES
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Install & Configure AIDE
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+- name: PRELIM | Install & Configure AIDE
+  ansible.builtin.include_role:
+    name: aide
+  when:
+    - rhel8stig_aide
+    - rhel_08_030650 or rhel_08_040300 or rhel_08_040310
+  tags:
+    - cat2
+    - medium
+    - cat3
+    - low
+    - instal_aide
+    - RHEL-08-030650
+    - RHEL-08-040300
+    - RHEL-08-040310
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Install & Configure USBGuard
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+- name: PRELIM | Install & Configure USBGuard
+  ansible.builtin.include_role:
+    name: usbguard
+  when:
+    - rhel8stig_usbguard
+    - rhel_08_040139 or rhel_08_040140 or rhel_08_040141 or rhel_08_030603
+  tags:
+    - cat2
+    - medium
+    - cat3
+    - low
+    - install_usbguard
+    - RHEL-08-040139
+    - RHEL-08-040140
+    - RHEL-08-040141
+    - RHEL-08-030603

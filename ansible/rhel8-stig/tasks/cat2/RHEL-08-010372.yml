@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-010372 | RHEL 8 must prevent the loading of a new kernel for later execution.
+  ansible.posix.sysctl:
+    name: kernel.kexec_load_disabled
+    value: "1"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_010372
+  tags:
+    - RHEL-08-010372

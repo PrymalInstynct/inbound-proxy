@@ -1,0 +1,17 @@
+---
+- name: MEDIUM | RHEL-08-020082 | RHEL 8 must prevent a user from overriding the screensaver lock-enabled setting for the graphical user interface.
+  ansible.builtin.lineinfile:
+    dest: /etc/dconf/db/local.d/locks/session
+    line: /org/gnome/desktop/screensaver/lock-enabled
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+  notify: Update dconf
+
+  when:
+    - rhel_08_020082
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-020082
+    - gui

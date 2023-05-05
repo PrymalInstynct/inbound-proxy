@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-020270 | MANUAL FIX | RHEL 8 emergency accounts must be automatically removed or disabled after the crisis is resolved or within 72 hours.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | All Emergency accounts should be removed within 72 hours of a crisis being resolved
+
+  when:
+    - rhel_08_020270
+  tags:
+    - RHEL-08-020270
+    - manual_fix

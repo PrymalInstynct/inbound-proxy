@@ -1,0 +1,133 @@
+---
+- name: HIGH | RHEL-08-010000
+  include_tasks: cat1/RHEL-08-010000.yml
+  when:
+    - rhel_08_010000
+  tags:
+    - RHEL-08-010000
+
+- name: HIGH | RHEL-08-010020
+  include_tasks: cat1/RHEL-08-010020.yml
+  when:
+    - rhel_08_010020
+  tags:
+    - RHEL-08-010020
+
+- name: HIGH | RHEL-08-010121
+  include_tasks: cat1/RHEL-08-010121.yml
+  when:
+    - rhel_08_010121
+  tags:
+    - RHEL-08-010121
+
+- name: HIGH | RHEL-08-010140
+  include_tasks: cat1/RHEL-08-010140.yml
+  when:
+    - rhel_08_010140
+  tags:
+    - RHEL-08-010140
+
+- name: HIGH | RHEL-08-010150
+  include_tasks: cat1/RHEL-08-010150.yml
+  when:
+    - rhel_08_010150
+  tags:
+    - RHEL-08-010150
+
+- name: HIGH | RHEL-08-010370
+  include_tasks: cat1/RHEL-08-010370.yml
+  when:
+    - rhel_08_010370
+  tags:
+    - RHEL-08-010370
+
+- name: HIGH | RHEL-08-010371
+  include_tasks: cat1/RHEL-08-010371.yml
+  when:
+    - rhel_08_010371
+  tags:
+    - RHEL-08-010371
+
+- name: HIGH | RHEL-08-010460
+  include_tasks: cat1/RHEL-08-010460.yml
+  when:
+    - rhel_08_010460
+  tags:
+    - RHEL-08-010460
+
+- name: HIGH | RHEL-08-010470
+  include_tasks: cat1/RHEL-08-010470.yml
+  when:
+    - rhel_08_010470
+  tags:
+    - RHEL-08-010470
+
+- name: HIGH | RHEL-08-010820
+  include_tasks: cat1/RHEL-08-010820.yml
+  when:
+    - rhel_08_010820
+  tags:
+    - RHEL-08-010820
+
+- name: HIGH | RHEL-08-020330
+  include_tasks: cat1/RHEL-08-020330.yml
+  when:
+    - rhel_08_020330
+  tags:
+    - RHEL-08-020330
+
+- name: HIGH | RHEL-08-040000
+  include_tasks: cat1/RHEL-08-040000.yml
+  when:
+    - rhel_08_040000
+  tags:
+    - RHEL-08-040000
+
+- name: HIGH | RHEL-08-040010
+  include_tasks: cat1/RHEL-08-040010.yml
+  when:
+    - rhel_08_040010
+  tags:
+    - RHEL-08-040010
+
+- name: HIGH | RHEL-08-040170
+  include_tasks: cat1/RHEL-08-040170.yml
+  when:
+    - rhel_08_040170
+  tags:
+    - RHEL-08-040170
+
+- name: HIGH | RHEL-08-040171
+  include_tasks: cat1/RHEL-08-040171.yml
+  when:
+    - rhel_08_040171
+  tags:
+    - RHEL-08-040171
+
+- name: HIGH | RHEL-08-040172
+  include_tasks: cat1/RHEL-08-040172.yml
+  when:
+    - rhel_08_040172
+  tags:
+    - RHEL-08-040172
+
+- name: HIGH | RHEL-08-040190
+  include_tasks: cat1/RHEL-08-040190.yml
+  when:
+    - rhel_08_040190
+  tags:
+    - RHEL-08-040190
+
+- name: HIGH | RHEL-08-040200
+  include_tasks: cat1/RHEL-08-040200.yml
+  when:
+    - rhel_08_040200
+  tags:
+    - RHEL-08-040200
+
+- name: HIGH | RHEL-08-040360
+  include_tasks: cat1/RHEL-08-040360.yml
+  when:
+    - rhel_08_040360
+  tags:
+    - RHEL-08-040360

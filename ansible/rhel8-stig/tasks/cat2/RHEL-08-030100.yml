@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-030100 | RHEL 8 audit log directory must be owned by root to prevent unauthorized read access.
+  ansible.builtin.file:
+    path: "{{ audit_log_directory.stdout }}"
+    owner: root
+    state: directory
+
+  when:
+    - rhel_08_030100
+  tags:
+    - RHEL-08-030100

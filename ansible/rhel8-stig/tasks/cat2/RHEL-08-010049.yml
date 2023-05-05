@@ -1,0 +1,19 @@
+---
+- name: MEDIUM | RHEL-08-010049 | RHEL 8 must display a banner before granting local or remote access to the system via a graphical user logon.
+  ansible.builtin.lineinfile:
+    path: /etc/dconf/db/local.d/01-banner-message
+    line: "{{ item }}"
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "[org/gnome/login-screen]"
+    - banner-message-enable=true
+  notify: Update dconf
+
+  when:
+    - rhel_08_010049
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-010049

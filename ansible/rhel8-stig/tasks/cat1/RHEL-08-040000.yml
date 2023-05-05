@@ -1,0 +1,12 @@
+---
+- name: HIGH | RHEL-08-040000 | RHEL 8 must not have the telnet-server package installed.
+  ansible.builtin.dnf:
+    name: telnet-server
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040000
+    - not rhel8stig_requires_telnet
+  tags:
+    - RHEL-08-040000

@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010100 | MANUAL FIX | RHEL 8, for certificate-based authentication, must enforce authorized access to the corresponding private key.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | SSH Private Keys must have a passphrase assigned.
+
+  when:
+    - rhel_08_010100
+  tags:
+    - RHEL-08-010100
+    - manual_fix

@@ -1,0 +1,19 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040290 | RHEL 8 must be configured to prevent unrestricted mail relaying. | Part 1 of 2
+      ansible.builtin.dnf:
+        name: postfix
+        state: absent
+      when: not rhel8stig_postfix
+
+    - name: MEDIUM | RHEL-08-040290 | RHEL 8 must be configured to prevent unrestricted mail relaying. | Part 2 of 2
+      ansible.builtin.command: postconf -e 'smtpd_client_restrictions = permit_mynetworks,reject'
+      changed_when: false
+      when:
+        - rhel8stig_postfix
+        - ansible_facts.services["postfix.service"] is defined
+
+  when:
+    - rhel_08_040290
+  tags:
+    - RHEL-08-040290

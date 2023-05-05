@@ -1,0 +1,13 @@
+---
+- name: HIGH | RHEL-08-010370 | RHEL 8 must prevent the installation of software, patches, service packs, device drivers, or operating system components from a repository
+    without verification.
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: ^#?\s*gpgcheck.*
+    replace: gpgcheck = 1
+  with_items: "{{ rhel_08_repo_files.files | map(attribute='path') | list }}"
+
+  when:
+    - rhel_08_010370
+  tags:
+    - RHEL-08-010370

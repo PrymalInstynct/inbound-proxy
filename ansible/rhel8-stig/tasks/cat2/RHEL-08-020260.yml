@@ -1,0 +1,9 @@
+---
+- name: MEDIUM | RHEL-08-020260 | RHEL 8 account identifiers (individuals, groups, roles, and devices) must be disabled after 35 days of inactivity.
+  ansible.builtin.command: useradd -D -f 35
+  changed_when: false
+
+  when:
+    - rhel_08_020260
+  tags:
+    - RHEL-08-020260

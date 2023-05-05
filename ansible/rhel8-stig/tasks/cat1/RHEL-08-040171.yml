@@ -1,0 +1,21 @@
+---
+- name: HIGH | RHEL-08-040171 | The x86 Ctrl-Alt-Delete key sequence in RHEL 8 must be disabled if a graphical user interface is installed.
+  ansible.builtin.lineinfile:
+    path: /etc/dconf/db/local.d/00-disable-CAD
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - "[org/gnome/settings-daemon/plugins/media-keys]"
+    - logout=''
+  notify: Update dconf
+
+  when:
+    - rhel_08_040171
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-040171
+    - gui

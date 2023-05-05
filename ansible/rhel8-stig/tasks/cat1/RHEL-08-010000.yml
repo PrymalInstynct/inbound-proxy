@@ -1,0 +1,10 @@
+---
+- name: HIGH | RHEL-08-010000 | The Red Hat Enterprise Linux operating system must be a vendor supported release.
+  ansible.builtin.debug:
+    msg: Installed version is {{ ansible_distribution }} {{ ansible_distribution_version }}. The minimum supported version of {{ ansible_distribution }} is {{ rhel8stig_min_supported_os_ver[ansible_distribution]
+      }}
+
+  when:
+    - rhel_08_010000
+  tags:
+    - RHEL-08-010000

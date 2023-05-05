@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020170 | RHEL 8 must require the change of at least 8 characters when passwords are changed.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*difok
+    line: difok = {{rhel8stig_password_complexity.difok|default('8')}}
+    state: present
+
+  when:
+    - rhel_08_020170
+  tags:
+    - RHEL-08-020170

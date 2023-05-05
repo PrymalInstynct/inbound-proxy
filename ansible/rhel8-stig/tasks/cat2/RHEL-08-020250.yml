@@ -1,0 +1,29 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-020250 | RHEL 8 must implement smart card logon for multifactor authentication for access to interactive accounts. | Part 1 of 3
+      ansible.builtin.dnf:
+        name: sssd
+        state: latest
+
+    - name: MEDIUM | RHEL-08-020250 | RHEL 8 must implement smart card logon for multifactor authentication for access to interactive accounts. | Part 2 of 3
+      stat:
+        path: /etc/sssd/sssd.conf
+      register: sssd_conf
+
+    - name: MEDIUM | RHEL-08-020250 | RHEL 8 must implement smart card logon for multifactor authentication for access to interactive accounts. | Part 2 of 3
+      ansible.builtin.lineinfile:
+        path: /etc/sssd/sssd.conf
+        regexp: ^#?\s*pam_cert_auth.*
+        line: pam_cert_auth = True
+        insertafter: \[pam\]
+        state: present
+      notify: Restart SSSD
+      when: sssd_conf.stat.exists | bool
+
+  when:
+    - rhel_08_020250
+    - rhel8stig_mfa
+    - rhel8stig_sssd
+  tags:
+    - RHEL-08-020250
+    - mfa

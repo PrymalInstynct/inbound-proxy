@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-040160 | All RHEL 8 networked systems must have and implement SSH to protect the confidentiality and integrity of transmitted and received
+    information, as well as information during preparation for transmission.
+  ansible.builtin.systemd:
+    name: sshd
+    state: started
+    enabled: true
+
+  when:
+    - rhel_08_040160
+  tags:
+    - RHEL-08-040160

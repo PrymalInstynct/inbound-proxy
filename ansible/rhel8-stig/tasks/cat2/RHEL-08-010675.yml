@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010675 | RHEL 8 must disable core dump backtraces.
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/coredump.conf
+    regexp: ^ProcessSizeMax.*|^#ProcessSizeMax.*
+    line: ProcessSizeMax=0
+
+  when:
+    - rhel_08_010675
+  tags:
+    - RHEL-08-010675

@@ -1,0 +1,28 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010400 | RHEL 8 must implement certificate status checking for multifactor authentication. | Part 1 of 3
+      ansible.builtin.dnf:
+        name: sssd
+        state: latest
+
+    - name: MEDIUM | RHEL-08-010400 | RHEL 8 must implement certificate status checking for multifactor authentication. | Part 2 of 3
+      stat:
+        path: /etc/sssd/sssd.conf
+      register: sssd_conf
+
+    - name: MEDIUM | RHEL-08-010400 | RHEL 8 must implement certificate status checking for multifactor authentication. | Part 3 of 3
+      ansible.builtin.lineinfile:
+        path: /etc/sssd/sssd.conf
+        regexp: ^#?\s*certificate_verification.*
+        line: certificate_verification = ocsp_dgst=sha1
+        insertafter: \[sssd\]
+        state: present
+      when: sssd_conf.stat.exists | bool
+
+  when:
+    - rhel_08_010400
+    - rhel8stig_mfa
+    - rhel8stig_sssd
+  tags:
+    - RHEL-08-010400
+    - mfa

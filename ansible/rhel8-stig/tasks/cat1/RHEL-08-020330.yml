@@ -1,0 +1,12 @@
+---
+- name: HIGH | RHEL-08-020330 | RHEL 8 must not allow accounts configured with blank or null passwords.
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: ^#?\s*PermitEmptyPasswords.*
+    line: PermitEmptyPasswords no
+  notify: Restart OpenSSH
+
+  when:
+    - rhel_08_020330
+  tags:
+    - RHEL-08-020330

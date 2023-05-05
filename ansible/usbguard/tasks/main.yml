@@ -1,0 +1,54 @@
+---
+- name: "Install USBGuard"
+  import_tasks: usbguard-install.yml
+  tags:
+    - install_tools
+    - never
+    - install
+    - install_usbguard
+  when:
+    - requires_usbguard
+    - ansible_os_family == 'RedHat'
+
+- name: "Configure USBGuard Policy"
+  import_tasks: usbguard-configure.yml
+  tags:
+    - install_tools
+    - never
+    - configure
+    - install_usbguard
+  when:
+    - requires_usbguard
+    - ansible_os_family == 'RedHat'
+
+- name: "Stop USBGuard Daemon"
+  import_tasks: usbguard-stop.yml
+  tags:
+    - install_tools
+    - never
+    - stop
+    - install_usbguard
+  when:
+    - requires_usbguard
+    - ansible_os_family == 'RedHat'
+
+- name: "Start USBGuard Daemon"
+  import_tasks: usbguard-start.yml
+  tags:
+    - install_tools
+    - never
+    - start
+    - install_usbguard
+  when:
+    - requires_usbguard
+    - ansible_os_family == 'RedHat'
+
+- name: "Remove USBGuard Daemon"
+  import_tasks: usbguard-uninstall.yml
+  tags:
+    - never
+    - uninstall_tools
+    - uninstall_usbguard
+  when:
+    - not requires_usbguard
+    - ansible_os_family == 'RedHat'

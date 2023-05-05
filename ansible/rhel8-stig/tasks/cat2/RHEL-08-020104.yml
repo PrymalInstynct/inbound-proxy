@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-020104 | RHEL 8 systems, version 8.4 and above, must ensure the password complexity module is configured for three retries or less.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*retry
+    line: retry = {{rhel8stig_password_complexity.retry|default('3')}}
+    state: present
+
+  when:
+    - rhel_08_020104
+    - ansible_distribution_version is version_compare('8.4', '>=')
+  tags:
+    - RHEL-08-020104

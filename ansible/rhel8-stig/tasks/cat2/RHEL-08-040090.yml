@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-040090 | MANUAL FIX | A RHEL 8 firewall must employ a deny-all, allow-by-exception policy for allowing connections to other systems.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | The Host Based Firewall must be configured with Deny-All ruleset
+
+  when:
+    - rhel_08_040090
+  tags:
+    - RHEL-08-040090
+    - manual_fix

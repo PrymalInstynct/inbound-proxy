@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040230 | RHEL 8 must not respond to Internet Control Message Protocol (ICMP) echoes sent to a broadcast address.
+  ansible.posix.sysctl:
+    name: net.ipv4.icmp_echo_ignore_broadcasts
+    value: "1"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_040230
+  tags:
+    - RHEL-08-040230

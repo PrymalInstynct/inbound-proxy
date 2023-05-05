@@ -1,0 +1,20 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010672 | RHEL 8 must disable acquiring, saving, and processing core dumps.
+      ansible.builtin.systemd:
+        name: systemd-coredump.socket
+        state: stopped
+        enabled: false
+        masked: true
+      register: state_change
+
+    - name: MEDIUM | RHEL-08-010672 | Daemon Reload | RHEL 8 must disable acquiring, saving, and processing core dumps
+      assert: { that: true, quiet: true }
+      changed_when: true
+      when: state_change.changed
+      notify: Reload Systemd Daemons
+
+  when:
+    - rhel_08_010672
+  tags:
+    - RHEL-08-010672

@@ -1,0 +1,9 @@
+---
+- name: MEDIUM | RHEL-08-010422 | RHEL 8 must disable virtual syscalls.
+  ansible.builtin.command: grubby --update-kernel=ALL --args="vsyscall=none"
+  changed_when: false
+
+  when:
+    - rhel_08_010422
+  tags:
+    - RHEL-08-010422

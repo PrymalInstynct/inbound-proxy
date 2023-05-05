@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010240 | The RHEL 8 /var/log directory must have mode 0755 or less permissive.
+  ansible.builtin.file:
+    path: /var/log
+    mode: g-w,o-w
+
+  when:
+    - rhel_08_010240
+  tags:
+    - RHEL-08-010240

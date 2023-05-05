@@ -1,0 +1,21 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010480 | The RHEL 8 SSH public host key files must have mode 0644 or less permissive. | Part 1 of 2
+      ansible.builtin.find:
+        paths: /etc/ssh
+        pattern: "*.pub"
+        recurse: true
+        hidden: true
+      register: host_pub_results
+
+    - name: MEDIUM | RHEL-08-010480 | The RHEL 8 SSH public host key files must have mode 0644 or less permissive. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: "0644"
+      with_items: "{{ host_pub_results.files | map(attribute='path') | list  }}"
+      when: host_pub_results | bool
+
+  when:
+    - rhel_08_010480
+  tags:
+    - RHEL-08-010480

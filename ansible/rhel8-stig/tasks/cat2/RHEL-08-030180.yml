@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-030180 | The RHEL 8 audit package must be installed.
+  ansible.builtin.dnf:
+    name: audit
+    state: latest
+
+  when:
+    - rhel_08_030180
+  tags:
+    - RHEL-08-030180

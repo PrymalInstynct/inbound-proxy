@@ -1,0 +1,18 @@
+---
+- block:
+    - name: HIGH | RHEL-08-040200 | The root account must be the only account having unrestricted access to the RHEL 8 system. | Part 1 of 2
+      ansible.builtin.shell: "cat /etc/passwd | awk -F: '($3 == 0 && $1 != \"root\") {i++;print $1 } END {exit i}'"
+      check_mode: false
+      changed_when: false
+      failed_when: false
+      register: uid_audit
+
+    - name: HIGH | RHEL-08-040200 | The root account must be the only account having unrestricted access to the RHEL 8 system. | Part 2 of 2
+      ansible.builtin.command: passwd -l {{ item }}
+      with_items:
+        - "{{ uid_audit.stdout_lines }}"
+
+  when:
+    - rhel_08_040200
+  tags:
+    - RHEL-08-040200

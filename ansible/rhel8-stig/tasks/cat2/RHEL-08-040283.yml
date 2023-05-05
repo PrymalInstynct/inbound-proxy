@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040283 | RHEL 8 must restrict exposed kernel pointer addresses access.
+  ansible.posix.sysctl:
+    name: kernel.kptr_restrict
+    value: "1"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_040283
+  tags:
+    - RHEL-08-040283

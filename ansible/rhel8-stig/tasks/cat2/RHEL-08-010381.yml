@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-010381 | RHEL 8 must require users to reauthenticate for privilege escalation.
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: ^([^#].*)!authenticate(.*)
+    replace: \1authenticate\2
+    validate: /usr/sbin/visudo -cf %s
+  with_items: "{{ rhel8stig_sudoers_files.stdout_lines }}"
+
+  when:
+    - rhel_08_010381
+  tags:
+    - RHEL-08-010381

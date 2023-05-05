@@ -1,0 +1,15 @@
+---
+- name: MEDIUM | RHEL-08-040341 | The RHEL 8 SSH daemon must prevent remote hosts from connecting to the proxy display.
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: ^#?\s*X11UseLocalhost.*
+    line: X11UseLocalhost yes
+    state: present
+    validate: /usr/sbin/sshd -tf %s
+  notify: Restart OpenSSH
+
+  when:
+    - rhel_08_040341
+    - not rhel8stig_x11
+  tags:
+    - RHEL-08-040341

@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010170 | RHEL 8 must use a Linux Security Module configured to enforce limits on system services.
+  ansible.posix.selinux:
+    state: enforcing
+    policy: targeted
+
+  when:
+    - rhel_08_010170
+  tags:
+    - RHEL-08-010170

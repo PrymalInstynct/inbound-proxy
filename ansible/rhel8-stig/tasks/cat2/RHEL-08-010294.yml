@@ -1,0 +1,23 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010294 | The RHEL 8 operating system must implement DoD-approved TLS encryption in the OpenSSL package. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/crypto-policies/back-ends/opensslcnf.config
+        regexp: ^MinProtocol =
+        line: MinProtocol = TLSv1.2
+      when: ansible_facts.packages['crypto-policies'][0].version | int < 20210617
+
+    - name: MEDIUM | RHEL-08-010294 | The RHEL 8 operating system must implement DoD-approved TLS encryption in the OpenSSL package. | Part 2 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/crypto-policies/back-ends/opensslcnf.config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - { regexp: "^TLS.MinProtocol = ", line: TLS.MinProtocol = TLSv1.2 }
+        - { regexp: ^DTLS.MinProtocol =, line: DTLS.MinProtocol = DTLSv1.2 }
+      when: ansible_facts.packages['crypto-policies'][0].version | int >= 20210617
+
+  when:
+    - rhel_08_010294
+  tags:
+    - RHEL-08-010294

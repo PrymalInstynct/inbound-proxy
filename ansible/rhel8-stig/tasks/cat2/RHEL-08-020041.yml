@@ -1,0 +1,18 @@
+---
+- name: MEDIUM | RHEL-08-020041 | RHEL 8 must ensure session control is automatically started at shell initialization.
+  ansible.builtin.copy:
+    dest: /etc/profile.d/tmux.sh
+    content: |
+      if [ "$PS1" ]; then
+      parent=$(ps -o ppid= -p $$)
+      name=$(ps -o comm= -p $parent)
+      case "$name" in (sshd|login) tmux ;; esac
+      fi
+    owner: root
+    group: root
+    mode: "0644"
+
+  when:
+    - rhel_08_020041
+  tags:
+    - RHEL-08-020041

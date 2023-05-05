@@ -1,0 +1,124 @@
+---
+- name: Ensure aide is installed
+  yum:
+    name: "{{ aide_pkg }}"
+    state: latest
+  tags:
+    - never
+    - install_aide
+
+- name: Check for existing aide database
+  stat:
+    path: "{{ aide_dbdir }}/{{ aide_database_filename }}"
+  register: aide_db_check
+  changed_when: aide_db_check.stat.exists != True
+  notify:
+    - Initialize aide database
+    - Copy Aide Database into place
+  tags:
+    - never
+    - install_aide
+
+- name: Check age of aide database
+  find:
+    paths: "{{ aide_dbdir }}"
+    age: 7d
+  register: aide_db_age
+  when: aide_db_check.stat.exists == True
+  tags:
+    - never
+    - install_aide
+
+- name: Configure /etc/aide.conf
+  template:
+    src: aide.conf.j2
+    dest: /etc/aide.conf
+  register: config 
+  tags:
+    - never
+    - install_aide
+
+- name: "AIDE | Validate Aide Configuration"
+  command: aide -D -c /etc/aide.conf
+  when:
+    - config.changed
+  tags:
+    - never
+    - install_aide
+
+# Setup Cron
+- name: "AIDE | Ensure aide check is setup in crontab - No Email Report"
+  ansible.builtin.cron:
+    name: "{{ aide_cronjob_name }}"
+    backup: yes
+    user: root
+    state: present
+    minute: "{{ aide_cron_sched_min }}"
+    hour: "{{ aide_cron_sched_hr }}"
+    day: "{{ aide_cron_sched_day }}"
+    month: "{{ aide_cron_sched_mon }}"
+    weekday: "{{ aide_cron_sched_wkd }}"
+    job: aide --check
+  when: (aide_cron_email_notify == '' and aide_cron_schedule_check == True)
+  tags:
+    - never
+    - install_aide
+
+- name: "AIDE | Ensure aide check is setup in crontab - With Email Report"
+  ansible.builtin.cron:
+    name: "{{ aide_cronjob_name }}"
+    backup: yes
+    user: root
+    state: present
+    minute: "{{ aide_cron_sched_min }}"
+    hour: "{{ aide_cron_sched_hr }}"
+    day: "{{ aide_cron_sched_day }}"
+    month: "{{ aide_cron_sched_mon }}"
+    weekday: "{{ aide_cron_sched_wkd }}"
+    job: aide --check | /usr/bin/mail -s "AIDE Report - $HOSTNAME" "{{ aide_cron_email_notify }}"
+  when: (aide_cron_email_notify != '' and aide_cron_schedule_check == True)
+  tags:
+    - never
+    - install_aide
+
+#Remove old cron jobs when aide_cron_schedule_check has been changed to False
+- name: Ensure aide check is removed in crontab - No Email Report
+  cron:
+    name: "{{ aide_cronjob_name }}"
+    state: absent
+  when: (aide_cron_email_notify == '' and aide_cron_schedule_check == False)
+  tags:
+    - never
+    - install_aide
+
+- name: Ensure aide check is removed in crontab - With Email Report
+  cron:
+    name: "{{ aide_cronjob_name }}"
+    state: absent
+  when: (aide_cron_email_notify != '' and aide_cron_schedule_check == False)
+  tags:
+    - never
+    - install_aide
+
+- name: Update aide database
+  shell: aide -u
+  register: aide_update
+  failed_when: "aide_update.rc > 7"
+  when:
+  - aide_db_check.stat.exists == True
+  - aide_db_age.matched > 0
+  notify: 
+    - Copy Aide Database into place      
+  tags:
+    - never
+    - install_aide
+  # - install_tools (has been removed in CMS 21Q4 Release)
+
+- name: "Uninstall Aide"
+  import_tasks: uninstall_aide.yml
+  when:
+    - (ansible_distribution_major_version == '7' or ansible_distribution_major_version == '11') and (ansible_os_family == 'RedHat' or ansible_os_family == 'Solaris')
+  tags:
+    - never
+    - uninstall_tools
+    - uninstall_aide

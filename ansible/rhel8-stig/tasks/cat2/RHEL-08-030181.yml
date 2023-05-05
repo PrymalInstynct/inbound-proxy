@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-030181 | RHEL 8 audit records must contain information to establish what type of events occurred, the source of events, where events occurred,
+    and the outcome of events.
+  ansible.builtin.systemd:
+    name: auditd
+    state: started
+    enabled: true
+
+  when:
+    - rhel_08_030181
+  tags:
+    - RHEL-08-030181

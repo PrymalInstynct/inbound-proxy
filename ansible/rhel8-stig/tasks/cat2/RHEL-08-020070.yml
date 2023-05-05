@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-020070 | RHEL 8 must automatically lock command line user sessions after 15 minutes of inactivity.
+  ansible.builtin.lineinfile:
+    path: /etc/tmux.conf
+    line: set -g lock-after-time 900
+    create: true
+    owner: root
+    group: root
+    mode: 644
+
+  when:
+    - rhel_08_020070
+  tags:
+    - RHEL-08-020070

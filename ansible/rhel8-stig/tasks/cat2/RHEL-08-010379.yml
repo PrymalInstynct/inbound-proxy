@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010379 | RHEL 8 must specify the default 'include' directory for the /etc/sudoers file.
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regex: ^#includedir
+    line: "#includedir /etc/sudoers.d"
+    validate: /usr/sbin/visudo -cf %s
+  when:
+    - rhel_08_010379
+  tags:
+    - RHEL-08-010379

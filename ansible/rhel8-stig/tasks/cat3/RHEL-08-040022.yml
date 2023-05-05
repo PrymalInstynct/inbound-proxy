@@ -1,0 +1,18 @@
+---
+- name: LOW | RHEL-08-040022 | RHEL 8 must disable the controller area network (CAN) protocol.
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^#install (?i)can.*|^install (?i)can.*", line: install can /bin/true }
+    - { regexp: "^#blacklist (?i)can", line: blacklist can }
+
+  when:
+    - rhel_08_040022
+  tags:
+    - RHEL-08-040022

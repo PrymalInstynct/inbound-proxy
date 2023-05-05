@@ -1,0 +1,17 @@
+# To avoid bad return codes from the linter.
+# exclude_paths:
+#   - rhel8-stig/tasks/cat2/parse_etc_passwd.yml
+
+warn_list:  # or 'skip_list' to silence them completely
+  - command-instead-of-module  # - To be investigated.
+  - command-instead-of-shell  # - To be investigated.
+  - experimental  # all rules tagged as experimental
+  - fqcn-builtins  # - To be considered
+  - no-changed-when  # Commands should not change things if nothing needs doing.
+  - no-tabs  # Most files should not contain tabs.
+  - package-latest  # Package installs should not use latest.
+  - risky-octal  # Octal file permissions must contain leading zero or be a string.
+  - risky-shell-pipe  # Shells that use pipes should set the pipefail option.
+  - unnamed-task  # There is a bug in how it reads name. This is a false positive.
+  - var-spacing  # Jinja2 variables and filters should have spaces before and after.
+  - yaml  # Violations reported by yamllint.

@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-010390 | RHEL 8 must have the packages required for multifactor authentication installed.
+  ansible.builtin.dnf:
+    name:
+      - openssl-pkcs11
+    state: latest
+
+  when:
+    - rhel_08_010390
+    - rhel8stig_mfa
+  tags:
+    - RHEL-08-010390
+    - mfa

@@ -1,0 +1,15 @@
+---
+- name: MEDIUM | RHEL-08-040340 | RHEL 8 remote X connections for interactive users must be disabled unless to fulfill documented and validated mission requirements.
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: ^#?\s*X11Forwarding yes
+    line: X11Forwarding no
+    state: present
+    validate: /usr/sbin/sshd -tf %s
+  notify: Restart OpenSSH
+
+  when:
+    - rhel_08_040340
+    - not rhel8stig_x11
+  tags:
+    - RHEL-08-040340

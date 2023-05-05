@@ -1,0 +1,20 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010090 | RHEL 8, for PKI-based authentication, must validate certificates by constructing a certification path (which includes status
+        information) to an accepted trust anchor.
+      stat:
+        path: /etc/sssd/pki/sssd_auth_ca_db.pem
+      register: sss_cert
+
+    - name: MEDIUM | RHEL-08-010090 | RHEL 8, for PKI-based authentication, must validate certificates by constructing a certification path (which includes status
+        information) to an accepted trust anchor.
+      ansible.builtin.debug:
+        msg: PKI Certificate exists
+      when: sss_cert.stat.exists | bool
+
+  when:
+    - rhel_08_010090
+    - rhel8stig_mfa
+  tags:
+    - RHEL-08-010090
+    - mfa

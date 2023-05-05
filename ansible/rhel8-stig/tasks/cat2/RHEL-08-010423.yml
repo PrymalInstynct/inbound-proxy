@@ -1,0 +1,9 @@
+---
+- name: MEDIUM | RHEL-08-010423 | RHEL 8 must clear SLUB/SLAB objects to prevent use-after-free attacks.
+  ansible.builtin.command: grubby --update-kernel=ALL --args="slub_debug=P"
+  changed_when: false
+
+  when:
+    - rhel_08_010423
+  tags:
+    - RHEL-08-010423

@@ -1,0 +1,15 @@
+---
+- name: MEDIUM | RHEL-08-020310 | RHEL 8 must enforce a delay of at least four seconds between logon prompts following a failed logon attempt.
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    line: "{{ item.line }}"
+    insertafter: "{{ item.insertafter }}"
+    state: present
+  with_items:
+    - { line: "# Delayed prompt between failed login attempts", insertafter: ^ENCRYPT_METHOD.* }
+    - { line: "FAIL_DELAY {{rhel8stig_login_defaults.fail_delay_secs|default('4')}}", insertafter: ^# Delayed.* }
+
+  when:
+    - rhel_08_020310
+  tags:
+    - RHEL-08-020310

@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-030731 | RHEL 8 must notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) when allocated audit
+    record storage volume 75 percent utilization.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*space_left_action =
+    line: space_left_action = email
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030731
+  tags:
+    - RHEL-08-030731

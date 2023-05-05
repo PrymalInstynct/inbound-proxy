@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040262 | RHEL 8 must not accept router advertisements on all IPv6 interfaces by default.
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.default.accept_ra
+    value: "0"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_040262
+  tags:
+    - RHEL-08-040262

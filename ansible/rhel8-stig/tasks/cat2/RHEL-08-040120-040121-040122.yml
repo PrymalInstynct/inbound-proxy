@@ -1,0 +1,20 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040120 RHEL-08-040121 RHEL-08-040122 | RHEL 8 must mount /dev/shm with the nodev, nosuid, noexec options. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        regexp: ^#?\s*tmpfs /dev/shm.*$
+        line: tmpfs /dev/shm tmpfs defaults,nodev,nosuid,noexec 0 0
+      register: result
+
+    - name: MEDIUM | RHEL-08-040120 RHEL-08-040121 RHEL-08-040122 | RHEL 8 must mount /dev/shm with the nodev, nosuid, noexec options. | Part 2 of 2
+      ansible.builtin.command: mount /dev/shm -o remount,nosuid,noexec,nodev
+      when: result.changed
+
+  when:
+    - rhel_08_040120 or rhel_08_040121 or rhel_08_040122
+
+  tags:
+    - RHEL-08-040120
+    - RHEL-08-040121
+    - RHEL-08-040122

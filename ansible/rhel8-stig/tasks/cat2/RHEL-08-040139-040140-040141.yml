@@ -1,0 +1,18 @@
+---
+- name: MEDIUM | RHEL-08-040139 | RHEL-08-040140 | RHEL-08-040141 | RHEL 8 must block unauthorized peripherals before establishing a connection.
+  ansible.builtin.debug:
+    msg: Configuring USBGuard is completed during Prelim Tasks
+  changed_when: false
+  run_once: true
+
+  when:
+    - rhel8stig_usbguard
+    - rhel_08_040139 or rhel_08_040140 or rhel_08_040141
+  tags:
+    - cat2
+    - medium
+    - cat3
+    - low
+    - RHEL-08-040139
+    - RHEL-08-040140
+    - RHEL-08-040141

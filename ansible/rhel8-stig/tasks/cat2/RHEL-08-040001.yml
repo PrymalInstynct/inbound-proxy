@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-040001 | RHEL 8 must not have any automated bug reporting tools installed.
+  ansible.builtin.dnf:
+    name: abrt*
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040001
+  tags:
+    - RHEL-08-040001

@@ -1,0 +1,28 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-020320 | RHEL 8 must not have unnecessary accounts. | Part 1 of 3
+      ansible.builtin.command: grep '^{{ item }}:' /etc/passwd
+      check_mode: false
+      failed_when: rhel_08_020320_audit.rc > 1
+      changed_when: rhel_08_020320_audit.rc == 0
+      register: rhel_08_020320_audit
+      with_items: "{{ rhel8stig_unnecessary_accounts }}"
+
+    - name: MEDIUM | RHEL-08-020320 | RHEL 8 must not have unnecessary accounts. | Part 2 of 3
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: absent
+        remove: "{{ rhel8stig_remove_unnecessary_user_files }}"
+      register: rhel_08_020320_patch
+      with_items: "{{ rhel8stig_unnecessary_accounts }}"
+
+    - name: MEDIUM | RHEL-08-020320 | RHEL 8 must not have unnecessary accounts. | Part 3 of 3
+      include_tasks: parse_etc_passwd.yml
+      vars:
+        rhel8stig_passwd_tasks: RHEL-08-020320
+      when: rhel_08_020320_patch is changed
+
+  when:
+    - rhel_08_020320
+  tags:
+    - RHEL-08-020320

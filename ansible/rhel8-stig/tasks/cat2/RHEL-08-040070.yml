@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040070 | The RHEL 8 file system automounter must be disabled unless required.
+  ansible.builtin.systemd:
+    name: autofs
+    state: stopped
+    enabled: false
+
+  when:
+    - rhel_08_040070
+    - not rhel8stig_autofs
+    - ansible_facts.services["autofs.service"] is defined
+  tags:
+    - RHEL-08-040070

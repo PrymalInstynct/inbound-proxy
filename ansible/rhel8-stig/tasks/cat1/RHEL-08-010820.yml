@@ -1,0 +1,25 @@
+---
+- block:
+    - name: HIGH | RHEL-08-010820 | Unattended or automatic logon via the RHEL 8 graphical user interface must not be allowed. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/gdm/custom.conf
+        regexp: ^AutomaticLoginEnable=true|^AutomaticLoginEnable=True
+        state: absent
+
+    - name: HIGH | RHEL-08-010820 | Unattended or automatic logon via the RHEL 8 graphical user interface must not be allowed. | Part 2 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/gdm/custom.conf
+        insertafter: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      with_items:
+        - { regexp: "^\\[daemon\\]", line: "# Disable Automatic Login" }
+        - { regexp: "# Disable Automatic Login", line: AutomaticLoginEnable=false }
+      notify: Update dconf
+
+  when:
+    - rhel_08_010820
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-010820
+    - gui

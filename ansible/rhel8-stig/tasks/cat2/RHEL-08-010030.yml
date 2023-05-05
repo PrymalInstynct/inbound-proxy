@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010030 | MANUAL FIX | All RHEL 8 local disk partitions must implement cryptographic mechanisms to prevent unauthorized disclosure or modification
+    of all information that requires at rest protection.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | LUKS Encryption must be Implemented during installation.
+
+  when:
+    - rhel_08_010030
+  tags:
+    - RHEL-08-010030
+    - manual_fix

@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-040159 | All RHEL 8 networked systems must have SSH installed.
+  ansible.builtin.dnf:
+    name: openssh-server
+    state: latest
+
+  when:
+    - rhel_08_040159
+  tags:
+    - RHEL-08-040159

@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010760 | All RHEL 8 local interactive user home directories defined in the /etc/passwd file must exist.
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: ^CREATE_HOME.*|#^CREATE_HOME.*
+    line: CREATE_HOME {{rhel8stig_login_defaults.create_home|default('yes')}}
+    state: present
+
+  when:
+    - rhel_08_010760
+  tags:
+    - RHEL-08-010760

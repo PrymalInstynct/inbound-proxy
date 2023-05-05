@@ -1,0 +1,22 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010770 | All RHEL 8 local initialization files must have mode 0740 or less permissive. | Part 1 of 2
+      ansible.builtin.find:
+        paths: /home
+        patterns: .*
+        recurse: true
+        hidden: true
+        depth: "1"
+      register: initialization_files_results
+
+    - name: MEDIUM | RHEL-08-010770 | All RHEL 8 local initialization files must have mode 0740 or less permissive. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: g-wx,o-rwx
+      with_items: "{{ initialization_files_results.files | map(attribute='path') | list }}"
+      when: initialization_files_results | bool
+
+  when:
+    - rhel_08_010770
+  tags:
+    - RHEL-08-010770

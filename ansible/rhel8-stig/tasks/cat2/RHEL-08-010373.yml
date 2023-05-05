@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-010373 | RHEL 8 must enable kernel parameters to enforce discretionary access control on symlinks.
+  ansible.posix.sysctl:
+    name: fs.protected_symlinks
+    value: "1"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_010373
+  tags:
+    - RHEL-08-010373

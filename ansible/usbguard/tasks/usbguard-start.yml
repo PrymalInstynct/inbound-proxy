@@ -1,0 +1,6 @@
+---
+- name: "RHEL | Start USBGuard Daemon"
+  systemd:
+    name: usbguard
+    state: started
+    enabled: yes

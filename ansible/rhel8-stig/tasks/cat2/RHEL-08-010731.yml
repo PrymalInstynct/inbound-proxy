@@ -1,0 +1,9 @@
+---
+- name: MEDIUM | RHEL-08-010731 | All RHEL 8 local interactive user home directory files must have mode 0750 or less permissive.
+  ansible.builtin.debug:
+    msg: This check requires insight to accomplish correctly without breaking access to a users own home directory files.
+
+  when:
+    - rhel_08_010731
+  tags:
+    - RHEL-08-010731

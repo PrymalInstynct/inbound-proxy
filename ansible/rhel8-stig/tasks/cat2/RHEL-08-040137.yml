@@ -1,0 +1,60 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040137 | The RHEL 8 fapolicy module must be configured to employ a deny-all, permit-by-exception policy to allow the execution of authorized
+        software programs.
+      ansible.builtin.lineinfile:
+        path: /etc/fapolicyd/fapolicyd.mounts
+        line: "{{ item }}"
+        create: true
+        owner: root
+        group: fapolicyd
+        mode: 0644
+      with_items:
+        - "{{ all_mounts }}"
+      notify: Restart fapolicyd
+
+    - name: MEDIUM | RHEL-08-040137 | The RHEL 8 fapolicy module must be configured to employ a deny-all, permit-by-exception policy to allow the execution of authorized
+        software programs.
+      ansible.builtin.lineinfile:
+        path: /etc/fapolicyd/fapolicyd.conf
+        regexp: ^#?\s*permissive
+        line: permissive = {{ rhel8stig_whitelisting_pre_state }}
+      notify: Restart fapolicyd
+
+    - name: MEDIUM | RHEL-08-040137 | The RHEL 8 fapolicy module must be configured to employ a deny-all, permit-by-exception policy to allow the execution of authorized
+        software programs.
+      ansible.builtin.lineinfile:
+        path: /etc/fapolicyd/fapolicyd.rules
+        line: "{{ item }}"
+      with_items:
+        - "{{ rhel8stig_fapolicy_white_list }}"
+      when:
+        - ansible_distribution_version <= "8.4"
+      notify: Restart fapolicyd
+
+    - name: MEDIUM | RHEL-08-040137 | The RHEL 8 fapolicy module must be configured to employ a deny-all, permit-by-exception policy to allow the execution of authorized
+        software programs.
+      ansible.builtin.lineinfile:
+        path: /etc/fapolicyd/rules.d
+        line: "{{ item }}"
+      with_items:
+        - "{{ rhel8stig_fapolicy_white_list }}"
+      when:
+        - ansible_distribution_version >= "8.5"
+      notify: Restart fapolicyd
+
+    - name: MEDIUM | RHEL-08-040137 | The RHEL 8 fapolicy module must be configured to employ a deny-all, permit-by-exception policy to allow the execution of authorized
+        software programs.
+      ansible.builtin.lineinfile:
+        path: /etc/fapolicyd/fapolicyd.conf
+        regexp: ^#?\s*permissive
+        line: permissive = {{ rhel8stig_whitelisting_post_state }}
+      notify: Restart fapolicyd
+
+  vars:
+    all_mounts: "{{ ansible_mounts | map(attribute='mount') | list }}"
+  when:
+    - rhel_08_040137
+    - rhel8stig_whitelisting
+  tags:
+    - RHEL-08-040137

@@ -1,0 +1,25 @@
+---
+- name: "UNINSTALL | Yum Uninstall Aide"
+  become: yes
+  yum:
+    name:
+      - aide
+    state: absent
+
+- name: "UNINSTALL | Delete Persistant AIDE Directories"
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/etc/aide.conf.rpmsave"
+    - "/var/lib/aide"
+    - "/var/lib/aide/aide.db.gz"
+    - "/var/log/aide"
+    - "/var/log/aide/aide.log"
+
+- name: "UNINSTALL | Remove Aide Cron"
+  become: yes
+  cron:
+    name: "{{ aide_cronjob_name }}"
+    state: absent

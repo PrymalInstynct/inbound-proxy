@@ -1,0 +1,6 @@
+---
+- name: "RHEL | Stop USBGuard Daemon"
+  systemd:
+    name: usbguard
+    state: stopped
+    enabled: no

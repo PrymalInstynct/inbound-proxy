@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040240 | RHEL 8 must not forward IPv6 source-routed packets.
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.accept_source_route
+    value: "0"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_040240
+  tags:
+    - RHEL-08-040240

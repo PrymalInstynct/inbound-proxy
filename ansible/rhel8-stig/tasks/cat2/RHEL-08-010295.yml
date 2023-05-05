@@ -1,0 +1,13 @@
+---
+- name: "MEDIUM | RHEL-08-010295 | The RHEL 8 operating system must implement DoD-approved TLS encryption in the GnuTLS package. "
+  ansible.builtin.lineinfile:
+    path: /etc/crypto-policies/back-ends/gnutls.config
+    regexp: (.*)VERS-ALL.*:%PROFILE_MEDIUM
+    line: \1VERS-ALL:-VERS-DTLS0.9:-VERS-SSL3.0:-VERS-TLS1.0:-VERS-TLS1.1:-VERS-DTLS1.0:+COMP-NULL:%PROFILE_MEDIUM
+    state: present
+    backrefs: true
+
+  when:
+    - rhel_08_010295
+  tags:
+    - RHEL-08-010295

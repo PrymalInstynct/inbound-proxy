@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010673 | RHEL 8 must disable core dumps for all users.
+  ansible.builtin.lineinfile:
+    path: /etc/security/limits.conf
+    regexp: .*hard core.*
+    line: "*\t\thard\tcore\t\t0"
+    insertafter: .*soft.*core.*
+
+  when:
+    - rhel_08_010673
+  tags:
+    - RHEL-08-010673

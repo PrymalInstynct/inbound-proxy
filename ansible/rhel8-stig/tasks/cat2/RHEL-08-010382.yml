@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010382 | MANUAL FIX | RHEL 8 must restrict privilege elevation to authorized personnel.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | This is a highly disruptive lockdown that will break approved priviledge escalation through the sudo command
+
+  when:
+    - rhel_08_010382
+  tags:
+    - RHEL-08-010382
+    - manual_fix

@@ -1,0 +1,24 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010680 | For RHEL 8 systems using Domain Name Servers (DNS) resolution, at least two name servers must be configured. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/nsswitch.conf
+        regexp: ^hosts:.*
+        line: "hosts:      files dns myhostname"
+
+    - name: MEDIUM | RHEL-08-010680 | For RHEL 8 systems using Domain Name Servers (DNS) resolution, at least two name servers must be configured. | Part 2 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/resolv.conf
+        insertafter: "{{ item.insertafter }}"
+        line: "{{ item.line }}"
+        firstmatch: "{{ item.firstmatch }}"
+      with_items:
+        - { insertafter: .*NetworkManager, line: "nameserver {{ rhel8stig_dns_server1 }}", firstmatch: "yes" }
+        - insertafter: ^nameserver {{ rhel8stig_dns_server1 }}
+          line: nameserver {{ rhel8stig_dns_server2 }}
+          firstmatch: "yes"
+
+  when:
+    - rhel_08_010680
+  tags:
+    - RHEL-08-010680

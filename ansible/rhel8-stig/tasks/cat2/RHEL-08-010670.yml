@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010670 | RHEL 8 must disable kernel dumps unless needed.
+  ansible.builtin.systemd:
+    name: kdump.service
+    enabled: false
+
+  when:
+    - rhel_08_010670
+  tags:
+    - RHEL-08-010670

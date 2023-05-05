@@ -1,0 +1,269 @@
+## First rule - delete all
+-D
+
+## Increase the buffers to survive stress events.
+## Make this bigger for busy systems
+-b 8192
+
+## This determine how long to wait in burst of events
+--backlog_wait_time 60000
+
+## Set failure mode to syslog
+-f 1
+
+## RHEL-08-030121 protect auditing rules from unauthorized change
+-e 2
+
+## RHEL-08-030122 protect logon UIDs from unauthorized change
+--loginuid-immutable
+
+#################
+## Audit Rules ##
+#################
+
+## RHEL-08-030000
+-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k execpriv 
+-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k execpriv
+-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k execpriv 
+-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k execpriv
+
+## RHEL-08-030130
+-w /etc/shadow -p wa -k identity
+
+## RHEL-08-030140
+-w /etc/security/opasswd -p wa -k identity
+
+## RHEL-08-030150
+-w /etc/passwd -p wa -k identity
+
+## RHEL-08-030160
+-w /etc/gshadow -p wa -k identity
+
+## RHEL-08-030170
+-w /etc/group -p wa -k identity
+
+## RHEL-08-030171
+-w /etc/sudoers -p wa -k identity
+
+## RHEL-08-030172
+-w /etc/sudoers.d/ -p wa -k identity
+
+## RHEL-08-030190
+-a always,exit -F path=/usr/bin/su -F perm=x -F auid>=1000 -F auid!=unset -k privileged-priv_change
+
+## RHEL-08-030200
+-a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b32 -S lremovexattr -F auid=0 -k perm_mod
+-a always,exit -F arch=b64 -S lremovexattr -F auid=0 -k perm_mod
+
+## RHEL-08-030210
+-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b32 -S removexattr -F auid=0 -k perm_mod
+-a always,exit -F arch=b64 -S removexattr -F auid=0 -k perm_mod
+
+## RHEL-08-030220
+-a always,exit -F arch=b32 -S lsetxattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S lsetxattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b32 -S lsetxattr -F auid=0 -k perm_mod 
+-a always,exit -F arch=b64 -S lsetxattr -F auid=0 -k perm_mod
+
+## RHEL-08-030230
+-a always,exit -F arch=b32 -S fsetxattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S fsetxattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b32 -S fsetxattr -F auid=0 -k perm_mod
+-a always,exit -F arch=b64 -S fsetxattr -F auid=0 -k perm_mod
+
+## RHEL-08-030240
+-a always,exit -F arch=b32 -S fremovexattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S fremovexattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b32 -S fremovexattr -F auid=0 -k perm_mod
+-a always,exit -F arch=b64 -S fremovexattr -F auid=0 -k perm_mod
+
+## RHEL-08-030250
+-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=unset -k privileged-chage
+
+## RHEL-08-030260
+-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030270
+-a always,exit -F arch=b32 -S setxattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S setxattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b32 -S setxattr -F auid=0 -k perm_mod 
+-a always,exit -F arch=b64 -S setxattr -F auid=0 -k perm_mod 
+
+## RHEL-08-030280
+-a always,exit -F path=/usr/bin/ssh-agent -F perm=x -F auid>=1000 -F auid!=unset -k privileged-ssh
+
+## RHEL-08-030290
+-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=unset -k privileged-passwd
+
+## RHEL-08-030300
+-a always,exit -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset -k privileged-mount
+
+## RHEL-08-030301
+-a always,exit -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=unset -k privileged-mount
+
+## RHEL-08-030302
+-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=unset -k privileged-mount
+-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=unset -k privileged-mount
+
+## RHEL-08-030310
+-a always,exit -F path=/usr/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030311
+-a always,exit -F path=/usr/sbin/postdrop -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030312
+-a always,exit -F path=/usr/sbin/postqueue -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030313
+-a always,exit -F path=/usr/sbin/semanage -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030314
+-a always,exit -F path=/usr/sbin/setfiles -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030315
+-a always,exit -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030316
+-a always,exit -F path=/usr/sbin/setsebool -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030317
+-a always,exit -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+## RHEL-08-030320
+-a always,exit -F path=/usr/libexec/openssh/ssh-keysign -F perm=x -F auid>=1000 -F auid!=unset -k privileged-ssh
+
+## RHEL-08-030330
+-a always,exit -F path=/usr/bin/setfacl -F perm=x -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030340
+-a always,exit -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=1000 -F auid!=unset -k privileged-pam_timestamp_check
+
+## RHEL-08-030350
+-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=unset -k priv_cmd
+
+## RHEL-08-030360
+-a always,exit -F arch=b32 -S init_module -F auid>=1000 -F auid!=unset -k module_chng
+-a always,exit -F arch=b64 -S init_module -F auid>=1000 -F auid!=unset -k module_chng
+
+## RHEL-08-030361
+-a always,exit -F arch=b32 -S rename -F auid>=1000 -F auid!=unset -k delete
+-a always,exit -F arch=b64 -S rename -F auid>=1000 -F auid!=unset -k delete
+
+## RHEL-08-030362
+-a always,exit -F arch=b32 -S renameat -F auid>=1000 -F auid!=unset -k delete
+-a always,exit -F arch=b64 -S renameat -F auid>=1000 -F auid!=unset -k delete
+
+## RHEL-08-030363
+-a always,exit -F arch=b32 -S rmdir -F auid>=1000 -F auid!=unset -k delete
+-a always,exit -F arch=b64 -S rmdir -F auid>=1000 -F auid!=unset -k delete
+
+## RHEL-08-030364
+-a always,exit -F arch=b32 -S unlink -F auid>=1000 -F auid!=unset -k delete
+-a always,exit -F arch=b64 -S unlink -F auid>=1000 -F auid!=unset -k delete
+
+## RHEL-08-030365
+-a always,exit -F arch=b32 -S unlinkat -F auid>=1000 -F auid!=unset -k delete
+-a always,exit -F arch=b64 -S unlinkat -F auid>=1000 -F auid!=unset -k delete
+
+## RHEL-08-030370
+-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=unset -k privileged-gpasswd
+
+## RHEL-08-030380
+-a always,exit -F arch=b32 -S finit_module -F auid>=1000 -F auid!=unset -k module_chng
+-a always,exit -F arch=b64 -S finit_module -F auid>=1000 -F auid!=unset -k module_chng
+
+## RHEL-08-030390
+-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng
+-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng
+
+## RHEL-08-030400
+-a always,exit -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=unset -k privileged-crontab
+
+## RHEL-08-030410
+-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=unset -k priv_cmd
+
+## RHEL-08-030420
+-a always,exit -F arch=b32 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b32 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+
+## RHEL-08-030430
+-a always,exit -F arch=b32 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b32 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+
+## RHEL-08-030440
+-a always,exit -F arch=b32 -S open -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S open -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b32 -S open -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S open -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+
+## RHEL-08-030450
+-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+
+## RHEL-08-030460
+-a always,exit -F arch=b32 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b32 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+
+## RHEL-08-030470
+-a always,exit -F arch=b32 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+
+## RHEL-08-030480
+-a always,exit -F arch=b32 -S chown -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S chown -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030490
+-a always,exit -F arch=b32 -S chmod -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S chmod -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030500
+-a always,exit -F arch=b32 -S lchown -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S lchown -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030510
+-a always,exit -F arch=b32 -S fchownat -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S fchownat -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030520
+-a always,exit -F arch=b32 -S fchown -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S fchown -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030530
+-a always,exit -F arch=b32 -S fchmodat -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S fchmodat -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030540
+-a always,exit -F arch=b32 -S fchmod -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S fchmod -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030550
+-a always,exit -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=unset -k priv_cmd
+
+## RHEL-08-030560
+-a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=unset -k privileged-usermod
+
+## RHEL-08-030570
+-a always,exit -F path=/usr/bin/chacl -F perm=x -F auid>=1000 -F auid!=unset -k perm_mod
+
+## RHEL-08-030580
+-a always,exit -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=unset -k modules
+
+## RHEL-08-030590
+-w /var/log/faillock -p wa -k logins
+
+## RHEL-08-030600
+-w /var/log/lastlog -p wa -k logins

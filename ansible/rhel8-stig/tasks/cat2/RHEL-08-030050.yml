@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-030050 | The RHEL 8 System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) must be alerted when the audit
+    storage volume is full.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*max_log_file_action
+    line: max_log_file_action = {{ rhel8stig_max_log_file_action }}
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030050
+  tags:
+    - RHEL-08-030050

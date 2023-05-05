@@ -1,0 +1,10 @@
+---
+- name: LOW | RHEL-08-010171 | RHEL 8 must have policycoreutils package installed.
+  ansible.builtin.dnf:
+    name: policycoreutils
+    state: latest
+
+  when:
+    - rhel_08_010171
+  tags:
+    - RHEL-08-010171

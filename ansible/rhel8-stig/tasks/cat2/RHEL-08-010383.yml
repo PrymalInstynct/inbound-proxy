@@ -1,0 +1,30 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010383 | RHEL 8 must require users to reauthenticate for privilege escalation. | Part 1 of 3
+      ansible.builtin.lineinfile:
+        path: "{{ item }}"
+        regexp: ^#?\s*Defaults\s*?!targetpw
+        line: Defaults !targetpw
+        validate: /usr/sbin/visudo -cf %s
+      with_items: "{{ rhel8stig_sudoers_files.stdout_lines }}"
+
+    - name: MEDIUM | RHEL-08-010383 | RHEL 8 must require users to reauthenticate for privilege escalation. | Part 2 of 3
+      ansible.builtin.lineinfile:
+        path: "{{ item }}"
+        regexp: ^#?\s*Defaults\s*?!rootpw
+        line: Defaults !rootpw
+        validate: /usr/sbin/visudo -cf %s
+      with_items: "{{ rhel8stig_sudoers_files.stdout_lines }}"
+
+    - name: MEDIUM | RHEL-08-010383 | RHEL 8 must require users to reauthenticate for privilege escalation. | Part 3 of 3
+      ansible.builtin.lineinfile:
+        path: "{{ item }}"
+        regexp: ^#?\s*Defaults\s*?!runaspw
+        line: Defaults !runaspw
+        validate: /usr/sbin/visudo -cf %s
+      with_items: "{{ rhel8stig_sudoers_files.stdout_lines }}"
+
+  when:
+    - rhel_08_010383
+  tags:
+    - RHEL-08-010383

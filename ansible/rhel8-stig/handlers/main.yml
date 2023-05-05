@@ -1,0 +1,45 @@
+---
+# handlers file for rhel8-stig
+- name: Restart OpenSSH
+  ansible.builtin.systemd:
+    name: sshd
+    state: restarted
+
+- name: Reload Systemd Daemons
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Update dconf
+  ansible.builtin.command: dconf update
+  changed_when: false
+
+- name: Restart Chrony
+  ansible.builtin.systemd:
+    name: chronyd
+    state: restarted
+
+- name: Restart rsyslog
+  ansible.builtin.systemd:
+    name: rsyslog
+    state: restarted
+
+- name: Restart SSSD
+  ansible.builtin.systemd:
+    name: sssd
+    state: restarted
+
+- name: Restart auditd
+  ansible.builtin.command: service auditd restart
+  args:
+    warn: false
+
+- name: Restart fapolicyd
+  ansible.builtin.systemd:
+    name: fapolicyd
+    state: restarted
+
+- name: New grub
+  ansible.builtin.command: grub2-mkconfig -o /boot/grub2/grub.cfg
+  changed_when: false
+  args:
+    warn: false

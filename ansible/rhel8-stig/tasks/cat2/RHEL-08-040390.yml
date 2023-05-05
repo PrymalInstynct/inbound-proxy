@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-040390 | The tuned package must not be installed unless mission essential on RHEL 8.
+  ansible.builtin.dnf:
+    name: tuned
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040390
+  tags:
+    - RHEL-08-040390

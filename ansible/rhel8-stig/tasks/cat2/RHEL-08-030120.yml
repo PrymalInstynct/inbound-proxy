@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-030120 | RHEL 8 audit log directory must have a mode of 0700 or less permissive to prevent unauthorized read access.
+  ansible.builtin.file:
+    path: "{{ audit_log_directory.stdout }}"
+    mode: g-wrx,o-wrx
+    state: directory
+
+  when:
+    - rhel_08_030120
+  tags:
+    - RHEL-08-030120

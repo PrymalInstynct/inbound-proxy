@@ -1,0 +1,19 @@
+---
+- block:
+    - name: HIGH | RHEL-08-010150 | Include Variables
+      include_vars: vault.yml
+
+    - name: HIGH | RHEL-08-010150 | RHEL 8 operating systems booted with a BIOS must require authentication upon booting into single-user and maintenance modes.
+      ansible.builtin.expect:
+        command: grub2-setpassword
+        responses:
+          "Enter password:": "{{ rhel8stig_bootloader_password }}"
+          "Confirm password:": "{{ rhel8stig_bootloader_password }}"
+      register: setpassword_result
+      changed_when: setpassword_result.rc !=0
+
+  when:
+    - rhel_08_010150
+    - not rhel8stig_machine_uses_uefi
+  tags:
+    - RHEL-08-010150

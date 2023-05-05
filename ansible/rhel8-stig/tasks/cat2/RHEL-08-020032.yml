@@ -1,0 +1,18 @@
+---
+- name: MEDIUM | RHEL-08-020032 | RHEL 8 must disable the user list at logon for graphical user interfaces.
+  ansible.builtin.copy:
+    dest: /etc/dconf/db/local.d/02-login-screen
+    content: |
+      [org/gnome/login-screen]
+      disable-user-list=true
+    owner: root
+    group: root
+    mode: 0644
+  notify: Update dconf
+
+  when:
+    - rhel_08_020032
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-020032
+    - gui

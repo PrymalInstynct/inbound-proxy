@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-040002 | RHEL 8 must not have the sendmail package installed.
+  ansible.builtin.dnf:
+    name: sendmail
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040002
+  tags:
+    - RHEL-08-040002

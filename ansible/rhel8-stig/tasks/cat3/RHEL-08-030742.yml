@@ -1,0 +1,13 @@
+---
+- name: LOW | RHEL-08-030742 | RHEL 8 must disable network management of the chrony daemon.
+  ansible.builtin.lineinfile:
+    path: /etc/chrony.conf
+    insertafter: ^port [0-9]+
+    regexp: ^cmdport [0-9]+|^#cmdport [0-9]+
+    line: cmdport 0
+  notify: Restart Chrony
+
+  when:
+    - rhel_08_030742
+  tags:
+    - RHEL-08-030742

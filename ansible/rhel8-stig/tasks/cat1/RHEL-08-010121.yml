@@ -1,0 +1,30 @@
+---
+- block:
+    - name: HIGH | RHEL-08-010121 | AUDIT | The RHEL 8 operating system must not have accounts configured with blank or null passwords. | Part 1 of 3
+      ansible.builtin.shell: "awk -F: '!$2 {print $1}' /etc/shadow"
+      changed_when: false
+      failed_when: false
+      check_mode: false
+      register: no_pw_users
+
+    - name: HIGH | RHEL-08-010121 | The RHEL 8 operating system must not have accounts configured with blank or null passwords. | Part 2 of 3
+      ansible.builtin.debug:
+        msg:
+          - "Alert! You have users that are not using passwords. Please either set a password, lock, or remove the accounts below:"
+          - "{{ no_pw_users.stdout_lines }}"
+      when:
+        - no_pw_users.stdout | length > 0
+
+    - name: HIGH | RHEL-08-010121 | The RHEL 8 operating system must not have accounts configured with blank or null passwords. | Part 3 of 3
+      ansible.builtin.user:
+        name: "{{ item }}"
+        assword_lock: true
+      with_items:
+        - "{{ no_pw_users.stdout_lines }}"
+      when:
+        - no_pw_users.stdout | length > 0
+
+  when:
+    - rhel_08_010121
+  tags:
+    - RHEL-08-010121

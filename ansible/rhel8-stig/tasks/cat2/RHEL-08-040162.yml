@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-040162 | RHEL 8 must force a frequent session key renegotiation for SSH connections to the client.
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/ssh_config
+    regexp: ^#?\s*RekeyLimit.*
+    line: RekeyLimit 1G 1h
+    state: present
+
+  when:
+    - rhel_08_040162
+  tags:
+    - RHEL-08-040162

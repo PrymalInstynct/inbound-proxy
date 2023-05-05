@@ -1,0 +1,11 @@
+---
+- name: LOW | RHEL-08-040300 | The RHEL 8 file integrity tool must be configured to verify extended attributes.
+  ansible.builtin.debug:
+    msg: /etc/aide.conf xattrs is set by the AIDE role run through the Preliminary Tasks
+  changed_when: false
+  run_once: true
+
+  when:
+    - rhel_08_040300
+  tags:
+    - RHEL-08-040300

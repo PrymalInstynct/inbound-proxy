@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010359 | The RHEL 8 operating system must use a file integrity tool to verify correct operation of all security functions.
+  ansible.builtin.dnf:
+    name: aide
+    state: latest
+
+  when:
+    - rhel8stig_aide
+    - rhel_08_010359
+  tags:
+    - RHEL-08-010359

@@ -1,0 +1,18 @@
+---
+- name: LOW | RHEL-08-040025 | RHEL 8 must disable mounting of cramfs.
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^#install (?i)cramfs.*|^install (?i)cramfs.*", line: install cramfs /bin/true }
+    - { regexp: "^#blacklist (?i)cramfs", line: blacklist cramfs }
+
+  when:
+    - rhel_08_040025
+  tags:
+    - RHEL-08-040025

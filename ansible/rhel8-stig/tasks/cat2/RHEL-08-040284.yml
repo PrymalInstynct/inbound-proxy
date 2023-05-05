@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040284 | RHEL 8 must disable the use of user namespaces.
+  ansible.posix.sysctl:
+    name: user.max_user_namespaces
+    value: "{{ rhel8stig_user_namespaces }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_040284
+  tags:
+    - RHEL-08-040284

@@ -1,0 +1,26 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-030740 | RHEL 8 must securely compare internal information system clocks at least every 24 hours with a server synchronized to an authoritative
+        time source. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/chrony.conf
+        regexp: ^pool\s(.*)$
+        line: "# pool \\1"
+        backrefs: true
+      notify: Restart Chrony
+
+    - name: MEDIUM | RHEL-08-030740 | RHEL 8 must securely compare internal information system clocks at least every 24 hours with a server synchronized to an authoritative
+        time source. | Part 2 of 2
+      blockinfile:
+        path: /etc/chrony.conf
+        insertafter: ^#pool\s
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR THE RHEL 8 STIG"
+        block: |
+          server {{ rhel8stig_time_server1 }} iburst maxpoll 16
+          server {{ rhel8stig_time_server2 }} iburst maxpoll 16
+      notify: Restart Chrony
+
+  when:
+    - rhel_08_030740
+  tags:
+    - RHEL-08-030740

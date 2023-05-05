@@ -1,0 +1,17 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010340 | RHEL 8 library files must be owned by root. | Part 1 of 2
+      ansible.builtin.shell: find -L /lib /lib64 /usr/lib /usr/lib64 ! -user root
+      register: system_libraries
+      changed_when: system_libraries.stdout != ""
+
+    - name: MEDIUM | RHEL-08-010340 | RHEL 8 library files must be owned by root. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        owner: root
+      with_items: "{{ system_libraries.stdout_lines }}"
+
+  when:
+    - rhel_08_010340
+  tags:
+    - RHEL-08-010340

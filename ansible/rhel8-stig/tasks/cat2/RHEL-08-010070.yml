@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-010070 | All RHEL 8 remote access methods must be monitored.
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    regexp: .*/var/log/secure$
+    line: "auth.*;authpriv.*;daemon.*\t\t\t\t/var/log/secure"
+    state: present
+  notify: Restart rsyslog
+
+  when:
+    - rhel_08_010070
+  tags:
+    - RHEL-08-010070

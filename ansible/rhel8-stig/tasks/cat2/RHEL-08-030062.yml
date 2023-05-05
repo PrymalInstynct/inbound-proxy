@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-030062 | RHEL 8 must label all off-loaded audit logs before sending them to the central log server.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*name_format
+    line: name_format = {{ rhel8stig_name_format }}
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030062
+  tags:
+    - RHEL-08-030062

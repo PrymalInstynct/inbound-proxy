@@ -1,0 +1,16 @@
+---
+- name: MEDIUM | RHEL-08-010740 | All RHEL 8 local interactive user home directories must be group-owned by the home directory owner’s primary group.
+  ansible.builtin.file:
+    path: "{{ item.dir }}"
+    group: "{{ item.gid }}"
+    state: directory
+  with_items: "{{ rhel8stig_passwd }}"
+  loop_control:
+    label: "{{ rhel8stig_passwd_label }}"
+
+  when:
+    - rhel_08_010740
+    - item.uid >= 1000
+    - item.uid < 65534
+  tags:
+    - RHEL-08-010740

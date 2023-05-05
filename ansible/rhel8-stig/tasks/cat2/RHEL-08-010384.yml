@@ -1,0 +1,14 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010384 | RHEL 8 must require re-authentication when using the "sudo" command.
+      ansible.builtin.lineinfile:
+        path: "{{ item }}"
+        regexp: ^#?\s*Defaults\s*?timeout
+        line: Defaults timestamp_timeout={{ rhel8stig_sudo_timeout }}
+        validate: /usr/sbin/visudo -cf %s
+      with_items: "{{ rhel8stig_sudoers_files.stdout_lines }}"
+
+  when:
+    - rhel_08_010384
+  tags:
+    - RHEL-08-010384

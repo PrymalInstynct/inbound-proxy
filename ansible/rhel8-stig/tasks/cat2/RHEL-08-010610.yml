@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010610 | MANUAL FIX | RHEL 8 must prevent code from being executed on file systems that are used with removable media.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | The noexec option must be added to all mounted removable media devices.
+
+  when:
+    - rhel_08_010610
+  tags:
+    - RHEL-08-010610
+    - manual_fix

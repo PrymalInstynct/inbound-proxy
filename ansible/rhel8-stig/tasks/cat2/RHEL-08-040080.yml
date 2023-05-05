@@ -1,0 +1,19 @@
+---
+- name: MEDIUM | RHEL-08-040080 | RHEL 8 must be configured to disable USB mass storage
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^#?\\s*install usb-storage.*", line: install usb-storage /bin/true }
+    - { regexp: "^#?\\s*blacklist usb-storage", line: blacklist usb-storage }
+
+  when:
+    - rhel_08_040080
+    - not rhel8stig_usbstorage
+  tags:
+    - RHEL-08-040080

@@ -1,0 +1,18 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010130 | The RHEL 8 shadow password suite must be configured to use a sufficient number of hashing rounds. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/login.defs
+        line: SHA_CRYPT_MAX_ROUNDS
+        state: absent
+
+    - name: MEDIUM | RHEL-08-010130 | The RHEL 8 shadow password suite must be configured to use a sufficient number of hashing rounds. | Part 2 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/login.defs
+        regexp: ^#?\sSHA_CRYPT_MIN_ROUNDS.*
+        line: SHA_CRYPT_MIN_ROUNDS 5000
+
+  when:
+    - rhel_08_010130
+  tags:
+    - RHEL-08-010130

@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-AUDIT-RULES | The RHEL 8 audit system must be configured to audit the execution of commands & system calls
+  ansible.builtin.template:
+    src: audit.rules.j2
+    dest: /etc/audit/rules.d/audit.rules
+    owner: root
+    group: root
+    mode: 0600
+  notify: Restart auditd
+
+  when:
+    - rhel_08_audit_rules
+  tags:
+    - RHEL-08-AUDIT-RULES

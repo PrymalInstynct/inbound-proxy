@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010001 | MANUAL FIX | The RHEL 8 operating system must implement the Endpoint Security for Linux Threat Prevention tool.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | Install McAfee Threat Protection for Linux
+
+  when:
+    - rhel_08_010001
+  tags:
+    - RHEL-08-010001
+    - manual_fix

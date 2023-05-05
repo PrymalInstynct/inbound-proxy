@@ -1,0 +1,596 @@
+---
+# Hostname of machine ansible is being run from; affects the STIG if you are also STIGGING the control node
+control_node: changeme
+
+# defaults file for rhel8-stig
+rhel8stig_cat1_patch: true
+rhel8stig_cat2_patch: true
+rhel8stig_cat3_patch: true
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Custom Settings
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+# ==================================================================================================================
+# CAT 1 rules
+# These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
+# PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
+# in order for the variables below to take effect.
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+rhel_08_010000: true
+rhel_08_010020: true ## FIPS Mode
+rhel_08_010121: true
+rhel_08_010140: true
+rhel_08_010150: true
+rhel_08_010370: true
+rhel_08_010371: true
+rhel_08_010460: true
+rhel_08_010470: true
+rhel_08_010820: true
+rhel_08_020330: true
+rhel_08_040000: true
+rhel_08_040010: true
+rhel_08_040170: true
+rhel_08_040171: true
+rhel_08_040172: true
+rhel_08_040190: true
+rhel_08_040200: true
+rhel_08_040360: true
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# CAT 2 rules
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+rhel_08_010001: true ## McAfee
+rhel_08_010010: true
+rhel_08_010030: true ## Manual
+rhel_08_010040: true
+rhel_08_010049: true
+rhel_08_010050: true
+rhel_08_010060: true
+rhel_08_010070: true
+rhel_08_010090: true ## Multi-Factor Authentication
+rhel_08_010100: true ## Manual
+rhel_08_010110: true
+rhel_08_010120: true
+rhel_08_010130: true
+rhel_08_010141: true
+rhel_08_010149: true
+rhel_08_010151: true
+rhel_08_010152: true
+rhel_08_010161: true ## Kerberos
+rhel_08_010162: true ## Kerberos
+rhel_08_010163: true ## Kerberos
+rhel_08_010170: true
+rhel_08_010181: true
+rhel_08_010190: true
+rhel_08_010200: true
+rhel_08_010201: true
+rhel_08_010210: true
+rhel_08_010220: true
+rhel_08_010230: true
+rhel_08_010240: true
+rhel_08_010250: true
+rhel_08_010260: true
+rhel_08_010287: true
+rhel_08_010290: true
+rhel_08_010291: true
+rhel_08_010293: true ## FIPS Mode
+rhel_08_010294: true ## FIPS Mode
+rhel_08_010295: true ## FIPS Mode
+rhel_08_010300: true
+rhel_08_010310: true
+rhel_08_010320: true
+rhel_08_010330: true
+rhel_08_010331: true
+rhel_08_010340: true
+rhel_08_010341: true
+rhel_08_010350: true
+rhel_08_010351: true
+rhel_08_010359: true
+rhel_08_010360: true
+rhel_08_010372: true
+rhel_08_010373: true
+rhel_08_010374: true
+rhel_08_010379: true
+rhel_08_010380: true
+rhel_08_010381: true
+rhel_08_010382: true ## Manual
+rhel_08_010383: true
+rhel_08_010384: true
+rhel_08_010390: true ## Multi-Factor Authentication
+rhel_08_010400: true ## Multi-Factor Authentication  ## SSSD
+rhel_08_010410: true ## Multi-Factor Authentication
+rhel_08_010420: true ## Manual
+rhel_08_010421: true
+rhel_08_010422: true
+rhel_08_010423: true
+rhel_08_010430: true
+rhel_08_010450: true
+rhel_08_010480: true
+rhel_08_010490: true
+rhel_08_010500: true
+rhel_08_010510: true
+rhel_08_010520: true
+rhel_08_010521: true
+rhel_08_010522: true
+rhel_08_010543: true
+rhel_08_010544: true
+rhel_08_010550: true
+rhel_08_010561: true
+rhel_08_010570: true
+rhel_08_010571: true
+rhel_08_010572: true
+rhel_08_010580: true
+rhel_08_010590: true
+rhel_08_010600: true ## Manual
+rhel_08_010610: true ## Manual
+rhel_08_010620: true ## Manual
+rhel_08_010630: true ## Manual
+rhel_08_010640: true ## Manual
+rhel_08_010650: true ## Manual
+rhel_08_010660: true ## Manual
+rhel_08_010670: true
+rhel_08_010671: true
+rhel_08_010672: true
+rhel_08_010673: true
+rhel_08_010674: true
+rhel_08_010675: true
+rhel_08_010680: true
+rhel_08_010690: true ## Manual
+rhel_08_010700: true
+rhel_08_010710: true
+rhel_08_010720: true
+rhel_08_010730: true
+rhel_08_010731: true
+rhel_08_010740: true
+rhel_08_010750: true
+rhel_08_010760: true
+rhel_08_010770: true
+rhel_08_010780: true
+rhel_08_010790: true
+rhel_08_010800: true
+rhel_08_010830: true
+rhel_08_020000: true
+rhel_08_020027: true
+rhel_08_020028: true
+rhel_08_020030: true
+rhel_08_020031: true
+rhel_08_020032: true
+rhel_08_020039: true
+rhel_08_020040: true
+rhel_08_020041: true
+rhel_08_020050: true
+rhel_08_020060: true
+rhel_08_020070: true
+rhel_08_020080: true
+rhel_08_020081: true
+rhel_08_020082: true
+rhel_08_020090: true ## Manual ## Multi-Factor Authentication  ## SSSD
+rhel_08_020104: true
+rhel_08_020110: true
+rhel_08_020120: true
+rhel_08_020130: true
+rhel_08_020140: true
+rhel_08_020150: true
+rhel_08_020160: true
+rhel_08_020170: true
+rhel_08_020180: true
+rhel_08_020190: true
+rhel_08_020200: true
+rhel_08_020210: true
+rhel_08_020230: true
+rhel_08_020231: true
+rhel_08_020240: true ## Manual
+rhel_08_020250: true ## Multi-Factor Authentication  ## SSSD
+rhel_08_020260: true
+rhel_08_020270: true ## Manual
+rhel_08_020280: true
+rhel_08_020290: true
+rhel_08_020300: true
+rhel_08_020310: true
+rhel_08_020320: true
+rhel_08_020350: true
+rhel_08_020351: true
+rhel_08_020352: true ## Manual
+rhel_08_020353: true
+rhel_08_030010: true
+rhel_08_030020: true
+rhel_08_030030: true
+rhel_08_030040: true
+rhel_08_030060: true
+rhel_08_030061: true
+rhel_08_030062: true
+rhel_08_030070: true
+rhel_08_030080: true
+rhel_08_030090: true
+rhel_08_030100: true
+rhel_08_030110: true
+rhel_08_030120: true
+rhel_08_030180: true
+rhel_08_030181: true
+rhel_08_030610: true
+rhel_08_030620: true
+rhel_08_030630: true
+rhel_08_030640: true
+rhel_08_030650: true
+rhel_08_030660: true ## Manual
+rhel_08_030670: true
+rhel_08_030680: true
+rhel_08_030690: true
+rhel_08_030700: true
+rhel_08_030710: true
+rhel_08_030720: true
+rhel_08_030730: true
+rhel_08_030731: true
+rhel_08_030740: true
+rhel_08_040001: true
+rhel_08_040002: true
+rhel_08_040020: true
+rhel_08_040030: true ## Manual ## Firewall
+rhel_08_040070: true
+rhel_08_040080: true
+rhel_08_040090: true ## Manual ## Firewall
+rhel_08_040100: true ## Firewall
+rhel_08_040101: true ## Firewall
+rhel_08_040110: true
+rhel_08_040111: true
+rhel_08_040120: true
+rhel_08_040121: true
+rhel_08_040122: true
+rhel_08_040123: true
+rhel_08_040124: true
+rhel_08_040125: true
+rhel_08_040126: true
+rhel_08_040127: true
+rhel_08_040128: true
+rhel_08_040129: true
+rhel_08_040130: true
+rhel_08_040131: true
+rhel_08_040132: true
+rhel_08_040133: true
+rhel_08_040134: true
+rhel_08_040135: true
+rhel_08_040136: true
+rhel_08_040137: true
+rhel_08_040139: true
+rhel_08_040140: true
+rhel_08_040141: true
+rhel_08_040150: true
+rhel_08_040159: true
+rhel_08_040160: true
+rhel_08_040161: true
+rhel_08_040180: true
+rhel_08_040209: true
+rhel_08_040210: true
+rhel_08_040220: true
+rhel_08_040230: true
+rhel_08_040239: true
+rhel_08_040240: true
+rhel_08_040249: true
+rhel_08_040250: true
+rhel_08_040259: true
+rhel_08_040260: true
+rhel_08_040261: true
+rhel_08_040262: true
+rhel_08_040270: true
+rhel_08_040279: true
+rhel_08_040280: true
+rhel_08_040281: true
+rhel_08_040282: true
+rhel_08_040283: true
+rhel_08_040284: true
+rhel_08_040285: true
+rhel_08_040286: true
+rhel_08_040290: true
+rhel_08_040320: true ## Manual if not documented for ISSM
+rhel_08_040321: true ## Manual if not documented for ISSM
+rhel_08_040330: true
+rhel_08_040340: true
+rhel_08_040341: true
+rhel_08_040350: true
+rhel_08_040370: true
+rhel_08_040380: true
+rhel_08_040390: true
+rhel_08_040400: true # Is possible this will break containers from being managed.
+rhel_08_040342: true
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# CAT 3 rules
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+rhel_08_010171: true
+rhel_08_010292: true
+rhel_08_010375: true
+rhel_08_010376: true
+rhel_08_010440: true
+rhel_08_010471: true
+rhel_08_010472: true
+rhel_08_010540: true
+rhel_08_010541: true
+rhel_08_010542: true
+rhel_08_020024: true
+rhel_08_020042: true
+rhel_08_030063: true
+rhel_08_030601: true
+rhel_08_030602: true
+rhel_08_030603: true
+rhel_08_030741: true
+rhel_08_030742: true
+rhel_08_040004: true
+rhel_08_040021: true
+rhel_08_040022: true
+rhel_08_040023: true
+rhel_08_040024: true
+rhel_08_040025: true
+rhel_08_040026: true
+rhel_08_040300: true
+rhel_08_040310: true
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# CAT 1,2,3 rules for PAM & audit.rules
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+rhel_08_pam_rules: true
+rhel_08_audit_rules: true
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Special Settings
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Minimum version of Ansible that can be used to run this role
+rhel8stig_min_ansible_version: 2.9
+
+# Whether to run tasks related to auditing/patching the desktop environment
+rhel8stig_gui: "{{ has_gnome.stat.exists }}"
+
+# Whether the system has a UEFI or BIOS
+rhel8stig_machine_uses_uefi: "{{ rhel_08_sys_firmware_efi.stat.exists }}"
+
+# Whether to run tasks related to FIPS Mode
+rhel8_fips_mode: false
+
+# Whether to run tasks related to auditing/patching PKI/Multi-Factor Authentication
+rhel8stig_mfa: false
+
+# Whether to run tasks related to PAM, SSSD, & Kerberos in Standalone mode
+# Set to true: If the system does not utilize any centralized authentication
+# Set to false: If the system utilizes Red Hat IDM, Active Directory, or LDAP for Central Authentication
+rhel8stig_standalone_auth: false
+
+# Whether to configure PAM to lock root after failed authentication attempts
+# Set to true: If your system is to lock the root account after failed authentication attempts
+rhel8stig_deny_root: true
+
+# Whether to run tasks related to auditing/patching SSSD
+rhel8stig_sssd: true
+
+# Whether the systems requires Kerberos Authentication
+# Set to true: If utilizing IDM, FreeIPA, or Windows Active Directory for Central Authentication
+rhel8stig_kerberos: true
+
+# Whether the systems requires GSSAPI Authentication
+# Set to true: If utilizing Windows Active Directory for Central Authentication
+rhel8stig_gssapi: true
+
+# Whether the systems requires AutoFS
+# Set to true: If utilizing AutoFS to mount remote file shares when logging in
+rhel8stig_autofs: false
+
+# Whether the systems require USB Mass Storage
+# Set to true: If utilizing USB Storage for system required functions
+rhel8stig_usbstorage: false
+
+# Whether the systems require Wireless Networking
+# Set to true: If utilizing Wireless Networking tools
+rhel8stig_wifi: false
+
+# Whether the systems require Bluetooth
+# Set to true: If utilizing Bluetooth
+rhel8stig_bluetooth: false
+
+# Whether the systems require Application Whitelisting
+# Set to true: If utilizing fapolicyd Application Whitelisting Tool
+rhel8stig_whitelisting: false
+
+# Whether the systems require USBGuard
+# Set to true: If utilizing USBGuard Tool
+rhel8stig_usbguard: true
+
+# Whether the systems require Postfix
+# Set to true: If utilizing Postfix
+rhel8stig_postfix: false
+
+# Whether the systems require X11 Forwarding via SSH
+# Set to true: If utilizing X11 Forwarding
+rhel8stig_x11: false
+
+# Whether the systems require aide to be installed
+# Set to true: If aide should be installed
+rhel8stig_aide: true
+
+# Wether the systems audit rules are immutable
+# Set to true: If audit rules should be immutable
+rhel8stig_audit_rules_immutable: true
+
+# Determine Local Filesystem Mounts
+rhel8stig_local_mounts: "{{ ansible_mounts | to_json | from_json | json_query(rhel8stig_local_mounts_query) }}"
+rhel8stig_local_mounts_query: "[?starts_with(device, '/dev/')].mount"
+
+# Supports Parsing of /etc/passwd
+rhel8stig_passwd_label: "{{ (this_item | default(item)).id }}: {{ (this_item | default(item)).dir }}"
+
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# STIG Specific Settings
+# ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# RHEL-08-010000
+# This is a check for a "supported release"
+# These are the minimum supported releases.
+# (Red Hat has support for older versions if you pay extra for it.)
+rhel8stig_min_supported_os_ver:
+  RedHat: "8.6"
+  CentOS: "8.6"
+  AlmaLinux: "8.6"
+  RockyLinux: "8.6"
+
+# RHEL-08-010040
+rhel8stig_logon_banner: |
+  You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+  By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+  -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+  -At any time, the USG may inspect and seize data stored on this IS.
+
+  -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+  -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+  -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+
+# RHEL-08-010331
+rhel8stig_lib_dir_perms: "0775"
+
+# RHEL-08-010384
+# Timeout for sudo password cacheing
+rhel8stig_sudo_timeout: "0"
+
+# RHEL-08-010140, RHEL-08-010141, RHEL-08-010150
+# Password protect the boot loader
+rhel8stig_bootloader_password: "{{ vault_bootloader }}"
+rhel8stig_boot_superuser: hulk
+
+# RHEL-08-010680
+rhel8stig_dns_server1: 10.10.1.53
+rhel8stig_dns_server2: 10.10.1.1
+
+# RHEL-08-010730
+rhel8stig_homedir_mode: g-w,o-rwx
+
+# RHEL-08-020024
+# Maximum concurrent sessions for all accounts
+rhel8stig_maxlogins: "10"
+
+# Password complexity settings
+rhel8stig_password_complexity:
+  # RHEL-08-020104
+  retry: 3
+  # RHEL-08-020110
+  ucredit: -1
+  # RHEL-08-020120
+  lcredit: -1
+  # RHEL-08-020130
+  dcredit: -1
+  # RHEL-08-020140
+  maxclassrepeat: 4
+  # RHEL-08-020150
+  maxrepeat: 3
+  # RHEL-08-020160
+  minclass: 4
+  # RHEL-08-020170
+  difok: 8
+  # RHEL-08-020230
+  minlen: 15
+  # RHEL-08-020280
+  ocredit: -1
+  # RHEL-08-020300
+  dictcheck: 1
+
+# /etc/login.defs settings
+rhel8stig_login_defaults:
+  # RHEL-08-010110
+  encrypt_method: SHA512
+  # RHEL-08-010760
+  create_home: "true"
+  # RHEL-08-020190
+  pass_min_days: 1
+  # RHEL-08-020200
+  pass_max_days: 60
+  # RHEL-08-020231
+  pass_min_len: 15
+  # RHEL-08-020310
+  fail_delay_secs: 4
+  # RHEL-08-020351
+  umask: "077"
+
+# RHEL-08-020210
+rhel8stig_root_pw_age: 60
+
+# RHEL-08-020320
+# By default, files owned by removed users will be retained, but this may
+# trigger RHEL-08-010780 (all files and directories must have a valid owner).
+# Set rhel7stig_remove_unnecessary_user_files to true to remove old files,
+# but this could remove files you intended to keep. And it's probably best to
+# avoid removing 'dbus', 'nobody', 'systemd-network', and 'polkitd', as they all
+# have home directories of '/' by default.
+rhel8stig_unnecessary_accounts:
+  - games
+rhel8stig_remove_unnecessary_user_files: false
+
+# RHEL-08-030040
+# Set to SYSLOG, SINGLE, HALT
+rhel8stig_disk_error_action: SYSLOG
+
+# RHEL-08-030060
+# Set to SYSLOG, SINGLE, HALT
+rhel8stig_disk_full_action: SYSLOG
+
+# RHEL-08-030062
+# Set to hostname, fqd, numeric
+rhel8stig_name_format: fqd
+
+# RHEL-08-030700
+# Set to ENRICHED, RAW, NOLOG
+rhel8stig_log_format: ENRICHED
+
+# RHEL-08-030603
+# USBGuard Auditing Subsystem "LinuxAudit OR FileAudit"
+rhel8stig_usbguard_audit: LinuxAudit
+
+# RHEL-08-030740
+rhel8stig_time_server1: 0.north-america.pool.ntp.org
+rhel8stig_time_server2: 1.north-america.pool.ntp.org
+
+# RHEL-08-030741
+# System acts as a Chrony Time Server
+rhel8stig_timeserver: false
+
+# RHEL-08-030690
+rhel8stig_syslog_forward_logs: true
+rhel8stig_log_aggregation_server: 10.10.1.136
+rhel8stig_log_aggregation_port: 514
+
+# RHEL-08-030700
+rhel8stig_overflow_action: SYSLOG
+
+# RHEL-08-040000
+# If machine requires a telnet
+rhel8stig_requires_telnet: false
+
+# RHEL-08-040010
+# If machine requires a rsh
+rhel8stig_requires_rsh: false
+
+# RHEL-08-040137
+# fapolicyd permissive state (1=yes)
+rhel8stig_whitelisting_pre_state: 1
+rhel8stig_whitelisting_post_state: 0
+rhel8stig_fapolicy_white_list:
+  - deny perm=any all: all
+
+# RHEL-08-040190
+# If machine requires a tftp-server
+rhel8stig_requires_tftp: false
+
+# RHEL-08-040259
+# If machine is configured as a router
+rhel8stig_router: false
+
+# RHEL-08-040284
+# If machine utilizes containers set to 7182
+rhel8stig_user_namespaces: "0"
+
+# RHEL-08-040360
+# If machine requires vsftpd
+rhel8stig_requires_vsftpd: false
+
+# RHEL-08-040370
+# If machine requires gssproxy
+rhel8stig_requires_gssproxy: true

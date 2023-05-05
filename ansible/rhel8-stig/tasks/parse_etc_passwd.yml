@@ -1,0 +1,21 @@
+---
+- block:
+    - name: PRELIM | Parse /etc/passwd
+      ansible.builtin.command: cat /etc/passwd
+      changed_when: false
+      check_mode: false
+      register: rhel8stig_passwd_file_audit
+
+    - name: PRELIM | Clear passwd variable
+      ansible.builtin.set_fact:
+        rhel8stig_passwd: []
+    - name: PRELIM | Split passwd entries
+      ansible.builtin.set_fact:
+        rhel8stig_passwd: "{{ rhel8stig_passwd | default([]) + [ { 'id': item_sp[0], 'uid': item_sp[2] | int, 'gid': item_sp[3] | int, 'gecos': item_sp[4], 'dir':\
+          \ item_sp[5], 'shell': item_sp[6] } ] }}"
+      with_items: "{{ rhel8stig_passwd_file_audit.stdout_lines }}"
+      vars:
+        item_sp: "{{ item.split(':') }}"
+
+  tags:
+    - always

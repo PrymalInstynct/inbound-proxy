@@ -1,0 +1,18 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010790 | All RHEL 8 local files and directories must have a valid group owner. | Part 1 of 2
+      ansible.builtin.shell: find / -path /proc -prune -path /sys -prune -fstype xfs -nogroup
+      register: nogroup_results
+      changed_when: false
+      failed_when: false
+
+    - name: MEDIUM | RHEL-08-010790 | All RHEL 8 local files and directories must have a valid group owner. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        owner: root
+      with_items: "{{ nogroup_results.stdout_lines }}"
+
+  when:
+    - rhel_08_010790
+  tags:
+    - RHEL-08-010790

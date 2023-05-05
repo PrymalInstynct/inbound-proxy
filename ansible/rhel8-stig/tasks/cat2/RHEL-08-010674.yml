@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010674 | RHEL 8 must disable storing core dumps.
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/coredump.conf
+    regexp: ^Storage.*|^#Storage.*
+    line: Storage=none
+    insertafter: ^[Coredump]
+
+  when:
+    - rhel_08_010674
+  tags:
+    - RHEL-08-010674

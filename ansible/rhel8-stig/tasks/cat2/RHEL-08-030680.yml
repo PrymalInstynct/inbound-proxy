@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-030680 | RHEL 8 must have the packages required for encrypting offloaded audit logs installed
+  ansible.builtin.dnf:
+    name: rsyslog-gnutls
+    state: latest
+
+  when:
+    - rhel_08_030680
+  tags:
+    - RHEL-08-030680

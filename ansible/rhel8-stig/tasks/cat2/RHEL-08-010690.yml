@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010690 | MANUAL FIX | Executable search paths within the initialization files of all local interactive RHEL 8 users must only contain paths
+    that resolve to the system default or the users home directory.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | Local User Path statements may not reference locations outside of this home directory
+
+  when:
+    - rhel_08_010690
+  tags:
+    - RHEL-08-010690
+    - manual_fix

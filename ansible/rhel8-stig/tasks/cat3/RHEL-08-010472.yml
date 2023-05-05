@@ -1,0 +1,10 @@
+---
+- name: LOW | RHEL-08-010472 | RHEL 8 must have the packages required to use the hardware random number generator entropy gatherer service.
+  ansible.builtin.dnf:
+    name: rng-tools
+    state: latest
+
+  when:
+    - rhel_08_010472
+  tags:
+    - RHEL-08-010472

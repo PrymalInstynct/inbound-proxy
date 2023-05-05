@@ -1,0 +1,28 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-030610 | RHEL 8 must allow only the Information System Security Manager (ISSM) (or individuals or roles appointed by the ISSM) to select
+        which auditable events are to be audited. | Part 1 of 3
+      ansible.builtin.find:
+        paths: /etc/audit/rules.d
+        recurse: true
+      register: audit_rules_files
+
+    - name: MEDIUM | RHEL-08-030610 | RHEL 8 must allow only the Information System Security Manager (ISSM) (or individuals or roles appointed by the ISSM) to select
+        which auditable events are to be audited. | Part 2 of 3
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: file
+        mode: u-x,g-wx,o-rwx
+      with_items: "{{ audit_rules_files.files }}"
+
+    - name: MEDIUM | RHEL-08-030610 | RHEL 8 must allow only the Information System Security Manager (ISSM) (or individuals or roles appointed by the ISSM) to select
+        which auditable events are to be audited. | Part 3 of 3
+      ansible.builtin.file:
+        path: /etc/audit/auditd.conf
+        state: file
+        mode: u-x,g-wx,o-rwx
+
+  when:
+    - rhel_08_030610
+  tags:
+    - RHEL-08-030610

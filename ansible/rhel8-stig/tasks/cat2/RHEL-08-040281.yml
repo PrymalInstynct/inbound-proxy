@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040281 | RHEL 8 must disable access to network bpf syscall from unprivileged processes.
+  ansible.posix.sysctl:
+    name: kernel.unprivileged_bpf_disabled
+    value: "1"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
+    sysctl_set: true
+
+  when:
+    - rhel_08_040281
+  tags:
+    - RHEL-08-040281

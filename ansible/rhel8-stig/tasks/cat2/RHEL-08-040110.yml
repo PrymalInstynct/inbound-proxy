@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-040110 | RHEL 8 wireless network adapters must be disabled.
+  ansible.builtin.command: nmcli radio all off
+  changed_when: false
+
+  when:
+    - rhel_08_040110
+    - not rhel8stig_wifi
+  tags:
+    - RHEL-08-040110

@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-010380 | RHEL 8 must require users to provide a password for privilege escalation.
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: ^([^#].*)NOPASSWD:(.*)
+    replace: \1 \2
+    validate: /usr/sbin/visudo -cf %s
+  with_items: "{{ rhel8stig_sudoers_files.stdout_lines }}"
+
+  when:
+    - rhel_08_010380
+  tags:
+    - RHEL-08-010380

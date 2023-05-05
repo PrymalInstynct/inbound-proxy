@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010110 | RHEL 8 must encrypt all stored passwords with a FIPS 140-2 approved cryptographic hashing algorithm.
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: ^#ENCRYPT_METHOD.*|^ENCRYPT_METHOD.*
+    line: ENCRYPT_METHOD {{rhel8stig_login_defaults.encrypt_method|default('SHA512')}}
+    state: present
+
+  when:
+    - rhel_08_010110
+  tags:
+    - RHEL-08-010110

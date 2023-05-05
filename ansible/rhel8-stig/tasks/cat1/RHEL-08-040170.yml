@@ -1,0 +1,18 @@
+---
+- block:
+    - name: HIGH | RHEL-08-040170 | The x86 Ctrl-Alt-Delete key sequence must be disabled on RHEL 8. Part 1 of 2
+      ansible.builtin.systemd:
+        name: ctrl-alt-del.target
+        state: stopped
+        enabled: false
+        masked: true
+      register: ctrl_status
+      failed_when:
+        - not ctrl_status.state is search("stopped")
+        - not ctrl_status.status.LoadState is search("masked")
+        - not ctrl_status.status.FragmentPath is search("/dev/null")
+      notify: Reload Systemd Daemons
+  when:
+    - rhel_08_040170
+  tags:
+    - RHEL-08-040170

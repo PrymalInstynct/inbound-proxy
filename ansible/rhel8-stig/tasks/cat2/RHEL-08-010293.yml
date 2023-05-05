@@ -1,0 +1,30 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010293 | The RHEL 8 operating system must implement DoD-approved encryption in the OpenSSL package. | Part 1 of 4
+      ansible.builtin.dnf:
+        name: fipscheck
+        state: latest
+
+    - name: MEDIUM | RHEL-08-010293 | The RHEL 8 operating system must implement DoD-approved encryption in the OpenSSL package. | Part 2 of 4
+      ansible.builtin.command: fipscheck
+      register: fipscheck_result
+      changed_when: false
+      failed_when: fipscheck_result.rc !=2
+
+    - name: MEDIUM | RHEL-08-010293 | The RHEL 8 operating system must implement DoD-approved encryption in the OpenSSL package. | Part 3 of 4
+      ansible.builtin.command: fips-mode-setup --enable
+      when:
+        - "'fips mode is on' not in fipscheck_result.stdout"
+        - rhel8_fips_mode
+
+    - name: MEDIUM | RHEL-08-010293 | The RHEL 8 operating system must implement DoD-approved encryption in the OpenSSL package. | Part 4 of 4
+      ansible.builtin.lineinfile:
+        path: /etc/pki/tls/openssl.cnf
+        regexp: ^.include.*|^#.include.*
+        line: .include /etc/crypto-policies/back-ends/opensslcnf.config
+        state: present
+
+  when:
+    - rhel_08_010293
+  tags:
+    - RHEL-08-010293

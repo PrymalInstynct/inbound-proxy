@@ -1,0 +1,12 @@
+---
+- name: LOW | RHEL-08-010542 | MANUAL FIX | RHEL 8 must use a separate file system for the system audit data path.
+  ansible.builtin.debug:
+    msg: "Manual Lockdown Required | WARNING: /var/log/audit is not mounted on a separate partition"
+  changed_when: false
+
+  when:
+    - rhel_08_010542
+    - ansible_mounts | selectattr('mount', 'match', '^/var/log/audit$') | list | length == 0
+  tags:
+    - RHEL-08-010542
+    - manual_fix

@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010560 | The auditd service must be running in RHEL 8.
+  ansible.builtin.systemd:
+    name: auditd
+    state: started
+    enabled: true
+
+  when:
+    - rhel_08_010560
+  tags:
+    - RHEL-08-010560

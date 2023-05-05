@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-030020 | The RHEL 8 System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) must be alerted of an audit processing
+    failure event.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*action_mail_acct
+    line: action_mail_acct = root
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030020
+  tags:
+    - RHEL-08-030020

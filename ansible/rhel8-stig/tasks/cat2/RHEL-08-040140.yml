@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040140 | RHEL 8 must block unauthorized peripherals before establishing a connection.
+  ansible.builtin.include_role:
+    name: usbguard
+    apply:
+      tags:
+        - setup_usbguard
+
+  when:
+    - rhel_08_040140
+    - rhel8stig_usbguard
+  tags:
+    - setup_usbguard

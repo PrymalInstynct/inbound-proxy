@@ -1,0 +1,25 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040126 RHEL-08-040127 RHEL-08-040128 | RHEL 8 must mount /var/log with the nosuid, noexec, nodev options. | Part 1 of 2
+      ansible.posix.mount:
+        path: /var/log
+        src: UUID={{ var_log_mount.uuid }}
+        fstype: "{{ var_log_mount.fstype }}"
+        opts: "{{ var_log_mount.options }},nosuid,noexec,nodev"
+        state: mounted
+
+    - name: MEDIUM | RHEL-08-040126 RHEL-08-040127 RHEL-08-040128 | RHEL 8 must mount /var/log with the nosuid, noexec, nodev options. | Part 2 of 2
+      ansible.builtin.command: mount /var/log -o remount,nosuid,noexec,nodev
+
+  when:
+    - rhel_08_040126 or rhel_08_040127 or rhel_08_040128
+    - ansible_mounts | selectattr('mount', 'match', '^/var/log$') | list | length != 0
+    - "'nosuid' not in var_log_mount.options"
+    - "'noexec' not in var_log_mount.options"
+    - "'nodev' not in var_log_mount.options"
+  vars:
+    var_log_mount: "{{ ansible_mounts | json_query('[?mount == `/var/log`] | [0]') }}"
+  tags:
+    - RHEL-08-040126
+    - RHEL-08-040127
+    - RHEL-08-040128

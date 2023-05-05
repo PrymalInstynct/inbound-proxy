@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-030061 | The RHEL 8 audit system must audit local events.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*local_events
+    line: local_events = yes
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030061
+  tags:
+    - RHEL-08-030061

@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-030010 | Cron logging must be implemented in RHEL 8.
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    state: present
+    regexp: ^cron\.\*[ \t]+/var/log/cron$
+    line: cron.*                                                  /var/log/cron
+    insertafter: "#### RULES ####"
+  notify: Restart rsyslog
+
+  when:
+    - rhel_08_030010
+  tags:
+    - RHEL-08-030010

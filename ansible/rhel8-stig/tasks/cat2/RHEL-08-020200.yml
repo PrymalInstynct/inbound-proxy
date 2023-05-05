@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020200 | RHEL 8 user account passwords must have a 60-day maximum password lifetime restriction.
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: ^#PASS_MAX_DAYS.*|^PASS_MAX_DAYS.*
+    line: PASS_MAX_DAYS {{rhel8stig_login_defaults.pass_max_days|default('60')}}
+    state: present
+
+  when:
+    - rhel_08_020200
+  tags:
+    - RHEL-08-020200

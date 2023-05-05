@@ -1,0 +1,32 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010331 | RHEL 8 library directories must have mode 755 or less permissive. | Part 1 of 3
+      ansible.builtin.shell: find /lib /lib64 /usr/lib /usr/lib64 -perm /0022 -type d
+      changed_when: false
+      failed_when: false
+      check_mode: false
+      register: directories
+
+    - name: MEDIUM | RHEL-08-010331 | RHEL 8 library directories must have mode 755 or less permissive. | Part 2 of 3
+      ansible.builtin.debug:
+        msg:
+          - Alert! There are library directories that have permessions set to more permissive than 755
+          - To conform to STIG standards, please review these directories and set to 755 or less permissive
+          - "{{ directories.stdout_lines }}"
+      when:
+        - directories.stdout | length > 0
+
+    - name: MEDIUM | RHEL-08-010331 | RHEL 8 library directories must have mode 755 or less permissive. | Part 3 of 3
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "{{ rhel8stig_lib_dir_perms }}"
+      with_items:
+        - "{{ directories.stdout_lines }}"
+      when:
+        - directories.stdout | length > 0
+
+  when:
+    - rhel_08_010331
+  tags:
+    - RHEL-08-010331

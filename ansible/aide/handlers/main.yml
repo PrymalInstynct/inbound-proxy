@@ -1,0 +1,24 @@
+---
+- name: "Initialize aide database"
+  shell: 
+    cmd: "aide -i"
+  when: "aide_db_check.stat.exists != True"
+
+- name: "Update aide database"
+  shell: 
+    cmd: "aide -u"
+  register: aide_update
+  failed_when:
+    - "aide_update.rc > 7"
+
+- name: "Copy Aide Database into place"
+  copy:
+    src: "{{ aide_dbdir }}/{{ aide_database_out_filename }}"
+    dest: "{{ aide_dbdir }}/{{ aide_database_filename }}"
+    remote_src: yes
+  when: ("aide_db_check.stat.exists != True") or ("aide_update.changed == True")
+
+- name: "Remove Old Aide Database File"
+  file:
+    path: "{{ aide_dbdir }}/{{ aide_database_out_filename }}"
+    state: absent

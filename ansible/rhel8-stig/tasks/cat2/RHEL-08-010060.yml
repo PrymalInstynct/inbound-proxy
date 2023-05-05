@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-010060 | RHEL 8 must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via
+    a command line user logon.
+  ansible.builtin.copy:
+    content: "{{ rhel8stig_logon_banner }}"
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: 0644
+
+  when:
+    - rhel_08_010060
+  tags:
+    - RHEL-08-010060

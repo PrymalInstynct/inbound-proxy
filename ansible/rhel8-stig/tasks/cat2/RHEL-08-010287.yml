@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010287 | The RHEL 8 SSH daemon must be configured to use system-wide crypto policies.
+  ansible.builtin.lineinfile:
+    path: /etc/sysconfig/sshd
+    regexp: ^#?\s*CRYPTO_POLICY.*
+    line: "# CRYPTO_POLICY="
+    state: present
+
+  when:
+    - rhel_08_010287
+  tags:
+    - RHEL-08-010287

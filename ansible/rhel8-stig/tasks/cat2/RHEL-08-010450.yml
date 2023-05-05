@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010450 | RHEL 8 must implement address space layout randomization (ASLR) to protect its memory from unauthorized code execution.
+  ansible.builtin.lineinfile:
+    path: /etc/selinux/config
+    regexp: ^SELINUXTYPE=minimum|^SELINUXTYPE=mls|^#SELINUXTYPE=targeted
+    line: SELINUXTYPE=targeted
+
+  when:
+    - rhel_08_010450
+  tags:
+    - RHEL-08-010450

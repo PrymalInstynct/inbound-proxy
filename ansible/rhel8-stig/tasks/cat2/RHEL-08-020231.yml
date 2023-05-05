@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020231 | RHEL 8 passwords for new users must have a minimum of 15 characters.
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: ^#PASS_MIN_LEN.*|^PASS_MIN_LEN.*
+    line: PASS_MIN_LEN {{rhel8stig_login_defaults.pass_min_len|default('15')}}
+    state: present
+
+  when:
+    - rhel_08_020231
+  tags:
+    - RHEL-08-020231

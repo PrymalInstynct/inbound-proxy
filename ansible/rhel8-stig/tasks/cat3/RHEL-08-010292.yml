@@ -1,0 +1,20 @@
+---
+- block:
+    - name: LOW | RHEL-08-010292 | RHEL 8 must ensure the SSH server uses strong entropy. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/sysconfig/sshd
+        regexp: ^SSH_USE_STRONG_RNG=[^32]|^#SSH_USE_STRONG_RNG=[^32]|^# SSH_USE_STRONG_RNG=[^32]
+        state: absent
+
+    - name: LOW | RHEL-08-010292 | RHEL 8 must ensure the SSH server uses strong entropy. | Part 2 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/sysconfig/sshd
+        insertafter: "# generator and you REALLY know what you are doing"
+        line: SSH_USE_STRONG_RNG=32
+      notify: Restart OpenSSH
+
+  when:
+    - rhel_08_010292
+    - ansible_distribution_version is version_compare('8.2', '>=')
+  tags:
+    - RHEL-08-010292

@@ -1,0 +1,19 @@
+---
+- name: MEDIUM | RHEL-08-030640 | RHEL 8 audit tools must be group-owned by root.
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: file
+    group: root
+  with_items:
+    - /sbin/auditctl
+    - /sbin/aureport
+    - /sbin/ausearch
+    - /sbin/autrace
+    - /sbin/auditd
+    - /sbin/rsyslogd
+    - /sbin/augenrules
+
+  when:
+    - rhel_08_030640
+  tags:
+    - RHEL-08-030640

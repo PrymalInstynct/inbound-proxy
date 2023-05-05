@@ -1,0 +1,12 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040135 | The RHEL 8 fapolicy module must be installed.
+      ansible.builtin.dnf:
+        name: fapolicyd
+        state: latest
+
+  when:
+    - rhel_08_040135
+    - rhel8stig_whitelisting
+  tags:
+    - RHEL-08-040135

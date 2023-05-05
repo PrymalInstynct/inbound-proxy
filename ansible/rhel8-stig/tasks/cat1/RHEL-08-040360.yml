@@ -1,0 +1,12 @@
+---
+- name: HIGH | RHEL-08-040360 | A File Transfer Protocol (FTP) server package must not be installed unless mission essential on RHEL 8.
+  ansible.builtin.dnf:
+    name: vsftpd
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040360
+    - not rhel8stig_requires_vsftpd
+  tags:
+    - RHEL-08-040360

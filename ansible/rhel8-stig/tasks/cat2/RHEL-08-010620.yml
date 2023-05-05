@@ -1,0 +1,11 @@
+---
+- name: MEDIUM | RHEL-08-010620 | MANUAL FIX | RHEL 8 must prevent files with the setuid and setgid bit set from being executed on file systems that are used with
+    removable media.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | The nosuid option must be added to all mounted removable media devices.
+
+  when:
+    - rhel_08_010620
+  tags:
+    - RHEL-08-010620
+    - manual_fix

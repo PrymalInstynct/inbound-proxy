@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020130 | RHEL 8 must enforce password complexity by requiring that at least one numeric character be used.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*dcredit
+    line: dcredit = {{rhel8stig_password_complexity.dcredit|default('-1')}}
+    state: present
+
+  when:
+    - rhel_08_020130
+  tags:
+    - RHEL-08-020130

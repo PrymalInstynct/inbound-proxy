@@ -1,0 +1,22 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040321 | The graphical display manager must not be the default target on RHEL 8 unless approved. | Part 1 of 2
+      ansible.builtin.command: systemctl set-default multi-user.target
+      changed_when: false
+
+  when:
+    - rhel_08_040321
+    - not rhel8stig_gui
+  tags:
+    - RHEL-08-040321
+
+- name: MEDIUM | RHEL-08-040321 | MANUAL FIX | The graphical display manager must not be the default target on RHEL 8 unless approved. | Part 2 of 2
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | This system has a GUI, is it documented and approved by the ISSM
+
+  when:
+    - rhel_08_040321
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-040321
+    - manual_fix

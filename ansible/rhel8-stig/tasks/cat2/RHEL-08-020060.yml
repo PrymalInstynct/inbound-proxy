@@ -1,0 +1,22 @@
+---
+- name: MEDIUM | RHEL-08-020060 | RHEL 8 must automatically lock graphical user sessions after 15 minutes of inactivity.
+  ansible.builtin.lineinfile:
+    path: /etc/dconf/db/local.d/00-screensaver
+    line: "{{ item }}"
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "[org/gnome/desktop/session]"
+    - "# Set the lock time out to 900 seconds before the session is considered idle"
+    - idle-delay=uint32 900
+  changed_when: false
+  notify: Update dconf
+
+  when:
+    - rhel_08_020060
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-020060
+    - gui

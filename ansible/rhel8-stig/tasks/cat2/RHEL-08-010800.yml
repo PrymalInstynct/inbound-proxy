@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010800 | MANUAL FIX | A separate RHEL 8 filesystem must be used for user home directories (such as /home or an equivalent).
+  ansible.builtin.debug:
+    msg: "Manual Lockdown Required | WARNING: /home is not mounted on a separate partition"
+  changed_when: false
+
+  when:
+    - rhel_08_010800
+    - ansible_mounts | selectattr('mount', 'match', '^/home$') | list | length == 0
+  tags:
+    - RHEL-08-010800
+    - manual_fix

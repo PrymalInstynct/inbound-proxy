@@ -1,0 +1,26 @@
+---
+- name: "PRELIM | Gather Package Info"
+  package_facts:
+    manager: auto
+
+- block:
+  - name: "RHEL | Stopping USBGuard Daemon"
+    systemd:
+      name: usbguard
+      state: stopped
+      daemon_reload: yes
+      enabled: no
+  
+  - name: "RHEL | Removing USBGuard Policy"
+    file: 
+      path: /etc/usbguard/rules.conf
+      state: absent
+  
+  - name: "RHEL | Uninstalling USBguard"
+    yum:
+      name: usbguard
+      state: absent
+
+  when: 
+    - ansible_os_family == "RedHat"
+    - "'usbguard' in ansible_facts.packages"

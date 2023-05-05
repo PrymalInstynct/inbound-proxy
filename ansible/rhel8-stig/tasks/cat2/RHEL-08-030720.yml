@@ -1,0 +1,15 @@
+---
+- name: MEDIUM | RHEL-08-030720 | RHEL 8 must authenticate the remote logging server for off-loading audit logs.
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    regexp: ^#?\s*$ActionSendStreamDriverAuthMode
+    line: $ActionSendStreamDriverAuthMode x509/name
+    state: present
+    insertbefore: ^#+\sRULES\s#+$
+  notify: Restart rsyslog
+
+  when:
+    - rhel_08_030720
+    - rhel8stig_syslog_forward_logs
+  tags:
+    - RHEL-08-030720

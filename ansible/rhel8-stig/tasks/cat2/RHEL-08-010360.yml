@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-010360 | The RHEL 8 file integrity tool must notify the system administrator when changes to the baseline configuration or anomalies in the
+    operation of any security functions are discovered within an organizationally defined frequency.
+  ansible.builtin.debug:
+    msg: Creating the Crontab Entry is accomplished by the AIDE role run through the Preliminary Tasks
+  changed_when: false
+  run_once: true
+
+  when:
+    - rhel_08_010360
+  tags:
+    - RHEL-08-010360

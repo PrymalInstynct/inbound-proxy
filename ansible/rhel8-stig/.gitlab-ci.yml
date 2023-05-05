@@ -1,0 +1,67 @@
+############
+# Workflow #
+############
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - 'defaults/*.yml'
+        - 'tasks/*/*.yml'
+        - 'tasks/*.yml'
+        - 'vars/*.yml'
+        - 'handlers/*.yml'
+        - '*.yml'
+        - 'templates/audit.rules.j2'
+        - 'files/01-banner-message'
+        - 'files/audit.rules.default'
+        - 'files/audit.rules.stig'
+        - 'files/authselect-custom.tar'
+        - 'ansible.cfg'
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+      changes:
+        - 'defaults/*.yml'
+        - 'tasks/*/*.yml'
+        - 'tasks/*.yml'
+        - 'vars/*.yml'
+        - 'handlers/*.yml'
+        - '*.yml'
+        - 'templates/audit.rules.j2'
+        - 'files/01-banner-message'
+        - 'files/audit.rules.default'
+        - 'files/audit.rules.stig'
+        - 'files/authselect-custom.tar'
+        - 'ansible.cfg'
+
+###############################
+# Include Ansible Lint Module #
+###############################
+include:
+  - remote: "https://pipeline-catalog.global.lmco.com/api/v1/us/modules/stages/v1/templates/stages.gitlab-ci.yml"
+  - remote: "https://pipeline-catalog.global.lmco.com/api/v1/us/modules/semantic-release/v3/modules/semantic-release.yml"
+  - remote: 'https://pipeline-catalog.global.lmco.com/api/v1/us/modules/ansible/v1/modules/ansible-lint.yml'
+
+##################
+# Lint Variables #
+##################
+variables:
+  ANSIBLE_DIR: $CI_PROJECT_DIR
+  ANSIBLE_LINT_BLOB: ${PLAYBOOK}
+  ANSIBLE_LINT_CLI_OPTIONS: "--write --exclude $CI_PROJECT_DIR/tasks/cat2/parse_etc_passwd.yml -c .config/ansible-lint.yml -x experimental,yaml[new-line-at-end-of-file]"
+  ENABLE_ANSIBLE_LINT: "true"
+  PLAYBOOK: configure-rhel8-stig.yml
+  ANSIBLE_LINT_IMAGE: lmregistry.global.lmco.com/ext.registry1.dso.mil/ironbank/opensource/ansible/ansible-lint
+  ANSIBLE_LINT_TAG: 6.3.0
+  SEMANTIC_RELEASE_BRANCH: master
+  ENABLE_SEMANTIC_RELEASE: "true"
+
+ansible_lint:
+    extends: .ansible_lint
+    stage: check
+    rules:
+        - if: $ENABLE_ANSIBLE_LINT == "true"
+    artifacts: 
+      paths:
+      - $CI_PROJECT_DIR
+      expire_in: 1 day

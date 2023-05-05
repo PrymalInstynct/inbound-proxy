@@ -1,0 +1,20 @@
+---
+- name: MEDIUM | RHEL-08-020030 | RHEL 8 must enable a user session lock until that user re-establishes access using established identification and authentication
+    procedures for graphical user sessions.
+  ansible.builtin.copy:
+    dest: /etc/dconf/db/local.d/00-screensaver
+    content: |
+      [org/gnome/desktop/screensaver]
+      # Set this to true to lock the screen when the screensaver activates
+      lock-enabled=true
+    owner: root
+    group: root
+    mode: 0644
+  notify: Update dconf
+
+  when:
+    - rhel_08_020030
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-020030
+    - gui

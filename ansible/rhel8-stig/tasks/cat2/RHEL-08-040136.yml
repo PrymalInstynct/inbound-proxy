@@ -1,0 +1,13 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040136 | The RHEL 8 fapolicy module must be enabled.
+      ansible.builtin.systemd:
+        name: fapolicyd
+        state: started
+        enabled: true
+
+  when:
+    - rhel_08_040136
+    - rhel8stig_whitelisting
+  tags:
+    - RHEL-08-040136

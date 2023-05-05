@@ -1,0 +1,18 @@
+---
+- name: MEDIUM | RHEL-08-030710 | RHEL 8 must encrypt the transfer of audit records off-loaded onto a different system or media from the system being audited.
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    insertbefore: ^#+\sRULES\s#+$
+  with_items:
+    - { regexp: "^#?\\s*$DefaultNetstreamDriver", line: $DefaultNetstreamDriver gtls }
+    - { regexp: "^#?\\s*$ActionSendStreamDriverMode", line: $ActionSendStreamDriverMode 1 }
+  notify: Restart rsyslog
+
+  when:
+    - rhel_08_030710
+    - rhel8stig_syslog_forward_logs
+  tags:
+    - RHEL-08-030710

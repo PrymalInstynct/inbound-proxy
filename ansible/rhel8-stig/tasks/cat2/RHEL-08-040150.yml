@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-040150 | A firewall must be able to protect against or limit the effects of Denial of Service (DoS) attacks by ensuring RHEL 8 can implement
+    rate-limiting measures on impacted network interfaces.
+  ansible.builtin.lineinfile:
+    path: /etc/firewalld/firewalld.conf
+    regexp: ^#?\s*FirewallBackend=.*
+    line: FirewallBackend=nftables
+    state: present
+
+  when:
+    - rhel_08_040150
+  tags:
+    - RHEL-08-040150

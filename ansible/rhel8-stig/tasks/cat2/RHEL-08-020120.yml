@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020120 | RHEL 8 must enforce password complexity by requiring that at least one lower-case character be used.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*lcredit
+    line: lcredit = {{rhel8stig_password_complexity.lcredit|default('-1')}}
+    state: present
+
+  when:
+    - rhel_08_020120
+  tags:
+    - RHEL-08-020120

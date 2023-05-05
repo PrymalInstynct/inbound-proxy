@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020300 | RHEL 8 must prevent the use of dictionary words for passwords.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*dictcheck
+    line: dictcheck = {{rhel8stig_password_complexity.dictcheck|default('1')}}
+    state: present
+
+  when:
+    - rhel_08_020300
+  tags:
+    - RHEL-08-020300

@@ -1,0 +1,121 @@
+---
+############################################################################################################################################
+#######################################################  This set of tasks covers ##########################################################
+## RHEL-08-010131 RHEL-08-010159 RHEL-08-010160 RHEL-08-020010 RHEL-08-020011 RHEL-08-020012 RHEL-08-020014 RHEL-08-020013 ##
+## RHEL-08-020015 RHEL-08-020016 RHEL-08-020017 RHEL-08-020018 RHEL-08-020019 RHEL-08-020020 RHEL-08-020021 RHEL-08-020022 RHEL-08-020023 ##
+## RHEL-08-020025 RHEL-08-020026 RHEL-08-020100 RHEL-08-020220 RHEL-08-020250 RHEL-08-020331 RHEL-08-020332 RHEL-08-020340 RHEL-08-030590 ##
+############################################################################################################################################
+
+# - name: "MEDIUM | RHEL-08-PAM-RULES | RHEL 8.1 or Older"
+#   block:
+#     - name: "MEDIUM | RHEL-08-PAM-RULES | STANDALONE - DENY ROOT | RHEL 8.1 or Older | The RHEL 8 system must harden the authentication system."
+#       ansible.builtin.command: authselect select custom/stig-hardened-standalone-8.1-older with-faillock without-nullok --force
+#       changed_when: no
+#       when:
+#         - rhel8stig_standalone_auth
+#         - rhel8stig_deny_root
+
+#     - name: "MEDIUM | RHEL-08-PAM-RULES | CENTRAL AUTHENTICATION - DENY ROOT | RHEL 8.1 or Older | The RHEL 8 system must harden the authentication system."
+#       ansible.builtin.command: authselect select custom/stig-hardened-ipa-8.1-older with-faillock without-nullok --force
+#       changed_when: no
+#       when:
+#         - not rhel8stig_standalone_auth
+#         - rhel8stig_deny_root
+
+#     - name: "MEDIUM | RHEL-08-PAM-RULES | CENTRAL AUTHENTICATION - DENY ROOT - MFA | RHEL 8.1 or Older | The RHEL 8 system must harden the authentication system."
+#       ansible.builtin.command: authselect select custom/stig-hardened-ipa-8.1-older with-faillock without-nullok with-smartcard with-smartcard-required with-smartcard-lock-on-removal --force
+#       changed_when: no
+#       when:
+#         - not rhel8stig_standalone_auth
+#         - rhel8stig_deny_root
+#         - rhel8stig_mfa
+
+#     - name: "MEDIUM | RHEL-08-PAM-RULES | STANDALONE | RHEL 8.1 or Older | The RHEL 8 system must harden the authentication system."
+#       ansible.builtin.command: authselect select custom/stig-hardened-standalone-8.1-older with-faillock without-nullok without-deny-root --force
+#       changed_when: no
+#       when:
+#         - rhel8stig_standalone_auth
+#         - not rhel8stig_deny_root
+
+#     - name: "MEDIUM | RHEL-08-PAM-RULES | CENTRAL AUTHENTICATION | RHEL 8.1 or Older | The RHEL 8 system must harden the authentication system."
+#       ansible.builtin.command: authselect select custom/stig-hardened-ipa-8.1-older with-faillock without-nullok without-deny-root --force
+#       changed_when: no
+#       when:
+#         - not rhel8stig_standalone_auth
+#         - not rhel8stig_deny_root
+
+#     - name: "MEDIUM | RHEL-08-PAM-RULES | CENTRAL AUTHENTICATION - MFA | RHEL 8.1 or Older | The RHEL 8 system must harden the authentication system."
+#       ansible.builtin.command: authselect select custom/stig-hardened-ipa-8.1-older with-faillock without-nullok without-deny-root with-smartcard with-smartcard-required with-smartcard-lock-on-removal --force
+#       changed_when: no
+#       when:
+#         - not rhel8stig_standalone_auth
+#         - not rhel8stig_deny_root
+#         - rhel8stig_mfa
+
+#   when:
+#     - rhel_08_pam_rules
+#     - ansible_distribution_version is version_compare('8.1', '<=')
+#   tags:
+#     - RHEL-08-PAM-RULES
+
+- name: MEDIUM | RHEL-08-PAM-RULES | RHEL 8.2 or Newer
+  block:
+    - name: MEDIUM | RHEL-08-PAM-RULES | STANDALONE | RHEL 8.2 or Newer | The RHEL 8 system must harden the authentication system.
+      ansible.builtin.command: authselect select custom/stig-profile with-mkhomedir with-faillock without-nullok --force
+      changed_when: false
+      when:
+        - rhel8stig_standalone_auth
+
+    - name: MEDIUM | RHEL-08-PAM-RULES | CENTRAL AUTHENTICATION | RHEL 8.2 or Newer | The RHEL 8 system must harden the authentication system.
+      ansible.builtin.command: authselect select custom/stig-profile with-sudo with-faillock without-nullok --force
+      changed_when: false
+      when:
+        - not rhel8stig_standalone_auth
+
+    - name: MEDIUM | RHEL-08-PAM-RULES | CENTRAL AUTHENTICATION - MFA | RHEL 8.2 or Newer | The RHEL 8 system must harden the authentication system.
+      ansible.builtin.command: authselect select custom/stig-profile with-sudo with-faillock without-nullok with-smartcard with-smartcard-required with-smartcard-lock-on-removal
+        --force
+      changed_when: false
+      when:
+        - not rhel8stig_standalone_auth
+        - rhel8stig_mfa
+
+    - name: MEDIUM | RHEL-08-PAM-RULES | FAILLOCK - DENY ROOT | RHEL 8.2 or Newer | The RHEL 8 system must harden the authentication system.
+      ansible.builtin.lineinfile:
+        path: /etc/security/faillock.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - { regexp: "^#?\\s*local_users_only", line: local_users_only }
+        - { regexp: "^#?\\s*deny.*", line: deny = 3 }
+        - { regexp: "^#?\\s*fail_interval.*", line: fail_interval = 900 }
+        - { regexp: "^#?\\s*unlock_time.*", line: unlock_time = 0 }
+        - { regexp: "^#?\\s*silent.*", line: silent }
+        - { regexp: "^#?\\s*audit.*", line: audit }
+        - { regexp: "^#?\\s*even_deny_root.*", line: even_deny_root }
+        - { regexp: "^#?\\s*dir.*", line: dir = /var/log/faillock }
+      when:
+        - rhel8stig_deny_root
+
+    - name: MEDIUM | RHEL-08-PAM-RULES | FAILLOCK | RHEL 8.2 or Newer | The RHEL 8 system must harden the authentication system.
+      ansible.builtin.lineinfile:
+        path: /etc/security/faillock.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - { regexp: "^#?\\s*local_users_only", line: local_users_only }
+        - { regexp: "^#?\\s*deny.*", line: deny = 3 }
+        - { regexp: "^#?\\s*fail_interval.*", line: fail_interval = 900 }
+        - { regexp: "^#?\\s*unlock_time.*", line: unlock_time = 0 }
+        - { regexp: "^#?\\s*silent.*", line: silent }
+        - { regexp: "^#?\\s*audit.*", line: audit }
+        - { regexp: "^#?\\s*even_deny_root.*", line: "# even_deny_root" }
+        - { regexp: "^#?\\s*dir.*", line: dir = /var/log/faillock }
+      when:
+        - not rhel8stig_deny_root
+
+  when:
+    - rhel_08_pam_rules
+    - ansible_distribution_version is version_compare('8.2', '>=')
+  tags:
+    - RHEL-08-PAM-RULES

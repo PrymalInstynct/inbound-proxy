@@ -1,0 +1,23 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010161 | RHEL 8 must prevent system daemons from using Kerberos for authentication. | Part 1 of 2
+      ansible.builtin.find:
+        paths: /
+        patterns: "*.keytab"
+        recurse: true
+      register: keytab_results
+
+    - name: MEDIUM | RHEL-08-010161 | RHEL 8 must prevent system daemons from using Kerberos for authentication. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      with_items: "{{ keytab_results.files | map(attribute='path') | list  }}"
+      when: keytab_results
+
+  when:
+    - rhel_08_010161
+    - not rhel8stig_kerberos
+    - ('krb5-server' in ansible_facts.packages and ansible_facts.packages['krb5-server'][0].version <= '1.17.18') or ('krb5-workstation' in ansible_facts.packages
+      and ansible_facts.packages['krb5-workstation'][0].version <= '1.17.18')
+  tags:
+    - RHEL-08-010161

@@ -1,0 +1,25 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010040 | RHEL 8 must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system
+        via a ssh logon. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: ^#Banner.*|^Banner.*
+        line: Banner /etc/issue
+        state: present
+        validate: /usr/sbin/sshd -tf %s
+      notify: Restart OpenSSH
+
+    - name: MEDIUM | RHEL-08-010040 | RHEL 8 must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system
+        via a ssh logon. | Part 2 of 2
+      ansible.builtin.copy:
+        content: "{{ rhel8stig_logon_banner }}"
+        dest: /etc/issue
+        owner: root
+        group: root
+        mode: 0644
+
+  when:
+    - rhel_08_010040
+  tags:
+    - RHEL-08-010040

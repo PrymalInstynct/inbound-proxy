@@ -1,0 +1,18 @@
+---
+- name: LOW | RHEL-08-040023 | RHEL 8 must disable the stream control transmission protocol (SCTP).<
+  ansible.builtin.lineinfile:
+    path: /etc/modprobe.d/blacklist.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - { regexp: "^#install (?i)sctp.*|^install (?i)sctp.*", line: install sctp /bin/true }
+    - { regexp: "^#blacklist (?i)sctp", line: blacklist sctp }
+
+  when:
+    - rhel_08_040023
+  tags:
+    - RHEL-08-040023

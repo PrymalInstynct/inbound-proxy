@@ -1,0 +1,11 @@
+---
+- name: LOW | RHEL-08-030063 | RHEL 8 must resolve audit information before writing to disk.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    insertafter: ^#?\s*log_format
+    line: log_format = {{ rhel8stig_log_format }}
+
+  when:
+    - rhel_08_030063
+  tags:
+    - RHEL-08-030063

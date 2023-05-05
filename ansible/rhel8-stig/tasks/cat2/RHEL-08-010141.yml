@@ -1,0 +1,24 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010141 | RHEL 8 operating systems booted with United Extensible Firmware Interface (UEFI) must require a unique superusers name upon
+        booting into single-user mode and maintenance. Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/grub.d/01_users
+        regexp: set\ssuperusers=\".*\"$
+        line: '    set superusers="{{ rhel8stig_boot_superuser }}"'
+      notify: New grub
+
+    - name: MEDIUM | RHEL-08-010141 | RHEL 8 operating systems booted with United Extensible Firmware Interface (UEFI) must require a unique superusers name upon
+        booting into single-user mode and maintenance. Part 2 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/grub.d/01_users
+        regexp: password_pbkdf2 \w+ (.*)
+        line: "    password_pbkdf2 {{ rhel8stig_boot_superuser }} \\1"
+        backrefs: true
+      notify: New grub
+
+  when:
+    - rhel_08_010141
+    - rhel8stig_machine_uses_uefi
+  tags:
+    - RHEL-08-010141

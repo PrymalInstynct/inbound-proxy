@@ -1,0 +1,17 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010700 | All RHEL 8 world-writable directories must be owned by root, sys, bin, or an application user. | Part 1 of 2
+      ansible.builtin.shell: find / -xdev -not -path "*/.local/share/containers*" -type d -perm -0002 -uid +999 -print
+      register: world_writable
+      changed_when: world_writable.stdout != ""
+
+    - name: MEDIUM | RHEL-08-010700 | All RHEL 8 world-writable directories must be owned by root, sys, bin, or an application user. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        owner: root
+      with_items: "{{ world_writable.stdout_lines }}"
+
+  when:
+    - rhel_08_010700
+  tags:
+    - RHEL-08-010700

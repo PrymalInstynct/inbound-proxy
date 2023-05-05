@@ -1,0 +1,15 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040330 | RHEL 8 network interfaces must not be in promiscuous mode. | Part 1 of 2
+      ansible.builtin.shell: "ip link | grep -i promisc | awk -F: '{print $2}'"
+      register: result
+      changed_when: false
+
+    - name: MEDIUM | RHEL-08-040330 | RHEL 8 network interfaces must not be in promiscuous mode. | Part 2 of 2
+      ansible.builtin.command: ip link set dev {{ result.stdout }} multicast off promisc off
+      when: result.stdout | length > 0
+
+  when:
+    - rhel_08_040330
+  tags:
+    - RHEL-08-040330

@@ -1,0 +1,9 @@
+---
+- name: MEDIUM | RHEL-08-010421 | RHEL 8 must clear the page allocator to prevent use-after-free attacks.
+  ansible.builtin.command: grubby --update-kernel=ALL --args="page_poison=1"
+  changed_when: false
+
+  when:
+    - rhel_08_010421
+  tags:
+    - RHEL-08-010421

@@ -1,0 +1,18 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040400 | RHEL 8 must prevent non-privileged users from executing privileged functions, including disabling, circumventing, or altering implemented
+        security safeguards/countermeasures. | Part 1 of 2
+      ansible.builtin.dnf:
+        name: python3-policycoreutils
+        state: present
+
+    - name: MEDIUM | RHEL-08-040400 | RHEL 8 must prevent non-privileged users from executing privileged functions, including disabling, circumventing, or altering implemented
+        security safeguards/countermeasures. | Part 2 of 2
+      community.general.selogin:
+        login: "%wheel"
+        seuser: staff_u
+        state: present
+  when:
+    - rhel_08_040400
+  tags:
+    - RHEL-08-040400

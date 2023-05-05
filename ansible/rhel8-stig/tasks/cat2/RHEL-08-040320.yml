@@ -1,0 +1,32 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-040320 | The graphical display manager must not be installed on RHEL 8 unless approved. | Part 1 of 3
+      ansible.builtin.command: systemctl set-default multi-user.target
+      changed_when: false
+
+    - name: MEDIUM | RHEL-08-040320 | The graphical display manager must not be installed on RHEL 8 unless approved. | Part 2 of 3
+      ansible.builtin.dnf:
+        name:
+          - xorg-x11-server-common
+          - xorg-x11-server-Xorg
+          - xorg-x11-server-utils
+          - xorg-x11-server-Xwayland
+        state: absent
+        autoremove: true
+
+  when:
+    - rhel_08_040320
+    - not rhel8stig_gui
+  tags:
+    - RHEL-08-040320
+
+- name: MEDIUM | RHEL-08-040320 | MANUAL FIX | The graphical display manager must not be installed on RHEL 8 unless approved. | Part 2 of 3
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | This system has a GUI, is it documented and approved by the ISSM
+
+  when:
+    - rhel_08_040320
+    - rhel8stig_gui
+  tags:
+    - RHEL-08-040320
+    - manual_fix

@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-040370 | The gssproxy package must not be installed unless mission essential on RHEL 8.
+  ansible.builtin.dnf:
+    name: gssproxy
+    state: absent
+    autoremove: true
+
+  when:
+    - rhel_08_040370
+    - not rhel8stig_requires_gssproxy
+  tags:
+    - RHEL-08-040370

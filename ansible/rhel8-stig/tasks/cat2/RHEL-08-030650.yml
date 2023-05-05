@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-030650 | RHEL 8 must use cryptographic mechanisms to protect the integrity of audit tools.
+  ansible.builtin.debug:
+    msg: /etc/aide.conf Audit Tool Rules are set by the AIDE role run through the Preliminary Tasks
+  changed_when: false
+
+  when:
+    - rhel_08_030650
+  tags:
+    - RHEL-08-030650

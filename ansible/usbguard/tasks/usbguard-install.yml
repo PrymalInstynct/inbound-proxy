@@ -1,0 +1,5 @@
+---
+- name: "RHEL | Install USBguard"
+  yum:
+    name: usbguard
+    state: present

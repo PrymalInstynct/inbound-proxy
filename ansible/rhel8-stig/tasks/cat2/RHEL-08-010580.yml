@@ -1,0 +1,28 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010580 | RHEL 8 must prevent special devices on non-root local partitions. | Part 1 of 2
+      ansible.posix.mount:
+        path: "{{ item.mount }}"
+        src: UUID={{ item.uuid }}
+        fstype: "{{ item.fstype }}"
+        opts: "{{ item.options }},nodev"
+        state: mounted
+      with_items: "{{ ansible_mounts }}"
+
+    - name: MEDIUM | RHEL-08-010580 | RHEL 8 must prevent special devices on non-root local partitions. | Part 2 of 2
+      ansible.builtin.command: mount {{ item.mount }} -o remount,nodev
+      with_items: "{{ ansible_mounts }}"
+
+  when:
+    - rhel_08_010580
+    - item.mount != '/'
+    - item.mount != '/misc'
+    - item.mount != '/home'
+    - item.mount != '/tmp'
+    - item.mount != '/var/tmp'
+    - item.mount != '/var/log'
+    - item.mount != '/var/log/audit'
+    - item.mount != '/var/lib/containers/storage/overlay'
+    - "'nodev' not in item.options"
+  tags:
+    - RHEL-08-010580

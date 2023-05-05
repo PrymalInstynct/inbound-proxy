@@ -1,0 +1,19 @@
+---
+- block:
+    - name: HIGH | RHEL-08-040172 | The systemd Ctrl-Alt-Delete burst key sequence in RHEL 8 must be disabled. | Part 1 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/system.conf
+        regexp: ^CtrlAltDelBurstAction=[^none]|^#CtrlAltDelBurstAction=[^none]|^#CtrlAltDelBurstAction=none
+        state: absent
+
+    - name: HIGH | RHEL-08-040172 | The systemd Ctrl-Alt-Delete burst key sequence in RHEL 8 must be disabled. | Part 2 of 2
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/system.conf
+        insertafter: ^#CrashReboot=no
+        line: CtrlAltDelBurstAction=none
+        state: present
+
+  when:
+    - rhel_08_040172
+  tags:
+    - RHEL-08-040172

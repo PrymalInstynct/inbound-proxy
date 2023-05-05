@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010250 | The RHEL 8 /var/log directory must be owned by root.
+  ansible.builtin.file:
+    path: /var/log
+    owner: root
+
+  when:
+    - rhel_08_010250
+  tags:
+    - RHEL-08-010250

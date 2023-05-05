@@ -1,0 +1,15 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-020180 | RHEL 8 passwords must have a 24 hours/1 day minimum password lifetime restriction in /etc/shadow. | Part 1 of 2
+      ansible.builtin.command: "awk -F: '$2 !~ /^[!*]/ && $4 < 1 {print $1}' /etc/shadow"
+      changed_when: false
+      register: user_accounts
+
+    - name: MEDIUM | RHEL-08-020180 | RHEL 8 passwords must have a 24 hours/1 day minimum password lifetime restriction in /etc/shadow. | Part 2 of 2
+      ansible.builtin.command: chage -m 1 {{ item }}
+      with_items: "{{ user_accounts.stdout_lines }}"
+
+  when:
+    - rhel_08_020180
+  tags:
+    - RHEL-08-020180

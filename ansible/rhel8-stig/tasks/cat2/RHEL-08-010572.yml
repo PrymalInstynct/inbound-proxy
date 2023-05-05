@@ -1,0 +1,22 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010572 | RHEL 8 must prevent files with the setuid and setgid bit set from being executed on the /boot/efi directory. | Part 1 of 2
+      ansible.posix.mount:
+        path: /boot/efi
+        src: UUID={{ boot_efi_mount.uuid }}
+        fstype: "{{ boot_efi_mount.fstype }}"
+        opts: "{{ boot_efi_mount.options }},nosuid"
+        state: mounted
+
+    - name: MEDIUM | RHEL-08-010572 | RHEL 8 must prevent files with the setuid and setgid bit set from being executed on the /boot/efi directory. | Part 2 of 2
+      ansible.builtin.command: mount /boot/efi -o remount,nosuid
+
+  when:
+    - rhel_08_010572
+    - ansible_mounts | selectattr('mount', 'match', '^/boot/efi$') | list | length != 0
+    - "'nosuid' not in boot_efi_mount.options"
+    - rhel8stig_machine_uses_uefi
+  vars:
+    boot_efi_mount: "{{ ansible_mounts | json_query('[?mount == `/boot/efi`] | [0]') }}"
+  tags:
+    - RHEL-08-010572

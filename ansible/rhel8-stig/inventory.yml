@@ -1,0 +1,26 @@
+---
+all:
+  hosts:
+    localhost:
+      ansible_host: 127.0.0.1
+      # STIG Variable Adjustments
+      # TMUX Session Lock
+      rhel_08_020040: false
+      # TMUX Session Start
+      rhel_08_020041: false
+      # TMUX Session Lock
+      rhel_08_020070: false
+      # User Namespaces for Containers
+      rhel_08_040284: false
+      # SELogin Configuration that breaks remote authentication
+      rhel_08_040400: false
+      rhel8stig_standalone_auth: true
+      rhel8stig_deny_root: false
+      rhel8stig_boot_superuser: hulk
+      rhel8stig_dns_server1: 10.10.1.30
+      rhel8stig_dns_server2: 10.10.1.1
+      rhel8stig_root_pw_age: 60
+      rhel8stig_time_server1: 0.north-america.pool.ntp.org
+      rhel8stig_time_server2: 1.north-america.pool.ntp.org
+      rhel8stig_syslog_forward_logs: false
+      rhel8stig_user_namespaces: "7182"

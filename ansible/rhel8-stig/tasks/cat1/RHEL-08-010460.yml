@@ -1,0 +1,20 @@
+---
+- block:
+    - name: HIGH | RHEL-08-010460 | There must be no shosts.equiv files on the RHEL 8 operating system. | Part 1 of 2
+      ansible.builtin.find:
+        paths: /
+        pattern: shosts.equiv
+        recurse: true
+      register: shosts_results
+
+    - name: HIGH | RHEL-08-010460 | There must be no shosts.equiv files on the RHEL 8 operating system. | Part 2 of 2
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      with_items: "{{ shosts_results.files | map(attribute='path') | list }}"
+      when: shosts_results
+
+  when:
+    - rhel_08_010460
+  tags:
+    - RHEL-08-010460

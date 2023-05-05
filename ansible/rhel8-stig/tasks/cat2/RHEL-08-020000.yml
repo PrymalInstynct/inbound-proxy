@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-020000 | MANUAL FIX | RHEL 8 temporary user accounts must be provisioned with an expiration time of 72 hours or less.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | Temporary user accounts must be provisioned with an expiration time of 72 hours or less
+
+  when:
+    - rhel_08_020000
+  tags:
+    - RHEL-08-020000
+    - manual_fix

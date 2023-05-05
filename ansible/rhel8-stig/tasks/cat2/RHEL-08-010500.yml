@@ -1,0 +1,14 @@
+---
+- name: MEDIUM | RHEL-08-010500 | The RHEL 8 SSH daemon must perform strict mode checking of home directory configuration files.
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: ^#StrictModes.*|^StrictModes.*
+    line: StrictModes yes
+    state: present
+    validate: /usr/sbin/sshd -tf %s
+  notify: Restart OpenSSH
+
+  when:
+    - rhel_08_010500
+  tags:
+    - RHEL-08-010500

@@ -1,0 +1,19 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-020240 | MANUAL FIX | RHEL 8 duplicate User IDs (UIDs) must not exist for interactive users. | Part 1 of 2
+      ansible.builtin.command: awk -F ':' 'list[$3]++{print $1, $3}' /etc/passwd
+      changed_when: false
+      register: duplicate_uid
+
+    - name: MEDIUM | RHEL-08-020240 | MANUAL FIX | RHEL 8 duplicate User IDs (UIDs) must not exist for interactive users. | Part 2 of 2
+      ansible.builtin.debug:
+        msg: |
+          Manual Lockdown Required, Manual Lockdown Required, The following users have duplicate UIDs.
+          {{ duplicate_uid.stdout_lines }}
+      when: duplicate_uid.stdout_lines | length > 0
+
+  when:
+    - rhel_08_020240
+  tags:
+    - RHEL-08-020240
+    - manual_fix

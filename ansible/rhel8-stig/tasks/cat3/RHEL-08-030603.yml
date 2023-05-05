@@ -1,0 +1,13 @@
+---
+- name: LOW | RHEL-08-030603 | RHEL 8 must enable Linux audit logging for the USBGuard daemon.
+  ansible.builtin.lineinfile:
+    path: /etc/usbguard/usbguard-daemon.conf
+    regexp: ^#?\s*AuditBackend=.*
+    line: AuditBackend={{ rhel8stig_usbguard_audit }}
+    state: present
+
+  when:
+    - rhel_08_030603
+    - rhel8stig_usbguard
+  tags:
+    - RHEL-08-030603

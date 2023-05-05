@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020110 | RHEL 8 must enforce password complexity by requiring that at least one uppercase character be used.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*ucredit
+    line: ucredit = {{rhel8stig_password_complexity.ucredit|default('-1')}}
+    state: present
+
+  when:
+    - rhel_08_020110
+  tags:
+    - RHEL-08-020110

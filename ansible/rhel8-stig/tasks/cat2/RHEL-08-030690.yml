@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-030690 | The RHEL 8 audit records must be off-loaded onto a different system or storage media from the system being audited.
+  ansible.builtin.lineinfile:
+    path: /etc/rsyslog.conf
+    regexp: ^#?.*. @+.*
+    line: "*.* @@{{ rhel8stig_log_aggregation_server }}:{{ rhel8stig_log_aggregation_port }}"
+    insertafter: EOF
+
+  when:
+    - rhel_08_030690
+    - rhel8stig_syslog_forward_logs
+  tags:
+    - RHEL-08-030690

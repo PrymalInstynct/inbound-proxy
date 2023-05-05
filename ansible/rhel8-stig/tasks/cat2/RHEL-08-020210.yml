@@ -1,0 +1,40 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-020210 | RHEL 8 user account passwords must be configured so that existing passwords are restricted to a 60-day maximum lifetime. | Part
+        1 of 6
+      ansible.builtin.command: "awk -F: '$1 !~ /^root$/ && $2 !~ /^[!*]/ && $5 > 60 {print $1}' /etc/shadow"
+      check_mode: false
+      changed_when: non_root_users.stdout != ""
+      register: non_root_users
+
+    - name: MEDIUM | RHEL-08-020210 | RHEL 8 user account passwords must be configured so that existing passwords are restricted to a 60-day maximum lifetime. | Part
+        2 of 6
+      ansible.builtin.command: chage -d '-1 day' {{ item }}
+      with_items: "{{ non_root_users.stdout_lines }}"
+
+    - name: MEDIUM | RHEL-08-020210 | RHEL 8 user account passwords must be configured so that existing passwords are restricted to a 60-day maximum lifetime. | Part
+        3 of 6
+      ansible.builtin.command: chage -M 60 {{ item }}
+      with_items: "{{ non_root_users.stdout_lines }}"
+
+    - name: MEDIUM | RHEL-08-020210 | RHEL 8 root account passwords must be configured so that existing passwords are restricted to a {{ rhel8stig_root_pw_age }}-day
+        maximum lifetime. | Part 4 of 6
+      ansible.builtin.command: "awk -F: '$1 ~ /^root$/ && $2 !~ /^[!*]/ && $5 > {{ rhel8stig_root_pw_age }} {print $1}' /etc/shadow"
+      check_mode: false
+      changed_when: root_user.stdout != ""
+      register: root_user
+
+    - name: MEDIUM | RHEL-08-020210 | RHEL 8 root account passwords must be configured so that existing passwords are restricted to a {{ rhel8stig_root_pw_age }}-day
+        maximum lifetime. | Part 5 of 6
+      ansible.builtin.command: chage -d '-1 day' root
+      with_items: "{{ root_user.stdout_lines }}"
+
+    - name: MEDIUM | RHEL-08-020210 | RHEL 8 root account passwords must be configured so that existing passwords are restricted to a {{ rhel8stig_root_pw_age }}-day
+        maximum lifetime. | Part 6 of 6
+      ansible.builtin.command: chage -M {{ rhel8stig_root_pw_age }} root
+      with_items: "{{ root_user.stdout_lines }}"
+
+  when:
+    - rhel_08_020210
+  tags:
+    - RHEL-08-020210

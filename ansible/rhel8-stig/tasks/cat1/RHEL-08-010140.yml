@@ -1,0 +1,24 @@
+---
+- name: HIGH | RHEL-08-010140 | Include Variables
+  include_vars: vault.yml
+  when:
+    - rhel_08_010140
+    - rhel8stig_machine_uses_uefi
+  tags:
+    - RHEL-08-010140
+
+- name: HIGH | RHEL-08-010140 | RHEL 8 operating systems booted with United Extensible Firmware Interface (UEFI) must require authentication upon booting into single-user
+    mode and maintenance.
+  ansible.builtin.expect:
+    command: grub2-setpassword
+    responses:
+      "Enter password:": "{{ rhel8stig_bootloader_password }}"
+      "Confirm password:": "{{ rhel8stig_bootloader_password }}"
+  register: setpassword_result
+  changed_when: setpassword_result.rc !=0
+
+  when:
+    - rhel_08_010140
+    - rhel8stig_machine_uses_uefi
+  tags:
+    - RHEL-08-010140

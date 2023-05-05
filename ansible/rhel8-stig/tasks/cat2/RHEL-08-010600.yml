@@ -1,0 +1,10 @@
+---
+- name: MEDIUM | RHEL-08-010600 | MANUAL FIX | RHEL 8 must prevent special devices on file systems that are used with removable media.
+  ansible.builtin.debug:
+    msg: Manual Lockdown Required | The nodev option must be added to all mounted removable media devices.
+
+  when:
+    - rhel_08_010600
+  tags:
+    - RHEL-08-010600
+    - manual_fix

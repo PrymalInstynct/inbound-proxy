@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020230 | RHEL 8 passwords must have a minimum of 15 characters.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*minlen
+    line: minlen = {{rhel8stig_password_complexity.minlen|default('15')}}
+    state: present
+
+  when:
+    - rhel_08_020230
+  tags:
+    - RHEL-08-020230

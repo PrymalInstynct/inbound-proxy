@@ -1,0 +1,16 @@
+---
+- block:
+    - name: MEDIUM | RHEL-08-010521 | The RHEL 8 SSH daemon must not allow Kerberos authentication, except to fulfill documented and validated mission requirements.
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: ^#KerberosAuthentication.*|^KerberosAuthentication.*
+        line: KerberosAuthentication no
+        state: present
+        validate: /usr/sbin/sshd -tf %s
+      notify: Restart OpenSSH
+      when: not rhel8stig_kerberos
+
+  when:
+    - rhel_08_010521
+  tags:
+    - RHEL-08-010521

@@ -1,0 +1,13 @@
+---
+- name: MEDIUM | RHEL-08-030700 | RHEL 8 must take appropriate action when the internal event queue is full.
+  ansible.builtin.lineinfile:
+    path: /etc/audit/auditd.conf
+    regexp: ^#?\s*overflow_action
+    line: overflow_action = {{ rhel8stig_overflow_action }}
+    state: present
+  notify: Restart auditd
+
+  when:
+    - rhel_08_030700
+  tags:
+    - RHEL-08-030700

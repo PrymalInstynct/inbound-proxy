@@ -1,0 +1,12 @@
+---
+- name: MEDIUM | RHEL-08-020280 | All RHEL 8 passwords must contain at least one special character.
+  ansible.builtin.lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^#?\s*ocredit
+    line: ocredit = {{rhel8stig_password_complexity.ocredit|default('-1')}}
+    state: present
+
+  when:
+    - rhel_08_020280
+  tags:
+    - RHEL-08-020280
